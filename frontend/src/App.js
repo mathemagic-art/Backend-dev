@@ -28,7 +28,7 @@ export default class PersonAdd extends React.Component {
       second: this.state.second,
     };
 
-    axios.post(`http://127.0.0.1:8000/`, this.state).then((res) => {
+    axios.post(`http://127.0.0.1:8000/newton/`, this.state).then((res) => {
       console.log(res);
       this.setState({ answer: res["data"] });
       console.log(res.data);
