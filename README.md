@@ -10,14 +10,7 @@ Full documentation for the project is available at [https://www.django-rest-fram
 
 ---
 
-# Funding
 
-REST framework is a *collaboratively funded project*. If you use
-REST framework commercially we strongly encourage you to invest in its
-continued development by [signing up for a paid plan][funding].
-
-The initial aim is to provide a single full-time position on REST framework.
-*Every single sign-up makes a significant impact towards making that possible.*
 # Overview
 
 Django REST framework is a powerful and flexible toolkit for building Web APIs.
@@ -40,8 +33,8 @@ There is a live example API for testing purposes, [available here][sandbox].
 
 # Requirements
 
-* Python (3.6, 3.7, 3.8, 3.9, 3.10)
-* Django (2.2, 3.0, 3.1, 3.2, 4.0)
+* Python (3.8+)
+* Django (4.0)
 
 We **highly recommend** and only officially support the latest patch release of
 each Python and Django series.
@@ -159,7 +152,6 @@ Full documentation for the project is available at [https://www.django-rest-fram
 
 For questions and support, use the [REST framework discussion group][group], or `#restframework` on libera.chat IRC.
 
-You may also want to [follow the author on Twitter][twitter].
 
 # Security
 
