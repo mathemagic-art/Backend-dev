@@ -6,3 +6,7 @@ class NewtonSerializer(serializers.Serializer):
     first = serializers.IntegerField()
     second = serializers.IntegerField()
 
+
+
+class DiffSerializer(serializers.Serializer):
+    equation = serializers.CharField(max_length=300)

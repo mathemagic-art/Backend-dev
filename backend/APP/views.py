@@ -1,13 +1,14 @@
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from .serializers import NewtonSerializer
-from .mathematics import newtonMethod
+from .serializers import NewtonSerializer,  DiffSerializer
+from .mathematics import newtonMethod, diffMethod
 # Create your views here.
 
-@api_view(['POST', 'GET'])
+@api_view(['POST'])
 def newton_list(request):
     if request.method == 'POST':
+        print("sdfsdgsdfgdfgsdfgdgsdfgdsfgd", request.data)
         deserialized = NewtonSerializer(data=request.data)
         if deserialized.is_valid():
             equation = deserialized.data['equation']
@@ -17,6 +18,18 @@ def newton_list(request):
             return Response(answer, status=status.HTTP_201_CREATED)
         else:
             return Response(deserialized.error_messages)
+
+
+@api_view(['POST'])
+def diff_list(request):
+    if request.method == 'POST':
+        deserialized = DiffSerializer(data=request.data)
+        if deserialized.is_valid():
+            equation = deserialized.data['equation']
+            answer = diffMethod(equation)
+            return Response(answer, status=status.HTTP_201_CREATED)
+        else:
+            return Response(deserialized.errors)
     
 
     # if request.method == 'GET':
