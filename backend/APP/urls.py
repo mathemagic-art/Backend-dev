@@ -1,6 +1,8 @@
 from django.urls import path
 from .views import *
 
-urlpatterns = [
-    path('', newton_list),
+urlpatterns = [    
+    path('diff/', diff_list),
+    path('newton/', newton_list),
+
 ]

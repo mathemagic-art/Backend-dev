@@ -19,3 +19,12 @@ def newtonMethod(input_function, first_guess, number_of_iterations):
             return x_i
     except RuntimeWarning:
         return "Please change your first guess. Perhaps, the method came across with vertex or new x_i are diverging instead of converging."
+
+
+
+def diffMethod(f):
+    f = f.replace('e', 'E')
+    f = sympify(f) 
+    f_prime = f.diff(x)
+    f = lambdify(x, f) 
+    return str(f_prime)
