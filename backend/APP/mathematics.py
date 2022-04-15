@@ -1,5 +1,6 @@
 import sympy as sp 
 import numpy as np
+import math
 import matplotlib.pyplot as plt
 import warnings
 warnings.filterwarnings("error")
@@ -50,8 +51,6 @@ Original file is located at
 # Commented out IPython magic to ensure Python compatibility.
 
 
-
-
 def Rectangle_Method(function:str, init_point:int, end_point:int, num_of_interval:int)->str:
   
     x = sp.symbols('x')
@@ -84,7 +83,21 @@ def Rectangle_Method(function:str, init_point:int, end_point:int, num_of_interva
 
 
 ########################################################################################################################
+# done by Attullah
 
 
-# done by Tariq
 
+
+
+def Taylor_Series(function: str, num_of_iter: int, center: int):
+    
+    function = function.replace('e', 'E')
+    taylorPolynomial = str(sp.lambdify(x, sp.sympify(function))(center))
+    
+    for i in range(1, num_of_iter):
+        f_diff = str(sp.lambdify(x, sp.diff(function, x, i))(center))
+        taylorPolynomial += '+' + f_diff +'/'+str(math.factorial(i))+'*(x-{})**{}'.format(center, i)
+    
+    taylorPolynomial = sp.sympify(taylorPolynomial, rational=True)
+    
+    return str(taylorPolynomial)

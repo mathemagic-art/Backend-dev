@@ -1,0 +1,7 @@
+
+for taylor
+{
+"equation": "sin(x)",
+"first": 16,
+"second": 0
+}
