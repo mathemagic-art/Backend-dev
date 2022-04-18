@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Reat.js-Django-Web-Development
 =======
 # [Django REST framework][docs]
