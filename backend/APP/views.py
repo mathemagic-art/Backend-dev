@@ -1,8 +1,8 @@
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from .serializers import NewtonSerializer, DiffSerializer
-from .mathematics import newtonMethod, diffMethod
+from .serializers import *
+from .mathematics import *
 
 @api_view(['POST'])
 def diff_list(request):
