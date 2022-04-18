@@ -2,6 +2,7 @@ from sympy import *
 from numpy import random
 x = Symbol('x')
 import warnings
+import scipy.integrate
 warnings.filterwarnings("error")
 warnings.filterwarnings("ignore", category=UserWarning)
 

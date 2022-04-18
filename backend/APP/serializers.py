@@ -1,11 +1,14 @@
 from rest_framework import serializers
 
-class DiffSerializer(serializers.Serializer):
-    equation = serializers.CharField(max_length=300)
-    
-class NewtonSerializer(serializers.Serializer):
-    equation = serializers.CharField(max_length=300)
-    first = serializers.IntegerField()
-    second = serializers.IntegerField()
 
+class Function_Numeric_Numeric(serializers.Serializer):
+    
+    equation = serializers.CharField(max_length=300)
+    first = serializers.FloatField()
+    second = serializers.FloatField()
+
+
+class Function(serializers.Serializer):
+    
+    equation = serializers.CharField(max_length=300)
 
