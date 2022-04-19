@@ -59,24 +59,8 @@ def rectangle_method(function:str, init_point:int, end_point:int, num_of_interva
 
     return str(area) 
 
-# def Rectangle_method_graph(function:str, init_point:int, end_point:int, num_of_interval:int):
-
-#     X = np.linspace(init_point,end_point,100)
-#     x = np.linspace(init_point,end_point,num_of_interval+1)
-#     Y = function(X)
-#     plt.figure(figsize = (15,10))
-#     plt.plot(X,Y, color='black', linewidth=2, markersize=50)
-
-#     for i in range(num_of_interval):
-#         init_point = [x[i],x[i],x[i+1],x[i+1]]
-#         end_point = [0,function(x[i]),function(x[i]),0]
-#         plt.fill_between(init_point,end_point, edgecolor='black')
-#         plt.savefig('Rectangle_Method_Graph.png')
-
-
-
 ########################################################################################################################
-# done by Attullah
+#  by Attullah
 
 def taylor_series(function, num_of_iter, center):
     
@@ -137,22 +121,15 @@ def trapezoid_method(function:str,initial_point:int,end_point:int,number_interva
   Area = dx * A
   return str(Area)
 
-# def Trapezoid_graph(function,initial_point,end_point,number_interval):
-#     X = np.linspace(initial_point,end_point,100)
-#     x = np.linspace(initial_point,end_point,number_interval+1)
-#     z = sym.symbols('x')
-#     function = sym.lambdify(z, function)
-#     Y = function(X)
-#     plt.figure(figsize = (15,10))
-#     plt.plot(X,Y, color='black', linewidth=2, markersize=50)
-
-#     for i in range(number_interval):
-#         initial_point = [x[i],x[i],x[i+1],x[i+1]]
-#         end_point = [0,function(x[i]),function(x[i+1]),0]
-#         plt.fill(initial_point,end_point,'lightblue', edgecolor='black',alpha=1)
-
-#     plt.title('Area under the curve, Trapezoid method')
-#     plt.savefig('image.png')
-
 
 ##############################################################################################################
+
+def rectangle_method(function:str, initial_point:int, end_point:int, num_of_interval:int)->str:
+  function = sp.lambdify(x, function)
+  dx = (end_point - initial_point)/num_of_interval
+  total = 0.0
+  for i in range (num_of_interval):
+          total = total + function((initial_point + (i*dx)))
+  Area = dx*total
+  return str(Area) 
+

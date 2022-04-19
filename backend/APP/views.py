@@ -92,14 +92,29 @@ def trapezoid_list(request):
         deserialized = Function_Three_Numeric(data=request.data)
 
         if deserialized.is_valid():
-
             equation = deserialized.data['equation']
             first = int(deserialized.data['first'])
             second = int(deserialized.data['second'])
             third = int(deserialized.data['third'])
 
             answer = trapezoid_method(equation, first, second, third)
+            return Response(answer, status=status.HTTP_201_CREATED)
+        else:
+            return Response(deserialized.error_messages)
 
+@api_view(['POST',])
+def rectangle_list(request):
+
+    if request.method == 'POST':
+        deserialized = Function_Three_Numeric(data=request.data)
+        
+        if deserialized.is_valid():
+            equation = deserialized.data['equation']
+            first = int(deserialized.data['first'])
+            second = int(deserialized.data['second'])
+            third = int(deserialized.data['third'])
+
+            answer = rectangle_method(equation, first, second, third)
             return Response(answer, status=status.HTTP_201_CREATED)
         else:
             return Response(deserialized.error_messages)
