@@ -1,46 +1,124 @@
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from .serializers import NewtonSerializer,  DiffSerializer
-from .mathematics import newtonMethod, diffMethod
-# Create your views here.
+from .serializers import *
+from .mathematics import *
+
+
+@api_view(['POST']) 
+def newton_list(request):
+
+    if request.method == 'POST':
+
+        deserialized = Function_Two_Numeric(data=request.data)
+
+        if deserialized.is_valid():
+
+            equation = deserialized.data['equation']
+            first = int(deserialized.data['first'])
+            second = int(deserialized.data['second'])
+            answer = newton_method(equation, first, second)
+            return Response(answer, status=status.HTTP_201_CREATED)
+        
+        else:
+            
+            return Response(deserialized.error_messages)
+
+
 
 @api_view(['POST'])
-def newton_list(request):
+def diff_list(request):
+
     if request.method == 'POST':
-        print("sdfsdgsdfgdfgsdfgdgsdfgdsfgd", request.data)
-        deserialized = NewtonSerializer(data=request.data)
+
+        deserialized = Function(data=request.data)
+        
+        if deserialized.is_valid():
+
+            equation = deserialized.data['equation']
+            answer = differentiating_calculator(equation)
+            return Response(answer, status=status.HTTP_201_CREATED)
+        
+        else:
+            
+            return Response(deserialized.errors)
+    
+
+
+@api_view(['POST'])
+def taylor_list(request):
+    
+    if request.method == "POST":
+
+        deserialized = Function_Two_Numeric(data=request.data)
+
+        if deserialized.is_valid():
+
+            equation = deserialized.data['equation']
+            first = int(deserialized.data['first'])
+            second = int(deserialized.data['second'])
+            
+            answer = taylor_series(equation, first, second)
+            return Response(answer, status=status.HTTP_201_CREATED)
+        
+        else: 
+            
+            return Response(deserialized.errors)
+
+
+
+@api_view(['POST'])
+def simpson_list(request):
+    
+    if request.method == "POST":
+        deserialized = Function_Two_Numeric(data=request.data)
+
+        if deserialized.is_valid():
+
+            equation = deserialized.data['equation']
+            first = int(deserialized.data['first'])
+            second = int(deserialized.data['second'])
+            
+            answer = simpsons_method(equation, first, second)
+            return Response(answer, status=status.HTTP_201_CREATED)
+        
+        else: 
+            return Response(deserialized.errors)
+
+
+
+@api_view(['POST',])
+def trapezoid_list(request):
+
+    if request.method == 'POST':
+        deserialized = Function_Three_Numeric(data=request.data)
+
         if deserialized.is_valid():
             equation = deserialized.data['equation']
             first = int(deserialized.data['first'])
             second = int(deserialized.data['second'])
-            answer = newtonMethod(equation, first, second)
+            third = int(deserialized.data['third'])
+
+            answer = trapezoid_method(equation, first, second, third)
             return Response(answer, status=status.HTTP_201_CREATED)
         else:
             return Response(deserialized.error_messages)
 
 
-@api_view(['POST'])
-def diff_list(request):
+
+@api_view(['POST',])
+def rectangle_list(request):
+
     if request.method == 'POST':
-        deserialized = DiffSerializer(data=request.data)
+        deserialized = Function_Three_Numeric(data=request.data)
+        
         if deserialized.is_valid():
             equation = deserialized.data['equation']
-            answer = diffMethod(equation)
+            first = int(deserialized.data['first'])
+            second = int(deserialized.data['second'])
+            third = int(deserialized.data['third'])
+
+            answer = rectangle_method(equation, first, second, third)
             return Response(answer, status=status.HTTP_201_CREATED)
         else:
-            return Response(deserialized.errors)
-    
-
-    # if request.method == 'GET':
-    #     answer = {
-    #         "equation":"x",
-    #         "first":200,
-    #         "second":300
-    #     }
-
-    #     serializer = NewtonSerializer(data=answer)
-    #     serializer.is_valid()
-    #     return Response(serializer.validated_data, status=status.HTTP_204_NO_CONTENT)
-    
-
+            return Response(deserialized.error_messages)
