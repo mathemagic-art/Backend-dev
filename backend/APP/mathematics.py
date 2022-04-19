@@ -122,14 +122,3 @@ def trapezoid_method(function:str,initial_point:int,end_point:int,number_interva
   return str(Area)
 
 
-##############################################################################################################
-
-def rectangle_method(function:str, initial_point:int, end_point:int, num_of_interval:int)->str:
-  function = sp.lambdify(x, function)
-  dx = (end_point - initial_point)/num_of_interval
-  total = 0.0
-  for i in range (num_of_interval):
-          total = total + function((initial_point + (i*dx)))
-  Area = dx*total
-  return str(Area) 
-
