@@ -5,6 +5,11 @@ import warnings
 warnings.filterwarnings("error")
 warnings.filterwarnings("ignore", category=UserWarning)
 
+from sympy import lambdify, sympify, diff, E
+from math import factorial
+from sympy.abc import x
+
+
 x = sp.Symbol('x')
 # done by Shokhrukh
 def Newton_Method(input_function: str, first_guess: int, number_of_iterations: int) -> str:
@@ -88,3 +93,11 @@ def Rectangle_Method(function:str, init_point:int, end_point:int, num_of_interva
 
 # done by Tariq
 
+def taylor(function, num_of_iter, center):
+  function = function.replace('e', 'E')
+  taylorPolynomial = str(lambdify(x, sympify(function))(center))
+  for i in range(1, num_of_iter):
+      f_diff = str(lambdify(x, diff(function, x, i))(center))
+      taylorPolynomial += '+' + f_diff +'/'+str(factorial(i))+'*(x-{})**{}'.format(center, i)
+  taylorPolynomial = sympify(taylorPolynomial, rational=True)
+  return str(taylorPolynomial)

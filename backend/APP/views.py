@@ -1,8 +1,8 @@
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from .serializers import NewtonSerializer,  DiffSerializer
-from .mathematics import newtonMethod, diffMethod
+from .serializers import NewtonSerializer,  DiffSerializer, TaylorSerializer
+from .mathematics import Newton_Method, Differentiating_Calculator, taylor
 # Create your views here.
 
 @api_view(['POST'])
@@ -14,7 +14,7 @@ def newton_list(request):
             equation = deserialized.data['equation']
             first = int(deserialized.data['first'])
             second = int(deserialized.data['second'])
-            answer = newtonMethod(equation, first, second)
+            answer = Newton_Method(equation, first, second)
             return Response(answer, status=status.HTTP_201_CREATED)
         else:
             return Response(deserialized.error_messages)
@@ -26,7 +26,7 @@ def diff_list(request):
         deserialized = DiffSerializer(data=request.data)
         if deserialized.is_valid():
             equation = deserialized.data['equation']
-            answer = diffMethod(equation)
+            answer = Differentiating_Calculator(equation)
             return Response(answer, status=status.HTTP_201_CREATED)
         else:
             return Response(deserialized.errors)
@@ -42,5 +42,19 @@ def diff_list(request):
     #     serializer = NewtonSerializer(data=answer)
     #     serializer.is_valid()
     #     return Response(serializer.validated_data, status=status.HTTP_204_NO_CONTENT)
+
+@api_view(['POST'])
+def taylor_list(request):
+    if request.method == 'POST':
+        deserialized = TaylorSerializer(data=request.data)
+        if deserialized.is_valid():
+            function = deserialized.data['function']
+            num_of_iter = deserialized.data['num_of_iter']
+            center = deserialized.data['center']
+            answer = taylor(function, num_of_iter, center)
+            return Response(answer, status=status.HTTP_201_CREATED)
+        else:
+            return Response(deserialized.errors)
+    
     
 
