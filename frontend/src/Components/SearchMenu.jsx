@@ -7,7 +7,7 @@ import { ReactComponent as Search } from "../Files/svgs/search.svg";
 const SearchMenu = () => {
   return (
     <div className="flex flex-col w-1/3 m-auto justify-center items-center bg-transparent mt-10">
-      <div className="flex justify-center items-center border-2 border-primary">
+      <div className="flex justify-center items-center border-2">
         <Placeholder />
         <input type="text" className="bg-black py-4 inline-block " />
         <Fx />
@@ -15,7 +15,9 @@ const SearchMenu = () => {
           <Search />
         </button>
       </div>
-      <Functions />
+      <div className="bg-black bg-opacity-80 z-10 rounded-3xl">
+        <Functions />
+      </div>
     </div>
   );
 };
