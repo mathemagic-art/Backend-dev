@@ -44,6 +44,7 @@ def diff_list(request):
             return Response(deserialized.errors)
     
 
+
 @api_view(['POST'])
 def taylor_list(request):
     
@@ -63,6 +64,7 @@ def taylor_list(request):
         else: 
             
             return Response(deserialized.errors)
+
 
 
 @api_view(['POST'])
@@ -101,6 +103,8 @@ def trapezoid_list(request):
             return Response(answer, status=status.HTTP_201_CREATED)
         else:
             return Response(deserialized.error_messages)
+
+
 
 @api_view(['POST',])
 def rectangle_list(request):
