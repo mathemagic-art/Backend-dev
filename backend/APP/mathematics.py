@@ -115,4 +115,4 @@ def simpsons_method(function: str, initial_point: int, end_point: int)->str:
         pol_func = find_polynomial(x_1, x_2, x_3, function(x_1), function(x_2), function(x_3))
         Area += scipy.integrate.quad(pol_func ,x_1, x_3)[0]
         
-    return str(Area)   
+    return str(Area)

@@ -1,5 +1,5 @@
-import React from "react";
 import axios from "axios";
+<<<<<<< HEAD
 
 export default class PersonAdd extends React.Component {
   state = {
@@ -60,3 +60,16 @@ export default class PersonAdd extends React.Component {
     );
   }
 }
+=======
+import "./App.css";
+import Home from "./Pages/Home";
+const App = () => {
+  return (
+    <div className="text-white text-center text-2xl">
+      <Home />
+    </div>
+  );
+};
+
+export default App;
+>>>>>>> 767bd47bc412ab43bfe5985522c85c1ef47fa2e7
