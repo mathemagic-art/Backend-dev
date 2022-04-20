@@ -8,10 +8,11 @@ const Home = () => {
   const toggle = () => {
     setIsOpen(!isOpen);
   };
+
   return (
     <div>
-      <Navbar />
-      <Hero />
+      <Navbar toggle={toggle} />
+      <Hero isOpen={isOpen} />
     </div>
   );
 };
