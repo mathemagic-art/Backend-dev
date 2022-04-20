@@ -1,11 +1,14 @@
 import axios from "axios";
 import "./App.css";
 import Home from "./Pages/Home";
+import Test from "./Pages/Test.jsx";
+import { Route, Router, Routes } from "react-router-dom";
 const App = () => {
   return (
-    <div className="text-white text-center text-2xl">
-      <Home />
-    </div>
+    <Routes>
+      <Route exact path="/" element={<Home />}></Route>
+      <Route path="/TEST" element={<Test />}></Route>
+    </Routes>
   );
 };
 
