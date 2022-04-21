@@ -28,3 +28,17 @@ input:
 }
 
 output: between "1.99" and "2.0001"
+
+
+
+##############
+# for limit #
+##############
+
+input :
+
+{
+"equation": "sin(x)/x",
+"first": "x",
+"second": "0"
+}

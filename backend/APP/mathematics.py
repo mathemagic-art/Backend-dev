@@ -67,12 +67,15 @@ def limit_calculator(function: str, symbol : str, approach: str) -> str:
     if approach[-1] in ['+', '-']:        
         sign = approach[-1]
         approach = int(approach[:-1])
-        ans = str("{:.5f}".format(sp.sympify(sp.limit(function, symbol, approach)).evalf()))
+        ans = str("{}".format(sp.sympify(sp.limit(function, symbol, approach, sign)).evalf()))
     else:
         if approach.isdigit():
             approach = int(approach)
+    
         ans = str("{:.5f}".format(sp.sympify(sp.limit(function, symbol, approach)).evalf()))    
-    return ans
+    
+    
+    return str(ans)
 
 ########################################################################################################################
 
