@@ -1,8 +1,7 @@
 import { useState } from "react";
-import Hero from "../Layouts/Hero";
 import Navbar from "../Layouts/Navbar";
 
-const Home = () => {
+const NewtonMethod = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggle = () => {
@@ -10,11 +9,10 @@ const Home = () => {
   };
 
   return (
-    <div>
+    <>
       <Navbar toggle={toggle} />
-      <Hero isOpen={isOpen} />
-    </div>
+    </>
   );
 };
 
-export default Home;
+export default NewtonMethod;
