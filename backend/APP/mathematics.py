@@ -55,10 +55,10 @@ def indefinite_integration_calculator(function: str) -> str:
 
 ########################################################################################################################
 
-def definite_integration_calculator(function:str, lower_bound:str, upper_bound:str) -> str:
+def definite_integration_calculator(function:str, lower_bound:int, upper_bound:int) -> str:
   function = parse_func(function)
-  a = sp.lambdify(x, sp.integrate(sp.sympify(function))) #integrating and lammbdifying a given function
-  return output_func("{:.5f}".format(a(int(upper_bound))-a(int(lower_bound))))
+  a = sp.lambdify(x, sp.integrate(sp.sympify(function))) 
+  return output_func("{:.5f}".format(a(upper_bound)-a(lower_bound)))
 
 #########################################################################################################################
 
