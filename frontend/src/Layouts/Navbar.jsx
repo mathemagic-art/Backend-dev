@@ -31,7 +31,7 @@ const Navbar = ({ toggle }) => {
         </button>
       </div>
       <div className="flex flex-row p-10 space-x-10 items-center m-auto gap-20">
-        <NavLink text={"TEST"} />
+        <NavLink text={"TEST YOURSELF"} />
         <NavLink text={"CHEATSHEETS"} />
         <Link to="/">
           <h1 className="text-4xl font-semibold text-center flex flex-row">
@@ -39,7 +39,7 @@ const Navbar = ({ toggle }) => {
             MATHEMAGICS
           </h1>
         </Link>
-        <NavLink text={"LEARNIGN MATERIALS"} />
+        <NavLink text={"LEARNING MATERIALS"} />
         <NavLink text={"ABOUT"} />
         <Search />
         <span>{darkmode.showWidget()}</span>

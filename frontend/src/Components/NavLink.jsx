@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const NavLink = ({ text }) => {
   return (
     <>
-      <Link to={"/" + text}>{text}</Link>
+      <Link to={"/"+text.replace(" ", "")}>{text}</Link>
     </>
   );
 };
