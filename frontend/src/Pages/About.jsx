@@ -1,7 +1,7 @@
 import React from 'react'
 import Navbar from '../Layouts/Navbar'
 
-const About = () => {
+const ABOUT = () => {
   return (
     <div>
         <Navbar />
@@ -11,4 +11,4 @@ const About = () => {
   )
 }
 
-export default About
+export default ABOUT
