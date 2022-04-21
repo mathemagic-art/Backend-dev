@@ -122,3 +122,23 @@ def rectangle_list(request):
             return Response(answer, status=status.HTTP_201_CREATED)
         else:
             return Response(deserialized.error_messages)
+
+
+
+@api_view(['POST'])
+def definite_integral_list(request):
+    
+    if request.method == "POST":
+        deserialized = Function_Two_Numeric(data=request.data)
+
+        if deserialized.is_valid():
+
+            equation = deserialized.data['equation']
+            first = int(deserialized.data['first'])
+            second = int(deserialized.data['second'])
+            
+            answer = definite_integration_calculator(equation, first, second)
+            return Response(answer, status=status.HTTP_201_CREATED)
+        
+        else: 
+            return Response(deserialized.errors)
