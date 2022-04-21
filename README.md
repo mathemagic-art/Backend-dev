@@ -1,5 +1,4 @@
 # Reat.js-Django-Web-Development
-=======
 # [Django REST framework][docs]
 
 [![build-status-image]][build-status]
@@ -204,4 +203,4 @@ Please see the [security policy][security-policy].
 
 [docs]: https://www.django-rest-framework.org/
 [security-policy]: https://github.com/encode/django-rest-framework/security/policy
->>>>>>> 95da1edf72957cbebe0d6eed245841ba4ec8144f
+
