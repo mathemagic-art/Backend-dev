@@ -2,6 +2,7 @@ import { useState } from "react";
 import MethodsCard from "../Components/MethodsCard";
 import Navbar from "../Layouts/Navbar";
 import { ReactComponent as Fx } from "../Files/svgs/fx.svg";
+import FunctionsMenu from "../Layouts/FunctionsMenu";
 
 const NewtonMethod = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -13,6 +14,7 @@ const NewtonMethod = () => {
   return (
     <>
       <Navbar toggle={toggle} />
+      {isOpen ? <FunctionsMenu /> : ""} 
       <div className="ml-32 mt-20 border-2 w-1/3 rounded-lg text-white p-10 bg-dark bg-opacity-30">
         <h2 className="text-center text-3xl font-primary text-primary">
           Newton's Method Calculator
