@@ -142,3 +142,22 @@ def definite_integral_list(request):
         
         else: 
             return Response(deserialized.errors)
+
+
+@api_view(['POST'])
+def limit_list(request):
+    
+    if request.method == "POST":
+        deserialized = Function_Two_String(data=request.data)
+
+        if deserialized.is_valid():
+
+            equation = deserialized.data['equation']
+            first = deserialized.data['first']
+            second = deserialized.data['second']
+            
+            answer = limit_calculator(equation, first, second)
+            return Response(answer, status=status.HTTP_201_CREATED)
+        
+        else: 
+            return Response(deserialized.errors)

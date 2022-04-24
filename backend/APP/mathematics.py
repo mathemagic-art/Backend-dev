@@ -62,8 +62,12 @@ def definite_integration_calculator(function:str, lower_bound:int, upper_bound:i
 
 #########################################################################################################################
 
+
 def limit_calculator(function: str, symbol : str, approach: str) -> str:
-    function = parse_func(function)    
+    
+    symbol = sp.Symbol(symbol)
+    function = parse_func(function)
+    
     if approach[-1] in ['+', '-']:        
         sign = approach[-1]
         approach = int(approach[:-1])
@@ -71,8 +75,10 @@ def limit_calculator(function: str, symbol : str, approach: str) -> str:
     else:
         if approach.isdigit():
             approach = int(approach)
-        ans = str("{:.5f}".format(sp.sympify(sp.limit(function, symbol, approach)).evalf()))    
-    return ans
+        ans = str("{:.5f}".format(sp.sympify(sp.limit(function, symbol, approach)).evalf()))
+    
+    
+    return str(ans)
 
 ########################################################################################################################
 
