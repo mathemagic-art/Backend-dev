@@ -25,13 +25,13 @@ def output_func(function):
 
 ########################################################################################################################
 
-def newton_method(input_function: str, first_guess: int, number_of_iterations: int) -> str:
+def newton_method(input_function: str, first_guess: float, number_of_iterations: float) -> str:
     try:
         input_function = parse_func(input_function) #replaces 
         f = sp.lambdify(x, input_function) #lambdify expression of the input function
         f_d = sp.lambdify(x, sp.diff(input_function, x))  #lambdify expression of the derivative of the input function
         x_i = first_guess
-        for i in range(number_of_iterations):
+        for i in range(int(number_of_iterations)):
             x_i = x_i - (f(x_i)/f_d(x_i))
         if f(x_i) > 0.000001:
             return "It seems that you put unsufficient number of iterations. Please make it bigger. Also, check the function. Probably, it does not have any roots."
