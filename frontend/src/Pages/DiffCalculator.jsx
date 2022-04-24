@@ -60,10 +60,15 @@ const DiffCalculator = () => {
   };
   
   const handleSubmit = (event) => {
-    axios.post("http://127.0.0.1:8000/diff/", data).then((res)=>{setAnswer(res.data)})
-    console.log(data)
-    console.log(answer)
-    event.preventDefault()
+    if (!data.equation){
+      event.preventDefault()
+    }else{
+
+      axios.post("http://127.0.0.1:8000/diff/", data).then((res)=>{setAnswer(res.data)})
+      console.log(data)
+      console.log(answer)
+      event.preventDefault()
+    }
     
   }
   return (
@@ -85,6 +90,7 @@ const DiffCalculator = () => {
             </label>
             <div className="flex rounded-xl text-black mb-10" id="searchbox">
                 <input
+                required
                 className="w-full p-4 border-2  border-primary rounded-l-xl text-xl"
                 type="text"
                 // id="function"
@@ -128,7 +134,7 @@ const DiffCalculator = () => {
             <div className=" w-1/2 mt-12 mr-20 flex flex-col text-white">
                 <p className="mt-24 pl-20 font-normal text-2xl flex">According to Differential Rules:<Newton className="ml-10 -mt-5"/></p>
                 <div className="flex mt-10 pl-20 pt-10 h-full w-full flex-row font-normal text-2xl tracking-wide">
-                    <p>The Derivative of {data.equation == ""? "f(x)": ("f(x) = " + data.equation)} equals to </p><div className="ml-3 pt-4 pb-14 border-2 font-normal rounded-xl text-3xl -mt-5 px-3 border-double border-green-600 h-10 bg-white text-black">f'(x)={answer !=="" ? answer:"_____________" }</div>
+                    <p>The Derivative of {!data.equation? "f(x)": ("f(x) = " + data.equation)} equals to </p><div className="ml-3 pt-4 pb-14 border-2 font-normal rounded-xl text-3xl -mt-5 px-3 border-double border-green-600 h-10 bg-white text-black">f'(x)={answer !=="" ? answer:"_____________" }</div>
                 </div>
             </div>
         </div>  

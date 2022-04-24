@@ -85,6 +85,7 @@ const NewtonMethod = () => {
             </label>
             <div className="flex rounded-xl text-black mb-10" id="searchbox">
               <input
+              required
                 className="w-full p-4 border-2  border-primary rounded-l-xl text-xl"
                 type="text"
                 // id="function"
@@ -101,6 +102,7 @@ const NewtonMethod = () => {
               Significant Figure
             </label>
             <input
+            required
               type="text"
               // id="figure"
               name="first"
@@ -112,6 +114,7 @@ const NewtonMethod = () => {
               Number of Iterations
             </label>
             <input
+              required
               type="text"
               // id="iteration"
               value={data.second}
