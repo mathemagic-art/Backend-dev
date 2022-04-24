@@ -40,7 +40,8 @@ const NewtonMethod = () => {
   //   // axios.post("http://127.0.0.1:8000/newton/", data).then((res)=>{setAnswer(res)})
   // };
 
-  const handleReset = () => {
+  const handleReset = (event) => {
+    event.preventDefault()
     setData({equation:"", first:"", second:""})
   }
 
