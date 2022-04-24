@@ -128,7 +128,7 @@ const DiffCalculator = () => {
             <div className=" w-1/2 mt-12 mr-20 flex flex-col text-white">
                 <p className="mt-24 pl-20 font-normal text-2xl flex">According to Differential Rules:<Newton className="ml-10 -mt-5"/></p>
                 <div className="flex mt-10 pl-20 pt-10 h-full w-full flex-row font-normal text-2xl tracking-wide">
-                    <p>The Derivative of f(x) equals to </p><div className="ml-3 pt-4 pb-14 border-2 font-normal rounded-xl text-3xl -mt-5 px-3 border-double border-green-600 h-10 bg-white text-black">f'(x)={answer !=="" ? answer:"_____________" }</div>
+                    <p>The Derivative of {data.equation == ""? "f(x)": ("f(x) = " + data.equation)} equals to </p><div className="ml-3 pt-4 pb-14 border-2 font-normal rounded-xl text-3xl -mt-5 px-3 border-double border-green-600 h-10 bg-white text-black">f'(x)={answer !=="" ? answer:"_____________" }</div>
                 </div>
             </div>
         </div>  
