@@ -85,7 +85,7 @@ const NewtonMethod = () => {
             </label>
             <div className="flex rounded-xl text-black mb-10" id="searchbox">
               <input
-                className="w-full p-4 border-2  border-primary rounded-l-xl"
+                className="w-full p-4 border-2  border-primary rounded-l-xl text-xl"
                 type="text"
                 // id="function"
                 name="equation"
@@ -106,7 +106,7 @@ const NewtonMethod = () => {
               name="first"
               value={data.first}
               onChange={handleInput}
-              className="w-full p-4 border-2 text-black  border-primary rounded-xl mb-10"
+              className="w-full p-4 border-2 text-black  border-primary rounded-xl mb-10 text-xl"
             />
             <label htmlFor="iteration" className="ml-2 text-bright">
               Number of Iterations
@@ -117,7 +117,7 @@ const NewtonMethod = () => {
               value={data.second}
               name="second"
               onChange={handleInput}
-              className="w-full p-4 border-2  text-black border-primary rounded-xl mb-10"
+              className="w-full p-4 border-2  text-black border-primary rounded-xl mb-10 text-xl"
               />
           </div>
           <div className=" flex justify-evenly">
