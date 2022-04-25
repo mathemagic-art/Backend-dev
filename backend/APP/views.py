@@ -15,8 +15,8 @@ def newton_list(request):
         if deserialized.is_valid():
 
             equation = deserialized.data['equation']
-            first = int(deserialized.data['first'])
-            second = int(deserialized.data['second'])
+            first = float(deserialized.data['first'])
+            second = float(deserialized.data['second'])
             answer = newton_method(equation, first, second)
             return Response(answer, status=status.HTTP_201_CREATED)
         
@@ -55,8 +55,8 @@ def taylor_list(request):
         if deserialized.is_valid():
 
             equation = deserialized.data['equation']
-            first = int(deserialized.data['first'])
-            second = int(deserialized.data['second'])
+            first = float(deserialized.data['first'])
+            second = float(deserialized.data['second'])
             
             answer = taylor_series(equation, first, second)
             return Response(answer, status=status.HTTP_201_CREATED)
@@ -76,8 +76,8 @@ def simpson_list(request):
         if deserialized.is_valid():
 
             equation = deserialized.data['equation']
-            first = int(deserialized.data['first'])
-            second = int(deserialized.data['second'])
+            first = float(deserialized.data['first'])
+            second = float(deserialized.data['second'])
             
             answer = simpsons_method(equation, first, second)
             return Response(answer, status=status.HTTP_201_CREATED)
@@ -95,9 +95,9 @@ def trapezoid_list(request):
 
         if deserialized.is_valid():
             equation = deserialized.data['equation']
-            first = int(deserialized.data['first'])
-            second = int(deserialized.data['second'])
-            third = int(deserialized.data['third'])
+            first = float(deserialized.data['first'])
+            second = float(deserialized.data['second'])
+            third = float(deserialized.data['third'])
 
             answer = trapezoid_method(equation, first, second, third)
             return Response(answer, status=status.HTTP_201_CREATED)
@@ -114,9 +114,9 @@ def rectangle_list(request):
         
         if deserialized.is_valid():
             equation = deserialized.data['equation']
-            first = int(deserialized.data['first'])
-            second = int(deserialized.data['second'])
-            third = int(deserialized.data['third'])
+            first = float(deserialized.data['first'])
+            second = float(deserialized.data['second'])
+            third = float(deserialized.data['third'])
 
             answer = rectangle_method(equation, first, second, third)
             return Response(answer, status=status.HTTP_201_CREATED)
@@ -134,10 +134,29 @@ def definite_integral_list(request):
         if deserialized.is_valid():
 
             equation = deserialized.data['equation']
-            first = int(deserialized.data['first'])
-            second = int(deserialized.data['second'])
+            first = float(deserialized.data['first'])
+            second = float(deserialized.data['second'])
             
             answer = definite_integration_calculator(equation, first, second)
+            return Response(answer, status=status.HTTP_201_CREATED)
+        
+        else: 
+            return Response(deserialized.errors)
+
+
+@api_view(['POST'])
+def limit_list(request):
+    
+    if request.method == "POST":
+        deserialized = Function_Two_String(data=request.data)
+
+        if deserialized.is_valid():
+
+            equation = deserialized.data['equation']
+            first = deserialized.data['first']
+            second = deserialized.data['second']
+            
+            answer = limit_calculator(equation, first, second)
             return Response(answer, status=status.HTTP_201_CREATED)
         
         else: 
