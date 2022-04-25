@@ -42,12 +42,12 @@ def newton_method(input_function: str, first_guess: float, number_of_iterations:
 
 ########################################################################################################################
 
-def differentiating_calculator(function: str) -> str:
+def differentiating_calculator(function: str, variable: str) -> str:
 
     function = parse_func(function)
-    function_prime = function.diff(x)  
+    variable = sp.Symbol(variable)
+    function_prime = function.diff(variable)  
     return output_func(function_prime)
-
 ########################################################################################################################
 
 def indefinite_integration_calculator(function: str) -> str:
