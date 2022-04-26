@@ -39,7 +39,7 @@ const DiffCalculator = () => {
 
   // const handleClick = () =>{
   //   console.log(data)
-  //   // axios.post("http://127.0.0.1:8000/newton/", data).then((res)=>{setAnswer(res)})
+  //   // axios.post("http://127.0.0.1:8000/diff/", data).then((res)=>{setAnswer(res)})
   // };
 
   const handleReset = (event) => {

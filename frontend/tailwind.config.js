@@ -13,6 +13,16 @@ module.exports = {
         text: "#757D8A",
       },
     },
+    screens: {
+      'tablet': '400px',
+      // => @media (min-width: 640px) { ... }
+
+      'laptop': '1440px',
+      // => @media (min-width: 1024px) { ... }
+
+      'desktop': '1280px',
+      // => @media (min-width: 1280px) { ... }
+    },
   },
   plugins: [],
 };
