@@ -70,9 +70,9 @@ const NewtonMethod = () => {
     <>
       <Navbar toggle={toggle} />
       {isOpen ? <FunctionsMenu /> : ""}
-      <div className="flex">
+      <div className="flex tablet:flex-col">
         <form onSubmit={handleSubmit}>
-        <div className="ml-32 mt-12 border-2 w-1/2 h-full rounded-3xl text-white p-10 bg-dark bg-opacity-30">
+        <div className="ml-52 mt-12 border-2 w-1/2 h-full rounded-3xl text-white p-10 bg-dark bg-opacity-30">
           <h2 className="text-center text-3xl font-primary text-primary">
             Newton's Method Calculator
           </h2>
@@ -99,7 +99,7 @@ const NewtonMethod = () => {
               </button>
             </div>
             <label htmlFor="figure" className="ml-2 text-bright">
-              Significant Figure
+              With Respect to
             </label>
             <input
             required
@@ -108,6 +108,7 @@ const NewtonMethod = () => {
               name="first"
               value={data.first}
               onChange={handleInput}
+              defaultValue="x"
               className="w-full p-4 border-2 text-black  border-primary rounded-xl mb-10 text-xl"
             />
             <label htmlFor="iteration" className="ml-2 text-bright">
@@ -133,7 +134,7 @@ const NewtonMethod = () => {
           </div>
         </div>
         </form>
-        <div className=" w-1/2 mt-12 mr-20 flex flex-col text-white">
+        <div className=" w-1/2 mt-12 mr-20 flex flex-col text-white tablet:w-full tablet:pl-16 tablet:pb-16" >
           <p className="mt-24 ml-10 font-normal text-2xl flex">According to Newton's Method:<Newton className="ml-10 -mt-5"/></p>
           <div className="flex mt-10 pl-10 pt-10 h-full w-full flex-row font-normal text-2xl tracking-wide">
             <p>The root of</p> <X2 className="mx-5 -mt-3"/><p>equals to </p><div className="ml-3 pt-4 pb-14 border-2 font-normal rounded-xl text-3xl -mt-5 px-3 border-double border-green-600 h-10 bg-white text-black">x(0)={answer !=="" ? answer:"_____________" }</div>

@@ -14,7 +14,7 @@ module.exports = {
       },
     },
     screens: {
-      'tablet': '400px',
+      'tablet': {'max': '1300px'},
       // => @media (min-width: 640px) { ... }
 
       'laptop': '1620px',

@@ -21,7 +21,7 @@ def newton_list(request):
             return Response(answer, status=status.HTTP_201_CREATED)
         
         else:
-            
+
             return Response(deserialized.error_messages)
 
 
