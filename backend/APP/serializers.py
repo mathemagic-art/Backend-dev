@@ -1,8 +1,10 @@
 from rest_framework import serializers
 
-class Function(serializers.Serializer):
+class String_String_Integer(serializers.Serializer):
     
     equation = serializers.CharField(max_length=300)
+    symbol = serializers.CharField(max_length=300)
+    first = serializers.FloatField()
 
 class Function_Two_Numeric(serializers.Serializer):
     

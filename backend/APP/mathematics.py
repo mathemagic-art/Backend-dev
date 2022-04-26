@@ -15,7 +15,7 @@ x = sp.Symbol('x')
 def parse_func(function: str):
     return sp.sympify(function.replace('e', 'E'), convert_xor=True)
 
-def output_func(function):
+def output_func(function: str) -> str:
     function = str(function).replace('log', 'ln')
     while re.search('ln\((.*?)\)/ln\((.*?)\)', function) != None:
         expression = re.search('ln\((.*?)\)/ln\((.*?)\)', function).string
