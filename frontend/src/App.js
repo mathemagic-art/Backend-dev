@@ -11,6 +11,7 @@ import ABOUT from "./Pages/About";
 import DiffCalculator from "./Pages/DiffCalculator";
 import LimitCalc from "./Pages/LimitCalc";
 import TaylorCalc from "./Pages/TaylorCalc";
+import SimpsonCalc from "./Pages/SimpsonCalc";
 
 const App = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -29,6 +30,7 @@ const App = () => {
       <Route path="/ABOUT" element={<ABOUT toggle={toggle} isOpen={isOpen}/>}></Route>
       <Route path="/limit" element={<LimitCalc/>}></Route>
       <Route path="/taylor" element={<TaylorCalc/>}></Route>
+      <Route path="/simpson" element={<SimpsonCalc/>}></Route>
     </Routes>
   );
 };
