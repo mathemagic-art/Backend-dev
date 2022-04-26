@@ -39,7 +39,7 @@ const DiffCalculator = () => {
 
   // const handleClick = () =>{
   //   console.log(data)
-  //   // axios.post("http://127.0.0.1:8000/newton/", data).then((res)=>{setAnswer(res)})
+  //   // axios.post("http://127.0.0.1:8000/diff/", data).then((res)=>{setAnswer(res)})
   // };
 
   const handleReset = (event) => {
@@ -64,7 +64,7 @@ const DiffCalculator = () => {
       event.preventDefault()
     }else{
 
-      axios.post("https://api-mathemagics.herokuapp.com/diff/", data).then((res)=>{setAnswer(res.data)})
+      axios.post("http://127.0.0.1:8000/diff/", data).then((res)=>{setAnswer(res.data)})
       console.log(data)
       console.log(answer)
       event.preventDefault()
