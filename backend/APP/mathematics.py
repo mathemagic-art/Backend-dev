@@ -1,3 +1,4 @@
+from hashlib import new
 import re
 import sympy as sp 
 import numpy as np
@@ -25,21 +26,33 @@ def output_func(function):
 
 ########################################################################################################################
 
-def newton_method(input_function: str, first_guess: float, number_of_iterations: float) -> str:
+def newton_method(input_function: str, variable: str, number_of_iterations: int) -> str:
     try:
-        input_function = parse_func(input_function) #replaces 
-        f = sp.lambdify(x, input_function) #lambdify expression of the input function
-        f_d = sp.lambdify(x, sp.diff(input_function, x))  #lambdify expression of the derivative of the input function
-        x_i = first_guess
+        input_function = parse_func(input_function)
+        variable = sp.Symbol(variable)
+        f = sp.lambdify(variable, input_function) #lambdify expression of the input function
+        f_d = sp.lambdify(variable, sp.diff(input_function, variable))  #lambdify expression of the derivative of the input function
+        interval = re.findall('Interval.*?\(.*?\)',  str(sp.calculus.util.continuous_domain(input_function, variable, sp.S.Reals))) #checking the domain
+        if interval: 
+            interval = interval[0]
+            interval = re.findall('\(.*?\)', interval)[0][1:-1].split(',')
+            if interval[0] == '-oo':
+                x_i = int(interval[1]) - 1
+            elif interval[1] == 'oo':
+                x_i = int(interval[0]) + 1
+            else:
+                x_i = int(interval[0]) + (int(interval[1]) - int(interval[0]))/2
+        else:
+            x_i = np.random.randint(1, 10)
         for i in range(int(number_of_iterations)):
             x_i = x_i - (f(x_i)/f_d(x_i))
-        if f(x_i) > 0.000001:
-            return "It seems that you put unsufficient number of iterations. Please make it bigger. Also, check the function. Probably, it does not have any roots."
-        else:
-            return str(x_i)
+        ret = str(sp.Float(x_i).round(4))
+        if '.0000' in ret:
+            ret = ret[:ret.index('.')]
+        return ret
     except RuntimeWarning:
-        return "Please change your first guess. Perhaps, the method came across with vertex or new x_i are diverging instead of converging."
-
+        return "Something went wrong. Please check the criteria."
+print(newton_method('x**2', 'x', 10))
 ########################################################################################################################
 
 def differentiating_calculator(function: str, variable: str, degree: int) -> str:
