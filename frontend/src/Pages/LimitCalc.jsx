@@ -72,18 +72,19 @@ const LimitCalc = () => {
       {isOpen ? <FunctionsMenu /> : ""}
       <div className="flex">
         <form onSubmit={handleSubmit}>
-        <div className="ml-32 mt-12 border-2 w-1/2 h-full rounded-3xl text-white p-10 bg-dark bg-opacity-30">
+        <div className="ml-32 mt-12 border-2 w-[55%] h-[95%] rounded-3xl text-white p-10 bg-dark bg-opacity-30">
           <h2 className="text-center text-3xl font-primary text-primary">
             Limit Calculator
           </h2>
           <p className="text-center text-text mb-10">
             Analyses the behavior of a function near a particular point{" "}
+            infinity(oo, -oo) and pi(π)
           </p>
           <div>
-            <label htmlFor="function" className="ml-2 text-bright">
+            <label htmlFor="function" className="ml-2 text-bright text-xl">
               Enter a function f(x)
             </label>
-            <div className="flex rounded-xl text-black mb-10" id="searchbox">
+            <div className="flex rounded-xl text-black mb-10 " id="searchbox">
               <input
               required
                 className="w-full p-4 border-2  border-primary rounded-l-xl text-xl"
@@ -98,39 +99,35 @@ const LimitCalc = () => {
                 <Fx />
               </button>
             </div>
-            <label htmlFor="figure" className="ml-2 text-bright">
+            <label htmlFor="figure" className="ml-2 text-bright text-xl">
               Choose a variable
             </label>
-            <input
-            required
-              type="text"
-              // id="figure"
-              name="first"
-              value={data.first}
-              onChange={handleInput}
-              className="w-full p-4 border-2 text-black  border-primary rounded-xl mb-10 text-xl"
-            />
-            <label htmlFor="iteration" className="ml-2 text-bright">
+            <select id = "list" onchange = "getSelectedValue();" className="w-full p-4 border-2 text-black text-xl border-primary rounded-xl mb-10">
+                <option value = "x">x</option>
+                <option value = "pi">π</option>
+                <option value = "h">h</option>
+            </select>
+            <label htmlFor="iteration" className="ml-2 text-bright text-xl">
               Side
+            </label>
+            <select id = "list" onchange = "getSelectedValue();" className="w-full p-4 border-2 text-black text-xl border-primary rounded-xl mb-10">
+                <option value = "x">Two-sided</option>
+                <option value = "y">Left (-)</option>
+                <option value = "z">Right (+)</option>
+            </select>
+              <label htmlFor="iteration" className="ml-2 text-bright text-xl">
+              Limits approach to
             </label>
             <input
               required
               type="text"
-              // id="iteration"
+              // id="iteration ∞"
               value={data.second}
               name="second"
               onChange={handleInput}
               className="w-full p-4 border-2  text-black border-primary rounded-xl mb-10 text-xl"
-              />
-              <label htmlFor="iteration" className="ml-2 text-bright">
-              Limits approach to
-            </label>
-            <select id = "list" onchange = "getSelectedValue();" className="w-full p-4 border-2 text-black text-xl border-primary rounded-xl mb-10">
-                <option value = "one">1</option>
-                <option value = "infinity">+∞</option>
-                <option value = "negative infinity">-∞</option>
-                <option value = "pi">z</option>
-            </select>
+              defaultValue="oo"
+              />    
           </div>
           <div className=" flex justify-evenly">
             <button className="bg-primary text-white px-6 py-2 text-center text-lg rounded-md" type="submit" >
@@ -143,9 +140,9 @@ const LimitCalc = () => {
         </div>
         </form>
         <div className=" w-1/2 mt-12 mr-20 flex flex-col text-white">
-          <p className="mt-24 ml-10 font-normal text-2xl flex">According to Newton's Method:<Newton className="ml-10 -mt-5"/></p>
+          <p className="mt-24 ml-10 font-normal text-2xl flex">According to Limit Rule's:<Newton className="ml-10 -mt-5"/></p>
           <div className="flex mt-10 pl-10 pt-10 h-full w-full flex-row font-normal text-2xl tracking-wide">
-            <p>The root of</p> <X2 className="mx-5 -mt-3"/><p>equals to </p><div className="ml-3 pt-4 pb-14 border-2 font-normal rounded-xl text-3xl -mt-5 px-3 border-double border-green-600 h-10 bg-white text-black">x(0)={answer !=="" ? answer:"_____________" }</div>
+          <p>The limits of {!data.equation? "f(x)": ("f(x) = " + data.equation)} approaches to {!data.second? "": (data.second)} is:</p><div className="ml-3 pt-4 pb-14 border-2 font-normal rounded-xl text-3xl -mt-5 px-3 border-double border-green-600 h-10 bg-white text-black">{answer !=="" ? answer:"_____________" }</div>
           </div>
         </div>
       </div>
