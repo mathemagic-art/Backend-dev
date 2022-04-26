@@ -58,13 +58,8 @@ def differentiating_calculator(function: str, variable: str, degree: int) -> str
 
     function = parse_func(function)
     variable = sp.Symbol(variable)
-    function_prime = function.diff(variable)  
-    
+    function_prime = function.diff(variable, degree)  
     ans = output_func(function_prime)
-    
-    if degree == 2:
-        ans = differentiating_calculator(ans, variable, 1)
-    
     return ans
 ########################################################################################################################
 
