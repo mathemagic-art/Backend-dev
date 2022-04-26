@@ -5,8 +5,8 @@ import FunctionsMenu from "./FunctionsMenu";
 
 const Hero = ({ isOpen }) => {
   return (
-    <div className="w-3/4 flex flex-col items-center mt-52 mx-auto">
-      <h1 className="text-white text-5xl  tracking-wide text-center">
+    <div className="w-3/4 flex flex-col items-center laptop:mt-52 mt-40 mx-auto">
+      <h1 className="text-white -mt-5 laptop:text-5xl text-3xl  tracking-wide text-center">
         Creative solutions for <br /> brilliant minds
       </h1>
       <SearchMenu />

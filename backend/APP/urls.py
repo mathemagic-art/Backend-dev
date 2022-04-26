@@ -10,4 +10,5 @@ urlpatterns = [
     path('trapezoid/', trapezoid_list),                    #Ilkhom
     path('rectangle/', rectangle_list),                    #Eldar
     path('definite-integral/', definite_integral_list),    #Ilkhom
+    path('limit/', limit_list),                            #Eldar
 ]
