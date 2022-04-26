@@ -26,13 +26,13 @@ def output_func(function: str) -> str:
 
 ########################################################################################################################
 
-def newton_method(input_function: str, variable: str, number_of_iterations: int) -> str:
+def newton_method(function: str, variable: str, number_of_iterations: int) -> str:
     try:
-        input_function = parse_func(input_function)
+        function = parse_func(function)
         variable = sp.Symbol(variable)
-        f = sp.lambdify(variable, input_function) #lambdify expression of the input function
-        f_d = sp.lambdify(variable, sp.diff(input_function, variable))  #lambdify expression of the derivative of the input function
-        interval = re.findall('Interval.*?\(.*?\)',  str(sp.calculus.util.continuous_domain(input_function, variable, sp.S.Reals))) #checking the domain
+        f = sp.lambdify(variable, function) #lambdify expression of the input function
+        f_d = sp.lambdify(variable, sp.diff(function, variable))  #lambdify expression of the derivative of the input function
+        interval = re.findall('Interval.*?\(.*?\)',  str(sp.calculus.util.continuous_domain(function, variable, sp.S.Reals))) #checking the domain
         if interval: 
             interval = interval[0]
             interval = re.findall('\(.*?\)', interval)[0][1:-1].split(',')
@@ -68,7 +68,7 @@ def indefinite_integration_calculator(function: str) -> str:
 
 ########################################################################################################################
 
-def definite_integration_calculator(function:str, lower_bound:int, upper_bound:int) -> str:
+def definite_integration_calculator(function:str, lower_bound: float, upper_bound: float) -> str:
   function = parse_func(function)
   a = sp.lambdify(x, sp.integrate(sp.sympify(function))) 
   return output_func("{:.5f}".format(a(upper_bound)-a(lower_bound)))
@@ -101,7 +101,7 @@ def limit_calculator(function: str, symbol : str, approach: str) -> str:
 
 ########################################################################################################################
 
-def rectangle_method(function:str, init_point:int, end_point:int, num_of_interval:int)->str:
+def rectangle_method(function: str, init_point: float, end_point: float, num_of_interval: int)->str:
     function = parse_func(function)
     function = sp.lambdify(x, function)
     dx = (end_point - init_point)/num_of_interval
@@ -116,7 +116,7 @@ def rectangle_method(function:str, init_point:int, end_point:int, num_of_interva
 
 #######################################################################################################################
 
-def simpsons_method(function: str, initial_point: int, end_point: int)-> str:
+def simpsons_method(function: str, initial_point: float, end_point: float)-> str:
 
     def find_polynomial(x1, x2, x3, y1, y2, y3):
      
@@ -147,7 +147,7 @@ def simpsons_method(function: str, initial_point: int, end_point: int)-> str:
 
 ######################################################################################################################
 
-def trapezoid_method(function:str,initial_point:int,end_point:int,number_interval:int) ->str:
+def trapezoid_method(function: str, initial_point: float, end_point: float, number_interval: int) ->str:
   function = sp.lambdify(x, function)
   dx = (end_point - initial_point)/number_interval
   A = 1/2 *(function(initial_point) + function(end_point))
@@ -158,7 +158,7 @@ def trapezoid_method(function:str,initial_point:int,end_point:int,number_interva
 
 ########################################################################################################################
 
-def taylor_series(function, num_of_iter, center) -> str:
+def taylor_series(function: str, num_of_iter: int, center: float) -> str:
     
     function = parse_func(function)
     taylorPolynomial = str(sp.lambdify(x, function)(center))
