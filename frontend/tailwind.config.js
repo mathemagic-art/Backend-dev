@@ -14,13 +14,13 @@ module.exports = {
       },
     },
     screens: {
-      'tablet': '400px',
+      'tablet': {'max': '1300px'},
       // => @media (min-width: 640px) { ... }
 
       'laptop': '1620px',
       // => @media (min-width: 1024px) { ... }
 
-      'desktop': '1280px',
+      'desktop': '162px',
       // => @media (min-width: 1280px) { ... }
     },
   },
