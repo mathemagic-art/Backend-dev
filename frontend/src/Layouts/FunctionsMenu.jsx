@@ -8,6 +8,7 @@ const FunctionsMenu = () => {
         <RouteItem text="Newton's Method Calculator" path="newton" />
         <RouteItem text="Derivative Calculator" path="diff" />
         <RouteItem text="Limit Calculator" path="limit" />
+        <RouteItem text="Taylor Series Calculator" path="taylor"/>
       </ul>
     </>
   );
