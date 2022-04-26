@@ -9,5 +9,6 @@ urlpatterns = [
     path('simpson/', simpson_list),                #Elnazar
     path('trapezoid/', trapezoid_list),            #Ilkhom
     path('rectangle/', rectangle_list),            #Eldar
+    path('integral/',indefinite_integral_list ), #Aizada
 
 ]
