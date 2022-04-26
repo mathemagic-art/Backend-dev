@@ -60,7 +60,7 @@ const NewtonMethod = () => {
   };
   
   const handleSubmit = (event) => {
-    axios.post("https://api-mathemagics.herokuapp.com/newton/", data).then((res)=>{setAnswer(res.data)})
+    axios.post("http://127.0.0.1:8000/newton/", data).then((res)=>{setAnswer(res.data)})
     console.log(data)
     console.log(answer)
     event.preventDefault()
