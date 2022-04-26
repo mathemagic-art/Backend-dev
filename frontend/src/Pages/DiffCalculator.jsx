@@ -63,10 +63,10 @@ const DiffCalculator = () => {
     if (!data.equation){
       event.preventDefault()
     }else{
-        axios.post("http://127.0.0.1:8000/diff/", data).then((res)=>{setAnswer(res.data)})
-        console.log(data)
-        console.log(answer)
-        event.preventDefault()
+      axios.post("https://api-mathemagics.herokuapp.com/diff/", data).then((res)=>{setAnswer(res.data)})
+      console.log(data)
+      console.log(answer)
+      event.preventDefault()
     }
     
   }
