@@ -9,6 +9,9 @@ import CHEATSHEETS from "./Pages/CHEATSHEETS";
 import LEARNING_MATERIALS from "./Pages/LEARNING_MATERIALS";
 import ABOUT from "./Pages/About";
 import DiffCalculator from "./Pages/DiffCalculator";
+import LimitCalc from "./Pages/LimitCalc";
+import TaylorCalc from "./Pages/TaylorCalc";
+import SimpsonCalc from "./Pages/SimpsonCalc";
 
 const App = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -20,11 +23,14 @@ const App = () => {
     <Routes>
       <Route exact path="/" element={<Home toggle={toggle} isOpen={isOpen} />}></Route>
       <Route path="/TESTYOURSELF" element={<TEST_YOURSELF toggle={toggle} isOpen={isOpen} />}></Route>
-      <Route path="/Newton" element={<NewtonMethod />}></Route>
-      <Route path="/Diff" element={<DiffCalculator />}></Route>
+      <Route path="/newton" element={<NewtonMethod />}></Route>
+      <Route path="/diff" element={<DiffCalculator />}></Route>
       <Route path="/CHEATSHEETS" element={<CHEATSHEETS toggle={toggle} isOpen={isOpen} />}></Route>
       <Route path="/LEARNINGMATERIALS" element={ <LEARNING_MATERIALS toggle={toggle} isOpen={isOpen} />}></Route>
       <Route path="/ABOUT" element={<ABOUT toggle={toggle} isOpen={isOpen}/>}></Route>
+      <Route path="/limit" element={<LimitCalc/>}></Route>
+      <Route path="/taylor" element={<TaylorCalc/>}></Route>
+      <Route path="/simpson" element={<SimpsonCalc/>}></Route>
     </Routes>
   );
 };

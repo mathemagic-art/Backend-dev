@@ -10,13 +10,13 @@ def newton_list(request):
 
     if request.method == 'POST':
 
-        deserialized = Function_Two_Numeric(data=request.data)
+        deserialized = Function_String_Numeric(data=request.data)
 
         if deserialized.is_valid():
 
             equation = deserialized.data['equation']
-            first = float(deserialized.data['first'])
-            second = float(deserialized.data['second'])
+            first = deserialized.data['first']
+            second = int(deserialized.data['second'])
             answer = newton_method(equation, first, second)
             return Response(answer, status=status.HTTP_201_CREATED)
         

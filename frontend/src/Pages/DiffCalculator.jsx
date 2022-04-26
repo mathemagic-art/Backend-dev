@@ -39,7 +39,7 @@ const DiffCalculator = () => {
 
   // const handleClick = () =>{
   //   console.log(data)
-  //   // axios.post("http://127.0.0.1:8000/newton/", data).then((res)=>{setAnswer(res)})
+  //   // axios.post("http://127.0.0.1:8000/diff/", data).then((res)=>{setAnswer(res)})
   // };
 
   const handleReset = (event) => {
@@ -63,8 +63,7 @@ const DiffCalculator = () => {
     if (!data.equation){
       event.preventDefault()
     }else{
-
-      axios.post("http://127.0.0.1:8000/diff/", data).then((res)=>{setAnswer(res.data)})
+      axios.post("https://api-mathemagics.herokuapp.com/diff/", data).then((res)=>{setAnswer(res.data)})
       console.log(data)
       console.log(answer)
       event.preventDefault()
@@ -77,7 +76,7 @@ const DiffCalculator = () => {
         {isOpen ? <FunctionsMenu /> : ""} 
         <div className="flex">
             <form onSubmit={handleSubmit}>
-            <div className="ml-32 mt-12 border-2 w-3/5 h-full rounded-3xl text-white p-10 bg-dark bg-opacity-30">
+            <div className="ml-32 mt-12 border-2 w-[60%] h-full rounded-3xl text-white p-10 bg-dark bg-opacity-30">
             <h2 className="text-center text-3xl font-primary text-primary">
             Derivative Calculator
             </h2>
@@ -106,9 +105,9 @@ const DiffCalculator = () => {
             <label htmlFor="figure" className="ml-2 text-bright">
                 Order of derivative
             </label>
-            <select id = "list" onchange = "getSelectedValue();" className="w-full p-4 border-2 text-black text-xl border-primary rounded-xl mb-10">
+            <select id = "list" className="w-full p-4 border-2 text-black text-xl border-primary rounded-xl mb-10">
                 <option value = "1">First order derivative</option>
-                <option value = "2">Second order derivative</option>
+                <option value ="2">Second order derivative</option>
 
             </select>
             <label htmlFor="iteration" className="ml-2 text-bright">
