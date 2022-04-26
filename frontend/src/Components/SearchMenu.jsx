@@ -11,8 +11,8 @@ const SearchMenu = () => {
     setFunctionsOpen(!functionsOpen);
   };
   return (
-    <div className="flex flex-col m-auto justify-center bg-transparent mt-10 text-white text-xl mb-52 z-10 w-2/3">
-      <div className="flex justify-center items-center border-2 rounded-lg border-blue-500 ">
+    <div className="flex flex-col m-auto justify-center bg-transparent mt-10 laptop:-mt-6 laptop:pt-20 text-white text-xl mb-52 z-10 w-2/3">
+      <div className="flex justify-center items-center border-2 rounded-lg border-blue-500">
         <Placeholder />
         <input type="text" className="bg-black py-4 inline-block w-2/3" />
         <button onClick={toggleFunctions}>
@@ -22,7 +22,7 @@ const SearchMenu = () => {
           <Search />
         </button>
       </div>
-      <div className="bg-black bg-opacity-80 z-10 rounded-3xl mt-5 absolute top-2/4">
+      <div className="bg-black bg-opacity-80 z-10 rounded-3xl tablet:mr-20  mt-5 absolute top-2/4">
         {functionsOpen ? <Functions className="w-full" /> : ""}
       </div>
     </div>

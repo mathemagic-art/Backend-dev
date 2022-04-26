@@ -24,24 +24,24 @@ const Navbar = ({ toggle }) => {
   const darkmode = new Darkmode(options);
 
   return (
-    <div className="flex flex-row items-center text-white text-2xl">
-      <div className="mx-10">
+    <div className="flex flex-row items-center text-white text-2xl tablet:text-lg ">
+      <div className="flex mx-10 tablet:mx-2">
         <button onClick={toggle}>
           <Bucket className="fill-white" />
         </button>
       </div>
-      <div className="flex flex-row p-10 space-x-10 items-center m-auto gap-20">
-        <NavLink text={"TEST"} />
+      <div className="flex flex-row p-10 py-10 px-5 space-x-10 tablet:space-x-3 items-center m-auto gap-20 tablet:gap-3">
+        <NavLink text={"TEST YOURSELF"} />
         <NavLink text={"CHEATSHEETS"} />
         <Link to="/">
-          <h1 className="text-4xl font-semibold text-center flex flex-row">
+          <h1 className="text-4xl tablet:text-2xl font-semibold text-center flex flex-row">
             <Logo className="mr-3" />
             MATHEMAGICS
           </h1>
         </Link>
-        <NavLink text={"LEARNIGN MATERIALS"} />
-        <NavLink text={"ABOUT"} />
-        <Search />
+        <NavLink text={"LEARNING MATERIALS"} className="flex"/>
+        <NavLink text={"ABOUT"} className="flex" />
+        <Search className="flex"/>
         <span>{darkmode.showWidget()}</span>
       </div>
     </div>

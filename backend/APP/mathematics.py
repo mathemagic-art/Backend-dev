@@ -1,3 +1,4 @@
+from hashlib import new
 import re
 import sympy as sp 
 import numpy as np
@@ -25,29 +26,41 @@ def output_func(function):
 
 ########################################################################################################################
 
-def newton_method(input_function: str, first_guess: int, number_of_iterations: int) -> str:
+def newton_method(input_function: str, variable: str, number_of_iterations: int) -> str:
     try:
-        input_function = parse_func(input_function) #replaces 
-        f = sp.lambdify(x, input_function) #lambdify expression of the input function
-        f_d = sp.lambdify(x, sp.diff(input_function, x))  #lambdify expression of the derivative of the input function
-        x_i = first_guess
-        for i in range(number_of_iterations):
-            x_i = x_i - (f(x_i)/f_d(x_i))
-        if f(x_i) > 0.000001:
-            return "It seems that you put unsufficient number of iterations. Please make it bigger. Also, check the function. Probably, it does not have any roots."
+        input_function = parse_func(input_function)
+        variable = sp.Symbol(variable)
+        f = sp.lambdify(variable, input_function) #lambdify expression of the input function
+        f_d = sp.lambdify(variable, sp.diff(input_function, variable))  #lambdify expression of the derivative of the input function
+        interval = re.findall('Interval.*?\(.*?\)',  str(sp.calculus.util.continuous_domain(input_function, variable, sp.S.Reals))) #checking the domain
+        if interval: 
+            interval = interval[0]
+            interval = re.findall('\(.*?\)', interval)[0][1:-1].split(',')
+            if interval[0] == '-oo':
+                x_i = int(interval[1]) - 1
+            elif interval[1] == 'oo':
+                x_i = int(interval[0]) + 1
+            else:
+                x_i = int(interval[0]) + (int(interval[1]) - int(interval[0]))/2
         else:
-            return str(x_i)
+            x_i = np.random.randint(1, 10)
+        for i in range(int(number_of_iterations)):
+            x_i = x_i - (f(x_i)/f_d(x_i))
+        ret = str(sp.Float(x_i).round(4))
+        if '.0000' in ret:
+            ret = ret[:ret.index('.')]
+        return ret
     except RuntimeWarning:
-        return "Please change your first guess. Perhaps, the method came across with vertex or new x_i are diverging instead of converging."
-
+        return "Something went wrong. Please check the criteria."
 ########################################################################################################################
 
-def differentiating_calculator(function: str) -> str:
+def differentiating_calculator(function: str, variable: str, degree: int) -> str:
 
     function = parse_func(function)
-    function_prime = function.diff(x)  
-    return output_func(function_prime)
-
+    variable = sp.Symbol(variable)
+    function_prime = function.diff(variable, degree)  
+    ans = output_func(function_prime)
+    return ans
 ########################################################################################################################
 
 def indefinite_integration_calculator(function: str) -> str:
@@ -55,24 +68,36 @@ def indefinite_integration_calculator(function: str) -> str:
 
 ########################################################################################################################
 
-def definite_integration_calculator(function:str, lower_bound:str, upper_bound:str) -> str:
+def definite_integration_calculator(function:str, lower_bound:int, upper_bound:int) -> str:
   function = parse_func(function)
-  a = sp.lambdify(x, sp.integrate(sp.sympify(function))) #integrating and lammbdifying a given function
-  return output_func("{:.5f}".format(a(int(upper_bound))-a(int(lower_bound))))
+  a = sp.lambdify(x, sp.integrate(sp.sympify(function))) 
+  return output_func("{:.5f}".format(a(upper_bound)-a(lower_bound)))
 
 #########################################################################################################################
 
+
 def limit_calculator(function: str, symbol : str, approach: str) -> str:
-    function = parse_func(function)    
+    
+    symbol = sp.Symbol(symbol)
+    function = parse_func(function)
+    
     if approach[-1] in ['+', '-']:        
         sign = approach[-1]
         approach = int(approach[:-1])
-        ans = str("{:.5f}".format(sp.sympify(sp.limit(function, symbol, approach)).evalf()))
+        ans = str(sp.sympify(sp.limit(function, symbol, approach, sign)).evalf())
+        if 'oo' in ans:
+            return ans
+        else:
+            return '{:.5f}'.format(float(ans))
     else:
         if approach.isdigit():
             approach = int(approach)
-        ans = str("{:.5f}".format(sp.sympify(sp.limit(function, symbol, approach)).evalf()))    
-    return ans
+        ans = str(sp.sympify(sp.limit(function, symbol, approach)).evalf())
+        if 'oo' in ans:
+            return ans
+        else:
+            return '{:.5f}'.format(float(ans))
+    
 
 ########################################################################################################################
 
