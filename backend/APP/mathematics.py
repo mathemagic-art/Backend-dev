@@ -53,8 +53,6 @@ def differentiating_calculator(function: str) -> str:
 def indefinite_integration_calculator(function: str) -> str:
   return output_func(sp.integrate(parse_func(function)))
 
-<<<<<<< HEAD
-=======
 ########################################################################################################################
 
 def definite_integration_calculator(function:str, lower_bound:int, upper_bound:int) -> str:
@@ -76,7 +74,6 @@ def limit_calculator(function: str, symbol : str, approach: str) -> str:
         ans = str("{:.5f}".format(sp.sympify(sp.limit(function, symbol, approach)).evalf()))    
     return ans
 
->>>>>>> origin/master
 ########################################################################################################################
 
 def rectangle_method(function:str, init_point:int, end_point:int, num_of_interval:int)->str:
@@ -90,52 +87,11 @@ def rectangle_method(function:str, init_point:int, end_point:int, num_of_interva
 
     area = dx*total
 
-<<<<<<< HEAD
-    return str(area) 
-
-
-# def Rectangle_method_graph(function:str, init_point:int, end_point:int, num_of_interval:int):
-
-#     X = np.linspace(init_point,end_point,100)
-#     x = np.linspace(init_point,end_point,num_of_interval+1)
-#     Y = function(X)
-#     plt.figure(figsize = (15,10))
-#     plt.plot(X,Y, color='black', linewidth=2, markersize=50)
-
-#     for i in range(num_of_interval):
-#         init_point = [x[i],x[i],x[i+1],x[i+1]]
-#         end_point = [0,function(x[i]),function(x[i]),0]
-#         plt.fill_between(init_point,end_point, edgecolor='black')
-#         plt.savefig('Rectangle_Method_Graph.png')
-
-
-########################################################################################################################
-# done by Attullah
-
-def taylor_series(function, num_of_iter, center):
-    
-    function = function.replace('e', 'E')
-    taylorPolynomial = str(sp.lambdify(x, sp.sympify(function))(center))
-    
-    for i in range(1, num_of_iter):
-        f_diff = str(sp.lambdify(x, sp.diff(function, x, i))(center))
-        taylorPolynomial += '+' + f_diff +'/'+str(math.factorial(i))+'*(x-{})**{}'.format(center, i)
-    
-    taylorPolynomial = sp.sympify(taylorPolynomial, rational=True)
-    
-    return str(taylorPolynomial)
-
-########################################################################################################################
-# Zakir and Tariq
-
-def simpsons_method(function: str, initial_point: int, end_point: int)->str:
-=======
     return "{:.5f}".format(area)
 
 #######################################################################################################################
 
 def simpsons_method(function: str, initial_point: int, end_point: int)-> str:
->>>>>>> origin/master
 
     def find_polynomial(x1, x2, x3, y1, y2, y3):
      
@@ -162,9 +118,6 @@ def simpsons_method(function: str, initial_point: int, end_point: int)-> str:
         pol_func = find_polynomial(x_1, x_2, x_3, function(x_1), function(x_2), function(x_3))
         Area += scipy.integrate.quad(pol_func ,x_1, x_3)[0]
         
-<<<<<<< HEAD
-    return str(Area)
-=======
     return "{:.5f}".format(Area)   
 
 ######################################################################################################################
@@ -192,4 +145,3 @@ def taylor_series(function, num_of_iter, center) -> str:
     taylorPolynomial = sp.sympify(taylorPolynomial, rational=True)
     
     return output_func(taylorPolynomial)
->>>>>>> origin/master
