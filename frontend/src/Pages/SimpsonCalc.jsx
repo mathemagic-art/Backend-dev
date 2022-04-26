@@ -1,7 +1,7 @@
 import React from "react";
 
-const TaylorCalc = () => {
+const SimpsonCalc = () => {
     return <div>SimpsonCalc</div>;
   };
 
-export default TaylorCalc;
+export default SimpsonCalc;
