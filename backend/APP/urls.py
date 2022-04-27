@@ -11,4 +11,5 @@ urlpatterns = [
     path('rectangle/', rectangle_list),                    #Eldar
     path('definite-integral/', definite_integral_list),    #Ilkhom
     path('limit/', limit_list),                            #Eldar
+    path('integral/', indefinite_integral_list),           #Aizada
 ]
