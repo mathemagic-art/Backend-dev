@@ -125,6 +125,32 @@ def rectangle_list(request):
 
 
 
+
+
+
+
+@api_view(['POST'])
+def indefinite_integral_list(request):
+
+    if request.method == 'POST':
+
+        deserialized = Function(data=request.data)
+        
+        if deserialized.is_valid():
+
+            equation = deserialized.data['equation']
+            answer = indefinite_integration_calculator(equation)
+            return Response(answer, status=status.HTTP_201_CREATED)
+        
+        else:
+            
+            return Response(deserialized.errors)
+    
+
+
+
+
+
 @api_view(['POST'])
 def definite_integral_list(request):
     
@@ -161,3 +187,24 @@ def limit_list(request):
         
         else: 
             return Response(deserialized.errors)
+
+
+        
+@api_view(['POST'])
+def indefinite_integral_list(request):
+
+    if request.method == 'POST':
+
+        deserialized = Function(data=request.data)
+        
+        if deserialized.is_valid():
+
+            equation = deserialized.data['equation']
+            answer = indefinite_integration_calculator(equation)
+            return Response(answer, status=status.HTTP_201_CREATED)
+        
+        else:
+            
+            return Response(deserialized.errors)
+    
+
