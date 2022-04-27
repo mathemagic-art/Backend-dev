@@ -48,7 +48,6 @@ const DiffCalculator = () => {
   // }, [data, setData])
   
   
-  
   const toggle = () => {
     setIsOpen(!isOpen);
   };
