@@ -12,6 +12,7 @@ import DiffCalculator from "./Pages/DiffCalculator";
 import LimitCalc from "./Pages/LimitCalc";
 import TaylorCalc from "./Pages/TaylorCalc";
 import SimpsonCalc from "./Pages/SimpsonCalc";
+import TrapezoidCalc from "./Pages/TrapezoidCalc";
 
 const App = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -31,6 +32,7 @@ const App = () => {
       <Route path="/limit" element={<LimitCalc/>}></Route>
       <Route path="/taylor" element={<TaylorCalc/>}></Route>
       <Route path="/simpson" element={<SimpsonCalc/>}></Route>
+      <Route path="/trapezoid" element={<TrapezoidCalc/>}></Route>
     </Routes>
   );
 };
