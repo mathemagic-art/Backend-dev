@@ -8,17 +8,14 @@ import { ReactComponent as X2} from "../Files/svgs/xSquare.svg"
 import FunctionsMenu from "../Layouts/FunctionsMenu";
 
 const DiffCalculator = () => {
-  const [data, setData] = useState({})
+  const [data, setData] = useState({equation:'', first: "x", second: "1"})
   const [answer, setAnswer] = useState("")
   const [isOpen, setIsOpen] = useState(false);
 
-  const handleInput = (event) => {
-    const name = event.target.name;
-    const value = event.target.value;
-    setData(values => ({...values, [name]: value}))
-  }
 
   console.log(data)
+
+
 
   // const handleInput = (event) => {
   //   console.log(event.target)
@@ -29,9 +26,7 @@ const DiffCalculator = () => {
   //   // setData({equation: event.target.value});
   //   // console.log("samat")
   // };
-  // const handleFirst = (event) => {
-  //   setData({first: event.target.value})
-  // };
+ 
   // const handleSecond = (event) => {
   //   setData({second: event.target.value})
     
@@ -44,7 +39,7 @@ const DiffCalculator = () => {
 
   const handleReset = (event) => {
     event.preventDefault()
-    setData({equation:""})
+    setData({equation:"", first: "x", second: "1"})
     setAnswer("")
   }
 
@@ -53,22 +48,15 @@ const DiffCalculator = () => {
   // }, [data, setData])
   
   
-  console.log(answer)
-  
   const toggle = () => {
     setIsOpen(!isOpen);
   };
   
   const handleSubmit = (event) => {
-    if (!data.equation){
-      event.preventDefault()
-    }else{
       axios.post("http://127.0.0.1:8000/diff/", data).then((res)=>{setAnswer(res.data)})
       console.log(data)
       console.log(answer)
       event.preventDefault()
-    }
-    
   }
   return (
     <>
@@ -91,34 +79,32 @@ const DiffCalculator = () => {
                 <input
                 required
                 className="w-full p-4 border-2  border-primary rounded-l-xl text-xl"
-                type="text"
-                // id="function"
-                name="equation"
-                value={data.equation}
-                onChange={handleInput}
+                type="text" 
+                name="equation" 
+                id="equation" 
+                value={data.equation} 
+                onChange={(e) => setData((prev) => ({ ...prev, equation: e.target.value }))}
 
                 />{" "}
                 <button className="px-4 border-2 border-primary rounded-r-xl ">
                 <Fx />
                 </button>
             </div>
-            <label htmlFor="figure" className="ml-2 text-bright">
-                Order of derivative
-            </label>
-            <select id = "list" className="w-full p-4 border-2 text-black text-xl border-primary rounded-xl mb-10">
-                <option value = "1">First order derivative</option>
-                <option value ="2">Second order derivative</option>
-
-            </select>
-            <label htmlFor="iteration" className="ml-2 text-bright">
+            <label htmlFor="first" className="ml-2 text-bright">
                 With respect to variable
             </label>
-            <select id = "list" onchange = "getSelectedValue();" className="w-full p-4 border-2 text-black text-xl border-primary rounded-xl mb-10">
-                <option value = "x" className="text-2xl">x</option>
-                <option value = "y">y</option>
-                <option value = "z">z</option>
+            <select name="first" id="first" value={data.first} onChange={(e) => setData((prev) => ({ ...prev, first: e.target.value }))} className="w-full p-4 border-2 text-black text-xl border-primary rounded-xl mb-10">
+                <option   value = "x" className="text-2xl">x</option>
+                <option  value = "y">y</option>
+                <option  value = "z">z</option>
             </select>
-                
+            <label htmlFor="second" className="ml-2 text-bright">
+                Order of derivative
+            </label>
+            <select name="second" id="second" value={data.second} onChange={(e) => setData((prev) => ({ ...prev, second: e.target.value }))} className="w-full p-4 border-2 text-black text-xl border-primary rounded-xl mb-10">
+                <option   value = "1" className="text-2xl">First Order</option>
+                <option  value = "2">Second Order</option>
+            </select>
             </div>
             <div className=" flex justify-evenly">
                 <button className="bg-primary text-white px-6 py-2 text-center text-lg rounded-md" type="submit" >
