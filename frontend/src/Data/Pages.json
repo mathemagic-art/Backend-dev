@@ -1,0 +1,42 @@
+[
+  {
+    "name": "Newton's Method",
+    "route": "newton",
+    "id": "1a"
+  },
+  {
+    "name": "Derivative Calculator",
+    "route": "diff",
+    "id": "2a"
+  },
+  {
+    "name": "Limit Calculator",
+    "route": "limit",
+    "id": "3a"
+  },
+  {
+    "name": "Simpson's 1/3 Rule Calculator",
+    "route": "simpson",
+    "id": "4a"
+  },
+  {
+    "name": "Taylor Series Calculator",
+    "route": "taylor",
+    "id": "5a"
+  },
+  {
+    "name": "Trapezoid Rule Calculator",
+    "route": "trapezoid",
+    "id": "6a"
+  },
+  {
+    "name": "Midpoint Rule Calculator",
+    "route": "rectangle",
+    "id": "7a"
+  },
+  {
+    "name": "Definite Integral Calculator",
+    "route": "definite-integral",
+    "id": "8a"
+  }
+]
