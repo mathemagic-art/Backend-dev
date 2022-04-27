@@ -31,6 +31,7 @@ def diff_list(request):
 
     if request.method == 'POST':
 
+<<<<<<< HEAD
         deserialized = String_String_Integer(data=request.data)
         
         if deserialized.is_valid():
@@ -40,6 +41,16 @@ def diff_list(request):
             degree = int(deserialized.data['arg_3_int'])
 
             answer = differentiating_calculator(function, variable, degree)
+=======
+        deserialized = Function_String_Numeric(data=request.data)
+        
+        if deserialized.is_valid():
+
+            equation = deserialized.data['equation']
+            first = deserialized.data['first']
+            second = deserialized.data['second']
+            answer = differentiating_calculator(equation, first, second)
+>>>>>>> origin/master
             return Response(answer, status=status.HTTP_201_CREATED)
         
         else:
@@ -132,6 +143,32 @@ def rectangle_list(request):
 
 
 
+
+
+
+
+@api_view(['POST'])
+def indefinite_integral_list(request):
+
+    if request.method == 'POST':
+
+        deserialized = Function(data=request.data)
+        
+        if deserialized.is_valid():
+
+            equation = deserialized.data['equation']
+            answer = indefinite_integration_calculator(equation)
+            return Response(answer, status=status.HTTP_201_CREATED)
+        
+        else:
+            
+            return Response(deserialized.errors)
+    
+
+
+
+
+
 @api_view(['POST'])
 def definite_integral_list(request):
     
@@ -168,3 +205,24 @@ def limit_list(request):
         
         else: 
             return Response(deserialized.errors)
+
+
+        
+@api_view(['POST'])
+def indefinite_integral_list(request):
+
+    if request.method == 'POST':
+
+        deserialized = Function(data=request.data)
+        
+        if deserialized.is_valid():
+
+            equation = deserialized.data['equation']
+            answer = indefinite_integration_calculator(equation)
+            return Response(answer, status=status.HTTP_201_CREATED)
+        
+        else:
+            
+            return Response(deserialized.errors)
+    
+
