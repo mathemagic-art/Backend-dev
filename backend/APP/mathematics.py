@@ -184,4 +184,3 @@ def taylor_series(function:str, variable: str, number_of_iterations:int, center:
             taylorPolynomial += '+' + f_diff +'/'+str(math.factorial(i))+'*({}-{})**{}'.format(variable, center, i)    
         taylorPolynomial = sp.sympify(taylorPolynomial, rational=True)
     return output_func(taylorPolynomial)
-print(taylor_series('sin(x)', 'x', 5, 0))
