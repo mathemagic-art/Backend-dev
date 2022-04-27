@@ -20,6 +20,8 @@ const DiffCalculator = () => {
 
   console.log(data);
 
+
+
   // const handleInput = (event) => {
   //   console.log(event.target)
   //   setData(values => ({...values, [event.target.name] : event.target.value}))
@@ -29,9 +31,7 @@ const DiffCalculator = () => {
   //   // setData({equation: event.target.value});
   //   // console.log("samat")
   // };
-  // const handleFirst = (event) => {
-  //   setData({first: event.target.value})
-  // };
+ 
   // const handleSecond = (event) => {
   //   setData({second: event.target.value})
 
@@ -59,19 +59,11 @@ const DiffCalculator = () => {
   };
 
   const handleSubmit = (event) => {
-    if (!data.equation) {
-      event.preventDefault();
-    } else {
-      axios
-        .post("http://api-mathemagics.herokuapp.com/diff/", data)
-        .then((res) => {
-          setAnswer(res.data);
-        });
-      console.log(data);
-      console.log(answer);
-      event.preventDefault();
-    }
-  };
+      axios.post("http://127.0.0.1:8000/diff/", data).then((res)=>{setAnswer(res.data)})
+      console.log(data)
+      console.log(answer)
+      event.preventDefault()
+  }
   return (
     <>
       <Navbar toggle={toggle} />
@@ -91,42 +83,34 @@ const DiffCalculator = () => {
               </label>
               <div className="flex rounded-xl text-black mb-10" id="searchbox">
                 <input
-                  required
-                  className="w-full p-4 border-2  border-primary rounded-l-xl text-xl"
-                  type="text"
-                  // id="function"
-                  name="equation"
-                  value={data.equation}
-                  onChange={handleInput}
+                required
+                className="w-full p-4 border-2  border-primary rounded-l-xl text-xl"
+                type="text" 
+                name="equation" 
+                id="equation" 
+                value={data.equation} 
+                onChange={(e) => setData((prev) => ({ ...prev, equation: e.target.value }))}
+
                 />{" "}
                 <button className="px-4 border-2 border-primary rounded-r-xl ">
                   <Fx />
                 </button>
-              </div>
-              <label htmlFor="figure" className="ml-2 text-bright">
-                Order of derivative
-              </label>
-              <select
-                id="list"
-                className="w-full p-4 border-2 text-black text-xl border-primary rounded-xl mb-10"
-              >
-                <option value="1">First order derivative</option>
-                <option value="2">Second order derivative</option>
-              </select>
-              <label htmlFor="iteration" className="ml-2 text-bright">
+            </div>
+            <label htmlFor="first" className="ml-2 text-bright">
                 With respect to variable
-              </label>
-              <select
-                id="list"
-                onchange="getSelectedValue();"
-                className="w-full p-4 border-2 text-black text-xl border-primary rounded-xl mb-10"
-              >
-                <option value="x" className="text-2xl">
-                  x
-                </option>
-                <option value="y">y</option>
-                <option value="z">z</option>
-              </select>
+            </label>
+            <select name="first" id="first" value={data.first} onChange={(e) => setData((prev) => ({ ...prev, first: e.target.value }))} className="w-full p-4 border-2 text-black text-xl border-primary rounded-xl mb-10">
+                <option   value = "x" className="text-2xl">x</option>
+                <option  value = "y">y</option>
+                <option  value = "z">z</option>
+            </select>
+            <label htmlFor="second" className="ml-2 text-bright">
+                Order of derivative
+            </label>
+            <select name="second" id="second" value={data.second} onChange={(e) => setData((prev) => ({ ...prev, second: e.target.value }))} className="w-full p-4 border-2 text-black text-xl border-primary rounded-xl mb-10">
+                <option   value = "1" className="text-2xl">First Order</option>
+                <option  value = "2">Second Order</option>
+            </select>
             </div>
             <div className=" flex justify-evenly">
               <button

@@ -31,12 +31,14 @@ def diff_list(request):
 
     if request.method == 'POST':
 
-        deserialized = Function(data=request.data)
+        deserialized = Function_String_Numeric(data=request.data)
         
         if deserialized.is_valid():
 
             equation = deserialized.data['equation']
-            answer = differentiating_calculator(equation)
+            first = deserialized.data['first']
+            second = deserialized.data['second']
+            answer = differentiating_calculator(equation, first, second)
             return Response(answer, status=status.HTTP_201_CREATED)
         
         else:
