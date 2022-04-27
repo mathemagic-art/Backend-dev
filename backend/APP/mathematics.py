@@ -174,12 +174,14 @@ def taylor_series(function:str, variable: str, number_of_iterations:int, center:
         taylorPolynomial = str(sp.lambdify(variable, function)(center))
         for i in range(1, number_of_iterations):
             f_diff = str(sp.lambdify(variable, sp.diff(function, variable, i))(center))
-            taylorPolynomial += '+' + f_diff +'/'+str(math.factorial(i))+'*({}-{})**{}'.format(str(variable), center, i)    
+            taylorPolynomial += '+' + f_diff +'/'+str(math.factorial(i))+'*({}-{})**{}'.format(variable, center, i)    
         taylorPolynomial = sp.sympify(taylorPolynomial, rational=True)
     else:
         taylorPolynomial = str(function.subs(variable, center))
         for i in range(1, number_of_iterations):
-            f_diff = str(sp.diff(function, variable, i))
+            f_diff = sp.diff(function, variable, i)
+            f_diff = str(f_diff.subs(variable, center))
             taylorPolynomial += '+' + f_diff +'/'+str(math.factorial(i))+'*({}-{})**{}'.format(variable, center, i)    
         taylorPolynomial = sp.sympify(taylorPolynomial, rational=True)
     return output_func(taylorPolynomial)
+print(taylor_series('sin(x)', 'x', 5, 0))
