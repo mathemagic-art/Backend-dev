@@ -1,4 +1,5 @@
 from hashlib import new
+from pyclbr import Function
 import re
 import sympy as sp 
 import numpy as np
@@ -15,8 +16,14 @@ x = sp.Symbol('x')
 def parse_func(function: str):
     return sp.sympify(function.replace('e', 'E'), convert_xor=True)
 
-def output_func(function):
+def output_func(function: str):
     function = str(function).replace('log', 'ln')
+    function = function.replace('E', 'e')
+    while re.search('exp\((.*?)\)', function) != None:
+        expression = re.search('exp\((.*?)\)', function).string
+        ind_of_ln_expr = list(re.search('exp\((.*?)\)', function).span())
+        ins_exp = re.findall('exp\((.*?)\)', expression)[0]
+        function = function[:ind_of_ln_expr[0]] + "e**({})".format(ins_exp) + function[ind_of_ln_expr[1]:]
     while re.search('ln\((.*?)\)/ln\((.*?)\)', function) != None:
         expression = re.search('ln\((.*?)\)/ln\((.*?)\)', function).string
         ind_of_ln_expr = list(re.search('ln\((.*?)\)/ln\((.*?)\)', function).span())
@@ -26,13 +33,13 @@ def output_func(function):
 
 ########################################################################################################################
 
-def newton_method(input_function: str, variable: str, number_of_iterations: int) -> str:
+def newton_method(function: str, variable: str, number_of_iterations: int) -> str:
     try:
-        input_function = parse_func(input_function)
+        function = parse_func(function)
         variable = sp.Symbol(variable)
-        f = sp.lambdify(variable, input_function) #lambdify expression of the input function
-        f_d = sp.lambdify(variable, sp.diff(input_function, variable))  #lambdify expression of the derivative of the input function
-        interval = re.findall('Interval.*?\(.*?\)',  str(sp.calculus.util.continuous_domain(input_function, variable, sp.S.Reals))) #checking the domain
+        f = sp.lambdify(variable, function) #lambdify expression of the input function
+        f_d = sp.lambdify(variable, sp.diff(function, variable))  #lambdify expression of the derivative of the input function
+        interval = re.findall('Interval.*?\(.*?\)',  str(sp.calculus.util.continuous_domain(function, variable, sp.S.Reals))) #checking the domain
         if interval: 
             interval = interval[0]
             interval = re.findall('\(.*?\)', interval)[0][1:-1].split(',')
@@ -68,15 +75,15 @@ def indefinite_integration_calculator(function: str) -> str:
 
 ########################################################################################################################
 
-def definite_integration_calculator(function:str, lower_bound:int, upper_bound:int) -> str:
+def definite_integration_calculator(function:str, initial_point:float, end_point: float) -> str:
   function = parse_func(function)
   a = sp.lambdify(x, sp.integrate(sp.sympify(function))) 
-  return output_func("{:.5f}".format(a(upper_bound)-a(lower_bound)))
+  return output_func("{:.5f}".format(a(end_point)-a(initial_point)))
 
 #########################################################################################################################
 
 
-def limit_calculator(function: str, symbol : str, approach: str) -> str:
+def limit_calculator(function: str, variable : str, approach: str) -> str:
     
     symbol = sp.Symbol(symbol)
     function = parse_func(function)
@@ -101,14 +108,14 @@ def limit_calculator(function: str, symbol : str, approach: str) -> str:
 
 ########################################################################################################################
 
-def rectangle_method(function:str, init_point:int, end_point:int, num_of_interval:int)->str:
+def rectangle_method(function:str, initial_point: float, end_point: float, number_of_intervals:int)->str:
     function = parse_func(function)
     function = sp.lambdify(x, function)
-    dx = (end_point - init_point)/num_of_interval
+    dx = (end_point - initial_point)/number_of_intervals
     total = 0.0
 
-    for i in range (num_of_interval):
-        total = total + function((init_point + (i*dx)))
+    for i in range (number_of_intervals):
+        total = total + function((initial_point + (i*dx)))
 
     area = dx*total
 
@@ -116,7 +123,7 @@ def rectangle_method(function:str, init_point:int, end_point:int, num_of_interva
 
 #######################################################################################################################
 
-def simpsons_method(function: str, initial_point: int, end_point: int)-> str:
+def simpsons_method(function: str, initial_point: float, end_point: float)-> str:
 
     def find_polynomial(x1, x2, x3, y1, y2, y3):
      
@@ -147,26 +154,32 @@ def simpsons_method(function: str, initial_point: int, end_point: int)-> str:
 
 ######################################################################################################################
 
-def trapezoid_method(function:str,initial_point:int,end_point:int,number_interval:int) ->str:
+def trapezoid_method(function:str, initial_point:float, end_point:float, number_of_intervals:int) ->str:
   function = sp.lambdify(x, function)
-  dx = (end_point - initial_point)/number_interval
+  dx = (end_point - initial_point)/number_of_intervals
   A = 1/2 *(function(initial_point) + function(end_point))
-  for i in range(1, number_interval):
+  for i in range(1, number_of_intervals):
       A = A + function(initial_point + i*dx)
   Area = dx * A
   return "{:.5f}".format(Area)
 
 ########################################################################################################################
 
-def taylor_series(function, num_of_iter, center) -> str:
+def taylor_series(function:str, variable: str, number_of_iterations:int, center:float) -> str:
     
     function = parse_func(function)
-    taylorPolynomial = str(sp.lambdify(x, function)(center))
-    
-    for i in range(1, num_of_iter):
-        f_diff = str(sp.lambdify(x, sp.diff(function, x, i))(center))
-        taylorPolynomial += '+' + f_diff +'/'+str(math.factorial(i))+'*(x-{})**{}'.format(center, i)
-    
-    taylorPolynomial = sp.sympify(taylorPolynomial, rational=True)
-    
+    variable = sp.Symbol(variable)
+
+    if center == 0:
+        taylorPolynomial = str(sp.lambdify(variable, function)(center))
+        for i in range(1, number_of_iterations):
+            f_diff = str(sp.lambdify(variable, sp.diff(function, variable, i))(center))
+            taylorPolynomial += '+' + f_diff +'/'+str(math.factorial(i))+'*({}-{})**{}'.format(str(variable), center, i)    
+        taylorPolynomial = sp.sympify(taylorPolynomial, rational=True)
+    else:
+        taylorPolynomial = str(function.subs(variable, center))
+        for i in range(1, number_of_iterations):
+            f_diff = str(sp.diff(function, variable, i))
+            taylorPolynomial += '+' + f_diff +'/'+str(math.factorial(i))+'*({}-{})**{}'.format(variable, center, i)    
+        taylorPolynomial = sp.sympify(taylorPolynomial, rational=True)
     return output_func(taylorPolynomial)
