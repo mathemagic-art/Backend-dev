@@ -1,71 +1,5 @@
-<<<<<<< HEAD
-import axios from "axios";
-<<<<<<< HEAD
-
-export default class PersonAdd extends React.Component {
-  state = {
-    equation: "",
-    first: null,
-    second: null,
-    answer: "",
-  };
-
-  handleEquation = (event) => {
-    this.setState({ equation: event.target.value });
-  };
-  handleFirst = (event) => {
-    this.setState({ first: event.target.value });
-  };
-  handleSecond = (event) => {
-    this.setState({ second: event.target.value });
-  };
-
-  handleSubmit = (event) => {
-    event.preventDefault();
-
-    const user = {
-      equation: this.state.equation,
-      first: this.state.first,
-      second: this.state.second,
-    };
-
-    axios.post(`http://127.0.0.1:8001/simpson/`, this.state).then((res) => {
-      console.log(res);
-      this.setState({ answer: res["data"] });
-      console.log(res.data);
-    });
-  };
-
-  render() {
-    return (
-      <div>
-        <form onSubmit={this.handleSubmit}>
-          <label>
-            Equation:
-            <input type="text" name="equation" onChange={this.handleEquation} />
-          </label>
-          <label>
-            First:
-            <input type="number" name="first" onChange={this.handleFirst} />
-          </label>
-          <label>
-            Second:
-            <input type="number" name="second" onChange={this.handleSecond} />
-          </label>
-          <button type="submit">Add</button>
-        </form>
-        <div>
-          {this.state.answer !== "" ? "The answer is " + this.state.answer : ""}
-        </div>
-      </div>
-    );
-  }
-}
-=======
-=======
 // import axios from "axios";
-import {useState} from "react"
->>>>>>> origin/master
+import { useState } from "react";
 import "./App.css";
 import Home from "./Pages/Home";
 import TEST_YOURSELF from "./Pages/TEST_YOURSELF";
@@ -90,26 +24,37 @@ const App = () => {
   };
   return (
     <Routes>
-      <Route exact path="/" element={<Home toggle={toggle} isOpen={isOpen} />}></Route>
-      <Route path="/TESTYOURSELF" element={<TEST_YOURSELF toggle={toggle} isOpen={isOpen} />}></Route>
+      <Route
+        exact
+        path="/"
+        element={<Home toggle={toggle} isOpen={isOpen} />}
+      ></Route>
+      <Route
+        path="/TESTYOURSELF"
+        element={<TEST_YOURSELF toggle={toggle} isOpen={isOpen} />}
+      ></Route>
       <Route path="/newton" element={<NewtonMethod />}></Route>
       <Route path="/diff" element={<DiffCalculator />}></Route>
-      <Route path="/CHEATSHEETS" element={<CHEATSHEETS toggle={toggle} isOpen={isOpen} />}></Route>
-      <Route path="/LEARNINGMATERIALS" element={ <LEARNING_MATERIALS toggle={toggle} isOpen={isOpen} />}></Route>
-      <Route path="/ABOUT" element={<ABOUT toggle={toggle} isOpen={isOpen}/>}></Route>
-      <Route path="/limit" element={<LimitCalc/>}></Route>
-      <Route path="/taylor" element={<TaylorCalc/>}></Route>
-      <Route path="/simpson" element={<SimpsonCalc/>}></Route>
-      <Route path="/trapezoid" element={<TrapezoidCalc/>}></Route>
-      <Route path="/rectangle" element={<RectangleCalc/>}></Route>
-      <Route path="/definite-integral" element={<DefIntegralCalc/>}></Route>
+      <Route
+        path="/CHEATSHEETS"
+        element={<CHEATSHEETS toggle={toggle} isOpen={isOpen} />}
+      ></Route>
+      <Route
+        path="/LEARNINGMATERIALS"
+        element={<LEARNING_MATERIALS toggle={toggle} isOpen={isOpen} />}
+      ></Route>
+      <Route
+        path="/ABOUT"
+        element={<ABOUT toggle={toggle} isOpen={isOpen} />}
+      ></Route>
+      <Route path="/limit" element={<LimitCalc />}></Route>
+      <Route path="/taylor" element={<TaylorCalc />}></Route>
+      <Route path="/simpson" element={<SimpsonCalc />}></Route>
+      <Route path="/trapezoid" element={<TrapezoidCalc />}></Route>
+      <Route path="/rectangle" element={<RectangleCalc />}></Route>
+      <Route path="/definite-integral" element={<DefIntegralCalc />}></Route>
     </Routes>
   );
 };
 
-<<<<<<< HEAD
 export default App;
-=======
-export default App;
->>>>>>> 767bd47bc412ab43bfe5985522c85c1ef47fa2e7
->>>>>>> origin/oneku16
