@@ -16,7 +16,7 @@ x = sp.Symbol('x')
 def parse_func(function: str):
     return sp.sympify(function.replace('e', 'E'), convert_xor=True)
 
-def output_func(function: str):
+def output_func(function: str) -> str:
     function = str(function).replace('log', 'ln')
     function = function.replace('E', 'e')
     while re.search('exp\((.*?)\)', function) != None:
@@ -75,7 +75,7 @@ def indefinite_integration_calculator(function: str) -> str:
 
 ########################################################################################################################
 
-def definite_integration_calculator(function:str, initial_point:float, end_point: float) -> str:
+def definite_integration_calculator(function:str, initial_point: float, end_point: float) -> str:
   function = parse_func(function)
   a = sp.lambdify(x, sp.integrate(sp.sympify(function))) 
   return output_func("{:.5f}".format(a(end_point)-a(initial_point)))
@@ -83,15 +83,15 @@ def definite_integration_calculator(function:str, initial_point:float, end_point
 #########################################################################################################################
 
 
-def limit_calculator(function: str, variable : str, approach: str) -> str:
+def limit_calculator(function: str, variable : str, sign: str, approach: str) -> str:
     
-    symbol = sp.Symbol(symbol)
+    variable = sp.Symbol(variable)
     function = parse_func(function)
     
     if approach[-1] in ['+', '-']:        
         sign = approach[-1]
         approach = int(approach[:-1])
-        ans = str(sp.sympify(sp.limit(function, symbol, approach, sign)).evalf())
+        ans = str(sp.sympify(sp.limit(function, variable, approach, sign)).evalf())
         if 'oo' in ans:
             return ans
         else:
@@ -99,7 +99,7 @@ def limit_calculator(function: str, variable : str, approach: str) -> str:
     else:
         if approach.isdigit():
             approach = int(approach)
-        ans = str(sp.sympify(sp.limit(function, symbol, approach)).evalf())
+        ans = str(sp.sympify(sp.limit(function, variable, approach)).evalf())
         if 'oo' in ans:
             return ans
         else:
