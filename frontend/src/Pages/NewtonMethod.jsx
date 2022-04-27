@@ -43,7 +43,7 @@ const NewtonMethod = () => {
 
   const handleReset = (event) => {
     event.preventDefault()
-    setData({equation:"", first:"", second:""})
+    setData({equation:"", first:"x", second:""})
     setAnswer("")
   }
 
@@ -97,31 +97,27 @@ const NewtonMethod = () => {
                 <Fx />
               </button>
             </div>
-            <label htmlFor="figure" className="ml-2 text-bright">
+            <label htmlFor="iteration" className="ml-2 text-bright">
               With Respect to
+            </label>
+            <select name="first" id="first" value={data.first} onChange={handleInput} className="w-full p-4 border-2  text-black border-primary rounded-xl mb-10 text-xl">
+                <option   value = "x" className="text-2xl">x</option>
+                <option  value = "y">y</option>
+                <option  value = "z">z</option>
+            </select>
+            <label htmlFor="figure" className="ml-2 text-bright">
+              Number of Iterations
             </label>
             <input
             required
               type="text"
               // id="figure"
-              name="first"
-              value={data.first}
+              name="second"
+              value={data.second}
               onChange={handleInput}
-              defaultValue={data.first}
               className="w-full p-4 border-2 text-black  border-primary rounded-xl mb-10 text-xl"
             />
-            <label htmlFor="iteration" className="ml-2 text-bright">
-              Number of Iterations
-            </label>
-            <input
-              required
-              type="text"
-              // id="iteration"
-              value={data.second}
-              name="second"
-              onChange={handleInput}
-              className="w-full p-4 border-2  text-black border-primary rounded-xl mb-10 text-xl"
-              />
+            
           </div>
           <div className=" flex justify-evenly">
             <button className="bg-primary text-white px-6 py-2 text-center text-lg rounded-md" type="submit" >
