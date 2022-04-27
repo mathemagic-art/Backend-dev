@@ -1,7 +1,7 @@
 import React from "react";
 
 const TaylorCalc = () => {
-    return <div>SimpsonCalc</div>;
+    return <div>TaylorCalc</div>;
   };
 
 export default TaylorCalc;
