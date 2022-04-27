@@ -8,7 +8,7 @@ import {ReactComponent as X2} from "../Files/svgs/xSquare.svg";
 import FunctionsMenu from "../Layouts/FunctionsMenu";
 
 const NewtonMethod = () => {
-  const [data, setData] = useState({})
+  const [data, setData] = useState({equation:"", first:"x", second:""})
   const [answer, setAnswer] = useState("")
   const [isOpen, setIsOpen] = useState(false);
 
@@ -17,6 +17,7 @@ const NewtonMethod = () => {
     const value = event.target.value;
     setData(values => ({...values, [name]: value}))
   }
+
 
   console.log(data)
 
@@ -29,9 +30,7 @@ const NewtonMethod = () => {
   //   // setData({equation: event.target.value});
   //   // console.log("samat")
   // };
-  // const handleFirst = (event) => {
-  //   setData({first: event.target.value})
-  // };
+
   // const handleSecond = (event) => {
   //   setData({second: event.target.value})
     
@@ -108,7 +107,7 @@ const NewtonMethod = () => {
               name="first"
               value={data.first}
               onChange={handleInput}
-              defaultValue="x"
+              defaultValue={data.first}
               className="w-full p-4 border-2 text-black  border-primary rounded-xl mb-10 text-xl"
             />
             <label htmlFor="iteration" className="ml-2 text-bright">
