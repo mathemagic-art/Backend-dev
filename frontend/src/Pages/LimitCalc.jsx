@@ -8,7 +8,7 @@ import {ReactComponent as X2} from "../Files/svgs/xSquare.svg";
 import FunctionsMenu from "../Layouts/FunctionsMenu";
 
 const LimitCalc = () => {
-  const [data, setData] = useState({})
+  const [data, setData] = useState({equation:"", first:"x", second:"x", third:"oo"})
   const [answer, setAnswer] = useState("")
   const [isOpen, setIsOpen] = useState(false);
 
@@ -44,7 +44,7 @@ const LimitCalc = () => {
 
   const handleReset = (event) => {
     event.preventDefault()
-    setData({equation:"", first:"", second:""})
+    setData({equation:"", first:"x", second:"x", third: "oo"})
     setAnswer("")
   }
 
@@ -89,7 +89,7 @@ const LimitCalc = () => {
               required
                 className="w-full p-4 border-2  border-primary rounded-l-xl text-xl"
                 type="text"
-                // id="function"
+                id="function"
                 name="equation"
                 value={data.equation}
                 onChange={handleInput}
@@ -99,31 +99,31 @@ const LimitCalc = () => {
                 <Fx />
               </button>
             </div>
-            <label htmlFor="figure" className="ml-2 text-bright text-xl">
+            <label htmlFor="first" className="ml-2 text-bright text-xl">
               Choose a variable
             </label>
-            <select id = "list" onchange = "getSelectedValue();" className="w-full p-4 border-2 text-black text-xl border-primary rounded-xl mb-10">
+            <select name="first" value={data.first} onChange = {handleInput} className="w-full p-4 border-2 text-black text-xl border-primary rounded-xl mb-10">
                 <option value = "x">x</option>
                 <option value = "pi">π</option>
                 <option value = "h">h</option>
             </select>
-            <label htmlFor="iteration" className="ml-2 text-bright text-xl">
+            <label htmlFor="second" className="ml-2 text-bright text-xl">
               Side
             </label>
-            <select id = "list" onchange = "getSelectedValue();" className="w-full p-4 border-2 text-black text-xl border-primary rounded-xl mb-10">
+            <select value = {data.second} name="second" onChange = {handleInput} className="w-full p-4 border-2 text-black text-xl border-primary rounded-xl mb-10">
                 <option value = "x">Two-sided</option>
-                <option value = "y">Left (-)</option>
-                <option value = "z">Right (+)</option>
+                <option value = "-">Left (-)</option>
+                <option value = "+">Right (+)</option>
             </select>
-              <label htmlFor="iteration" className="ml-2 text-bright text-xl">
+            <label htmlFor="third" className="ml-2 text-bright text-xl">
               Limits approach to
             </label>
             <input
               required
               type="text"
               // id="iteration ∞"
-              value={data.second}
-              name="second"
+              value={data.third}
+              name="third"
               onChange={handleInput}
               className="w-full p-4 border-2  text-black border-primary rounded-xl mb-10 text-xl"
               defaultValue="oo"
