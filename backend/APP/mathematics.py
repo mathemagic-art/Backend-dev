@@ -85,13 +85,13 @@ def definite_integration_calculator(function:str, initial_point:float, end_point
 
 def limit_calculator(function: str, variable : str, approach: str) -> str:
     
-    symbol = sp.Symbol(symbol)
+    variable = sp.Symbol(variable)  
     function = parse_func(function)
     
     if approach[-1] in ['+', '-']:        
         sign = approach[-1]
         approach = int(approach[:-1])
-        ans = str(sp.sympify(sp.limit(function, symbol, approach, sign)).evalf())
+        ans = str(sp.sympify(sp.limit(function,variable, approach, sign)).evalf())
         if 'oo' in ans:
             return ans
         else:
@@ -99,7 +99,7 @@ def limit_calculator(function: str, variable : str, approach: str) -> str:
     else:
         if approach.isdigit():
             approach = int(approach)
-        ans = str(sp.sympify(sp.limit(function, symbol, approach)).evalf())
+        ans = str(sp.sympify(sp.limit(function, variable, approach)).evalf())
         if 'oo' in ans:
             return ans
         else:

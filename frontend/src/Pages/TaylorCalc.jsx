@@ -88,7 +88,7 @@ const TaylorCalc = () => {
               required
                 className="w-full p-4 border-2  border-primary rounded-l-xl text-xl"
                 type="text"
-                // id="function"
+                id="function"
                 name="equation"
                 value={data.equation}
                 onChange={handleInput}
@@ -98,7 +98,7 @@ const TaylorCalc = () => {
                 <Fx />
               </button>
             </div>
-            <label htmlFor="figure" className="ml-2 text-bright text-xl">
+            <label htmlFor="point" className="ml-2 text-bright text-xl">
               Enter a point
             </label>
             <input
@@ -106,29 +106,30 @@ const TaylorCalc = () => {
               type="text"
               // id="figure"
               name="first"
+              id="point"
               value={data.first}
               onChange={handleInput}
               className="w-full p-4 border-2 text-black  border-primary rounded-xl mb-10 text-xl"
             />
-            <label htmlFor="iteration" className="ml-2 text-bright text-xl">
+            <label htmlFor="order" className="ml-2 text-bright text-xl">
               Order = n
             </label>
             <input
               required
               type="text"
-              // id="iteration"
+              id="order"
               value={data.second}
               name="second"
               onChange={handleInput}
               className="w-full p-4 border-2  text-black border-primary rounded-xl mb-10 text-xl"
               />
-              <label htmlFor="iteration" className="ml-2 text-bright text-xl">
+              <label htmlFor="error" className="ml-2 text-bright text-xl">
               The error at the point
             </label>
             <input
               optional
               type="text"
-              // id="iteration"
+              id="error"
               value={data.third}
               name="second"
               onChange={handleInput}

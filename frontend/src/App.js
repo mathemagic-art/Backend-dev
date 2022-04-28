@@ -1,5 +1,6 @@
 // import axios from "axios";
-import {useState} from "react"
+import React from "react";
+import { useState } from "react";
 import "./App.css";
 import Home from "./Pages/Home";
 import TEST_YOURSELF from "./Pages/TEST_YOURSELF";
@@ -15,7 +16,7 @@ import SimpsonCalc from "./Pages/SimpsonCalc";
 import TrapezoidCalc from "./Pages/TrapezoidCalc";
 import RectangleCalc from "./Pages/RectangleCalc";
 import DefIntegralCalc from "./Pages/DefIntegralCalc";
-
+import IndefIntegralCalc from "./Pages/IndefIntegralCalc";
 const App = () => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -24,19 +25,37 @@ const App = () => {
   };
   return (
     <Routes>
-      <Route exact path="/" element={<Home toggle={toggle} isOpen={isOpen} />}></Route>
-      <Route path="/TESTYOURSELF" element={<TEST_YOURSELF toggle={toggle} isOpen={isOpen} />}></Route>
+      <Route
+        exact
+        path="/"
+        element={<Home toggle={toggle} isOpen={isOpen} />}
+      ></Route>
+      <Route
+        path="/TESTYOURSELF"
+        element={<TEST_YOURSELF toggle={toggle} isOpen={isOpen} />}
+      ></Route>
       <Route path="/newton" element={<NewtonMethod />}></Route>
       <Route path="/diff" element={<DiffCalculator />}></Route>
-      <Route path="/CHEATSHEETS" element={<CHEATSHEETS toggle={toggle} isOpen={isOpen} />}></Route>
-      <Route path="/LEARNINGMATERIALS" element={ <LEARNING_MATERIALS toggle={toggle} isOpen={isOpen} />}></Route>
-      <Route path="/ABOUT" element={<ABOUT toggle={toggle} isOpen={isOpen}/>}></Route>
-      <Route path="/limit" element={<LimitCalc/>}></Route>
-      <Route path="/taylor" element={<TaylorCalc/>}></Route>
-      <Route path="/simpson" element={<SimpsonCalc/>}></Route>
-      <Route path="/trapezoid" element={<TrapezoidCalc/>}></Route>
-      <Route path="/rectangle" element={<RectangleCalc/>}></Route>
-      <Route path="/definite-integral" element={<DefIntegralCalc/>}></Route>
+      <Route path="/limit" element={<LimitCalc />}></Route>
+      <Route path="/taylor" element={<TaylorCalc />}></Route>
+      <Route path="/simpson" element={<SimpsonCalc />}></Route>
+      <Route path="/trapezoid" element={<TrapezoidCalc />}></Route>
+      <Route path="/rectangle" element={<RectangleCalc />}></Route>
+      <Route path="/definite-integral" element={<DefIntegralCalc />}></Route>
+      <Route path="/indefinite-integral" element={<IndefIntegralCalc/>}></Route>
+      <Route
+        path="/CHEATSHEETS"
+        element={<CHEATSHEETS toggle={toggle} isOpen={isOpen} />}
+      ></Route>
+      <Route
+        path="/LEARNINGMATERIALS"
+        element={<LEARNING_MATERIALS toggle={toggle} isOpen={isOpen} />}
+      ></Route>
+      <Route
+        path="/ABOUT"
+        element={<ABOUT toggle={toggle} isOpen={isOpen} />}
+      ></Route>
+      
     </Routes>
   );
 };
