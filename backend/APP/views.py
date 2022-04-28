@@ -142,11 +142,11 @@ def indefinite_integral_list(request):
 
     if request.method == 'POST':
 
-        deserialized = Function(data=request.data)
+        deserialized = String_(data=request.data)
         
         if deserialized.is_valid():
 
-            equation = deserialized.data['equation']
+            equation = deserialized.data['arg_1_str']
             answer = indefinite_integration_calculator(equation)
             return Response(answer, status=status.HTTP_201_CREATED)
         
