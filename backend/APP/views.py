@@ -52,15 +52,16 @@ def taylor_list(request):
     
     if request.method == "POST":
 
-        deserialized = Function_Two_Numeric(data=request.data)
+        deserialized = string_string_int_float(data=request.data)
 
         if deserialized.is_valid():
 
             equation = deserialized.data['equation']
-            first = float(deserialized.data['first'])
-            second = float(deserialized.data['second'])
+            first = deserialized.data['first']
+            second = int(deserialized.data['second'])
+            third = float(deserialized.data['third'])
             
-            answer = taylor_series(equation, first, second)
+            answer = taylor_series(equation, first, second, third)
             return Response(answer, status=status.HTTP_201_CREATED)
         
         else: 
