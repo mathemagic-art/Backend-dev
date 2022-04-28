@@ -44,7 +44,7 @@ const DiffCalculator = () => {
 
   const handleReset = (event) => {
     event.preventDefault();
-    setData({ equation: "" });
+    setData({ equation: "", first: 'x', second: '1' });
     setAnswer("");
   };
 
