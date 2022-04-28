@@ -53,15 +53,16 @@ def taylor_list(request):
     
     if request.method == "POST":
 
-        deserialized = String_Integer_Float(data=request.data)
+        deserialized = String_String_Integer_Float(data=request.data)
 
         if deserialized.is_valid():
 
             function = deserialized.data['arg_1_str']
-            num_of_iter = int(deserialized.data['arg_2_int'])
-            center = float(deserialized.data['arg_3_float'])
+            variable = deserialized.data['arg_2_str']
+            number_of_iterations = int(deserialized.data['arg_3_int'])
+            center = float(deserialized.data['arg_4_float'])
 
-            answer = taylor_series(function, num_of_iter, center)
+            answer = taylor_series(function, variable, number_of_iterations, center)
             return Response(answer, status=status.HTTP_201_CREATED)
         
         else: 
@@ -187,8 +188,8 @@ def limit_list(request):
 
             function = deserialized.data['arg_1_str']
             variable = deserialized.data['arg_2_str']
-            sign = deserialized.data['arg_2_str']
-            approach = deserialized.data['arg_3_str']
+            sign = deserialized.data['arg_3_str']
+            approach = deserialized.data['arg_4_str']
             
             answer = limit_calculator(function, variable, sign, approach)
             return Response(answer, status=status.HTTP_201_CREATED)
@@ -196,23 +197,5 @@ def limit_list(request):
         else: 
             return Response(deserialized.errors)
 
-
-        
-@api_view(['POST'])
-def indefinite_integral_list(request):
-
-    if request.method == 'POST':
-
-        deserialized = Function(data=request.data)
-        
-        if deserialized.is_valid():
-
-            equation = deserialized.data['equation']
-            answer = indefinite_integration_calculator(equation)
-            return Response(answer, status=status.HTTP_201_CREATED)
-        
-        else:
-            
-            return Response(deserialized.errors)
     
 

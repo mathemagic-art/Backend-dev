@@ -88,24 +88,20 @@ def limit_calculator(function: str, variable : str, sign: str, approach: str) ->
     variable = sp.Symbol(variable)
     function = parse_func(function)
     
-    if approach[-1] in ['+', '-']:        
-        sign = approach[-1]
-        approach = int(approach[:-1])
+    if sign in ['+', '-']:        
+
         ans = str(sp.sympify(sp.limit(function, variable, approach, sign)).evalf())
         if 'oo' in ans:
             return ans
         else:
             return '{:.5f}'.format(float(ans))
     else:
-        if approach.isdigit():
-            approach = int(approach)
         ans = str(sp.sympify(sp.limit(function, variable, approach)).evalf())
         if 'oo' in ans:
             return ans
         else:
             return '{:.5f}'.format(float(ans))
-    
-
+            
 ########################################################################################################################
 
 def rectangle_method(function:str, initial_point: float, end_point: float, number_of_intervals:int)->str:
@@ -165,7 +161,7 @@ def trapezoid_method(function:str, initial_point:float, end_point:float, number_
 
 ########################################################################################################################
 
-def taylor_series(function:str, variable: str, number_of_iterations:int, center:float) -> str:
+def taylor_series(function:str, variable: str, number_of_iterations: int, center: float) -> str:
     
     function = parse_func(function)
     variable = sp.Symbol(variable)

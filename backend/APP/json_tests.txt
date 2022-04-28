@@ -7,8 +7,9 @@ input :
 
 {
     "arg_1_str": "sin(x)",
-    "arg_2_int": 6,
-    "arg_3_float": 0.0
+    "arg_2_str": "x",
+    "arg_3_int": 6,
+    "arg_4_float": 0.0
 }
 
 output: "x**5/120 - x**3/6 + x"
@@ -64,9 +65,10 @@ output: "2.66667"
 
 input: 
 {
-"equation": "sin(x)/x",
-"first": "x",
-"second": "0"
+    "arg_1_str": "1/x",
+    "arg_2_str": "x",
+    "arg_3_str": "-",
+    "arg_4_float": 1
 }
 
 output: 1.00000

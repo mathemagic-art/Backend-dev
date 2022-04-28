@@ -16,11 +16,12 @@ class String_Float_Float(serializers.Serializer):
     arg_3_float = serializers.FloatField()
 
 
-class String_Integer_Float(serializers.Serializer):
+class String_String_Integer_Float(serializers.Serializer):
     
     arg_1_str = serializers.CharField(max_length=300)
-    arg_2_int = serializers.IntegerField()
-    arg_3_float = serializers.FloatField()
+    arg_2_str = serializers.CharField(max_length=300)
+    arg_3_str = serializers.CharField(max_length=300)
+    arg_4_float = serializers.FloatField()
 
 
 class String_Float_Float_Integer(serializers.Serializer):
