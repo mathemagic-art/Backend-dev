@@ -16,7 +16,7 @@ import SimpsonCalc from "./Pages/SimpsonCalc";
 import TrapezoidCalc from "./Pages/TrapezoidCalc";
 import RectangleCalc from "./Pages/RectangleCalc";
 import DefIntegralCalc from "./Pages/DefIntegralCalc";
-
+import IndefIntegralCalc from "./Pages/IndefIntegralCalc";
 const App = () => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -36,6 +36,13 @@ const App = () => {
       ></Route>
       <Route path="/newton" element={<NewtonMethod />}></Route>
       <Route path="/diff" element={<DiffCalculator />}></Route>
+      <Route path="/limit" element={<LimitCalc />}></Route>
+      <Route path="/taylor" element={<TaylorCalc />}></Route>
+      <Route path="/simpson" element={<SimpsonCalc />}></Route>
+      <Route path="/trapezoid" element={<TrapezoidCalc />}></Route>
+      <Route path="/rectangle" element={<RectangleCalc />}></Route>
+      <Route path="/definite-integral" element={<DefIntegralCalc />}></Route>
+      <Route path="/indefinite-integral" element={<IndefIntegralCalc/>}></Route>
       <Route
         path="/CHEATSHEETS"
         element={<CHEATSHEETS toggle={toggle} isOpen={isOpen} />}
@@ -48,12 +55,7 @@ const App = () => {
         path="/ABOUT"
         element={<ABOUT toggle={toggle} isOpen={isOpen} />}
       ></Route>
-      <Route path="/limit" element={<LimitCalc />}></Route>
-      <Route path="/taylor" element={<TaylorCalc />}></Route>
-      <Route path="/simpson" element={<SimpsonCalc />}></Route>
-      <Route path="/trapezoid" element={<TrapezoidCalc />}></Route>
-      <Route path="/rectangle" element={<RectangleCalc />}></Route>
-      <Route path="/definite-integral" element={<DefIntegralCalc />}></Route>
+      
     </Routes>
   );
 };
