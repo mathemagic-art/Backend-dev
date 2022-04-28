@@ -1,5 +1,5 @@
 import re
-
+from re import search, findall
 from math import factorial
 from numpy import linspace, random
 from sympy import Symbol, sympify, lambdify, diff, Float, limit, integrate, calculus, S
@@ -19,15 +19,15 @@ def parse_func(function: str):
 def output_func(function: str) -> str:
     function = str(function).replace('log', 'ln')
     function = function.replace('E', 'e')
-    while re.search('exp\((.*?)\)', function) != None:
-        expression = re.search('exp\((.*?)\)', function).string
-        ind_of_ln_expr = list(re.search('exp\((.*?)\)', function).span())
-        ins_exp = re.findall('exp\((.*?)\)', expression)[0]
+    while search('exp\((.*?)\)', function) != None:
+        expression = search('exp\((.*?)\)', function).string
+        ind_of_ln_expr = list(search('exp\((.*?)\)', function).span())
+        ins_exp = findall('exp\((.*?)\)', expression)[0]
         function = function[:ind_of_ln_expr[0]] + "e**({})".format(ins_exp) + function[ind_of_ln_expr[1]:]
-    while re.search('ln\((.*?)\)/ln\((.*?)\)', function) != None:
-        expression = re.search('ln\((.*?)\)/ln\((.*?)\)', function).string
-        ind_of_ln_expr = list(re.search('ln\((.*?)\)/ln\((.*?)\)', function).span())
-        limit_base, limit_expr = re.findall('ln\((.*?)\)', expression)
+    while search('ln\((.*?)\)/ln\((.*?)\)', function) != None:
+        expression = search('ln\((.*?)\)/ln\((.*?)\)', function).string
+        ind_of_ln_expr = list(search('ln\((.*?)\)/ln\((.*?)\)', function).span())
+        limit_base, limit_expr = findall('ln\((.*?)\)', expression)
         function = function[:ind_of_ln_expr[0]] + "log({},{})".format(limit_base, limit_expr) + function[ind_of_ln_expr[1]:]
     return function
 
@@ -78,7 +78,6 @@ def indefinite_integration_calculator(function: str, variable: str) -> str:
     
     variable = Symbol(variable)
     function = parse_func(function)
-
     ans = lambdify(variable, integrate(sympify(function)))
 
     return output_func(ans)
