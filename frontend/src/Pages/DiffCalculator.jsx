@@ -81,7 +81,7 @@ const DiffCalculator = () => {
                 className="w-full p-4 border-2  border-primary rounded-l-xl text-xl"
                 type="text" 
                 name="equation" 
-                id="equation" 
+                id="function" 
                 value={data.equation} 
                 onChange={(e) => setData((prev) => ({ ...prev, equation: e.target.value }))}
 
