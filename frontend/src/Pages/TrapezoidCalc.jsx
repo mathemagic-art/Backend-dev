@@ -74,7 +74,7 @@ const TrapezoidCalc = () => {
         <form onSubmit={handleSubmit}>
         <div className="ml-32 mt-12 border-2 w-[50%] h-[95%] rounded-3xl text-white p-10 bg-dark bg-opacity-30">
           <h2 className="text-center text-3xl font-primary text-primary">
-            Trapezoid Rule Calculator
+            Trapezoidal Rule Calculator
           </h2>
           <p className="text-center text-text mb-10">
             Approximate the area under a curve by dividing in the trapezoids{" "}
