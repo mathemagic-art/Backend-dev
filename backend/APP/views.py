@@ -134,13 +134,14 @@ def indefinite_integral_list(request):
 
     if request.method == 'POST':
 
-        deserialized = String_(data=request.data)
+        deserialized = String_String_(data=request.data)
         
         if deserialized.is_valid():
 
             equation = deserialized.data['argument_1']
-            
-            answer = indefinite_integration_calculator(equation)
+            variable = deserialized.data['argument_2']
+
+            answer = indefinite_integration_calculator(equation, variable)
             return Response(answer, status=status.HTTP_201_CREATED)
         
         else:
