@@ -6,7 +6,7 @@ class string(serializers.Serializer):
 
 class Function_Two_Numeric(serializers.Serializer):
     
-    
+    equation = serializers.CharField(max_length=300)
     first = serializers.FloatField()
     second = serializers.FloatField()
 

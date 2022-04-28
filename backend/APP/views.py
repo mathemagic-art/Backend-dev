@@ -100,7 +100,7 @@ def trapezoid_list(request):
             equation = deserialized.data['equation']
             first = float(deserialized.data['first'])
             second = float(deserialized.data['second'])
-            third = float(deserialized.data['third'])
+            third = int(deserialized.data['third'])
 
             answer = trapezoid_method(equation, first, second, third)
             return Response(answer, status=status.HTTP_201_CREATED)
@@ -119,7 +119,7 @@ def rectangle_list(request):
             equation = deserialized.data['equation']
             first = float(deserialized.data['first'])
             second = float(deserialized.data['second'])
-            third = float(deserialized.data['third'])
+            third = int(deserialized.data['third'])
 
             answer = rectangle_method(equation, first, second, third)
             return Response(answer, status=status.HTTP_201_CREATED)
