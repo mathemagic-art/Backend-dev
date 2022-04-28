@@ -20,7 +20,7 @@ class String_String_Integer_Float(serializers.Serializer):
     
     arg_1_str = serializers.CharField(max_length=300)
     arg_2_str = serializers.CharField(max_length=300)
-    arg_3_str = serializers.CharField(max_length=300)
+    arg_3_int = serializers.IntegerField()
     arg_4_float = serializers.FloatField()
 
 

@@ -1,5 +1,3 @@
-from hashlib import new
-from pyclbr import Function
 import re
 import sympy as sp 
 import numpy as np
@@ -14,6 +12,7 @@ x = sp.Symbol('x')
 # parsing and output functions 
  
 def parse_func(function: str):
+
     return sp.sympify(function.replace('e', 'E'), convert_xor=True)
 
 def output_func(function: str) -> str:
@@ -34,6 +33,8 @@ def output_func(function: str) -> str:
 ########################################################################################################################
 
 def newton_method(function: str, variable: str, number_of_iterations: int) -> str:
+
+    number_of_iterations = int(number_of_iterations)
     try:
         function = parse_func(function)
         variable = sp.Symbol(variable)
@@ -62,6 +63,8 @@ def newton_method(function: str, variable: str, number_of_iterations: int) -> st
 ########################################################################################################################
 
 def differentiating_calculator(function: str, variable: str, degree: int) -> str:
+    
+    degree = int(degree)
 
     function = parse_func(function)
     variable = sp.Symbol(variable)
@@ -71,14 +74,18 @@ def differentiating_calculator(function: str, variable: str, degree: int) -> str
 ########################################################################################################################
 
 def indefinite_integration_calculator(function: str) -> str:
-  return output_func(sp.integrate(parse_func(function)))
+    return output_func(sp.integrate(parse_func(function)))
 
 ########################################################################################################################
 
 def definite_integration_calculator(function:str, initial_point: float, end_point: float) -> str:
-  function = parse_func(function)
-  a = sp.lambdify(x, sp.integrate(sp.sympify(function))) 
-  return output_func("{:.5f}".format(a(end_point)-a(initial_point)))
+    
+    initial_point = float(initial_point)
+    end_point = float(end_point)
+
+    function = parse_func(function)
+    a = sp.lambdify(x, sp.integrate(sp.sympify(function))) 
+    return output_func("{:.5f}".format(a(end_point)-a(initial_point)))
 
 #########################################################################################################################
 
@@ -88,7 +95,7 @@ def limit_calculator(function: str, variable : str, sign: str, approach: str) ->
     variable = sp.Symbol(variable)
     function = parse_func(function)
     
-    if sign in ['+', '-']:        
+    if len(sign) == 1:        
 
         ans = str(sp.sympify(sp.limit(function, variable, approach, sign)).evalf())
         if 'oo' in ans:
@@ -105,6 +112,11 @@ def limit_calculator(function: str, variable : str, sign: str, approach: str) ->
 ########################################################################################################################
 
 def rectangle_method(function:str, initial_point: float, end_point: float, number_of_intervals:int)->str:
+
+    initial_point = float(initial_point)
+    end_point = float(end_point)
+    number_of_intervals = int(number_of_intervals)
+
     function = parse_func(function)
     function = sp.lambdify(x, function)
     dx = (end_point - initial_point)/number_of_intervals
@@ -120,6 +132,9 @@ def rectangle_method(function:str, initial_point: float, end_point: float, numbe
 #######################################################################################################################
 
 def simpsons_method(function: str, initial_point: float, end_point: float)-> str:
+
+    initial_point = float(initial_point)
+    end_point = float(end_point)
 
     def find_polynomial(x1, x2, x3, y1, y2, y3):
      
@@ -151,18 +166,26 @@ def simpsons_method(function: str, initial_point: float, end_point: float)-> str
 ######################################################################################################################
 
 def trapezoid_method(function:str, initial_point:float, end_point:float, number_of_intervals:int) ->str:
-  function = sp.lambdify(x, function)
-  dx = (end_point - initial_point)/number_of_intervals
-  A = 1/2 *(function(initial_point) + function(end_point))
-  for i in range(1, number_of_intervals):
-      A = A + function(initial_point + i*dx)
-  Area = dx * A
-  return "{:.5f}".format(Area)
+
+    initial_point = float(initial_point)
+    end_point = float(end_point)
+    number_of_intervals = int(number_of_intervals)
+
+    function = sp.lambdify(x, function)
+    dx = (end_point - initial_point)/number_of_intervals
+    A = 1/2 *(function(initial_point) + function(end_point))
+    for i in range(1, number_of_intervals):
+        A = A + function(initial_point + i*dx)
+    Area = dx * A
+    return "{:.5f}".format(Area)
 
 ########################################################################################################################
 
 def taylor_series(function:str, variable: str, number_of_iterations: int, center: float) -> str:
-    
+
+    number_of_iterations = int(number_of_iterations)
+    center = float(center)
+
     function = parse_func(function)
     variable = sp.Symbol(variable)
 
