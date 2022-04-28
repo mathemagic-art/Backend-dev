@@ -78,7 +78,7 @@ def indefinite_integration_calculator(function: str) -> str:
 
 ########################################################################################################################
 
-def definite_integration_calculator(function:str, initial_point: float, end_point: float) -> str:
+def definite_integration_calculator(function: str, initial_point: float, end_point: float) -> str:
     
     initial_point = float(initial_point)
     end_point = float(end_point)
@@ -111,7 +111,7 @@ def limit_calculator(function: str, variable : str, sign: str, approach: str) ->
             
 ########################################################################################################################
 
-def rectangle_method(function:str, initial_point: float, end_point: float, number_of_intervals:int)->str:
+def rectangle_method(function:str, initial_point: float, end_point: float, number_of_intervals: int) -> str:
 
     initial_point = float(initial_point)
     end_point = float(end_point)
@@ -131,7 +131,7 @@ def rectangle_method(function:str, initial_point: float, end_point: float, numbe
 
 #######################################################################################################################
 
-def simpsons_method(function: str, initial_point: float, end_point: float)-> str:
+def simpsons_method(function: str, initial_point: float, end_point: float) -> str:
 
     initial_point = float(initial_point)
     end_point = float(end_point)
@@ -165,7 +165,7 @@ def simpsons_method(function: str, initial_point: float, end_point: float)-> str
 
 ######################################################################################################################
 
-def trapezoid_method(function:str, initial_point:float, end_point:float, number_of_intervals:int) ->str:
+def trapezoid_method(function: str, initial_point: float, end_point: float, number_of_intervals: int) -> str:
 
     initial_point = float(initial_point)
     end_point = float(end_point)
