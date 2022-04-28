@@ -132,22 +132,22 @@ def rectangle_list(request):
 
 
 
-@api_view(['POST'])
-def indefinite_integral_list(request):
+# @api_view(['POST'])
+# def indefinite_integral_list(request):
 
-    if request.method == 'POST':
+#     if request.method == 'POST':
 
-        deserialized = Function(data=request.data)
+#         deserialized = Function(data=request.data)
         
-        if deserialized.is_valid():
+#         if deserialized.is_valid():
 
-            equation = deserialized.data['equation']
-            answer = indefinite_integration_calculator(equation)
-            return Response(answer, status=status.HTTP_201_CREATED)
+#             equation = deserialized.data['equation']
+#             answer = indefinite_integration_calculator(equation)
+#             return Response(answer, status=status.HTTP_201_CREATED)
         
-        else:
+#         else:
             
-            return Response(deserialized.errors)
+#             return Response(deserialized.errors)
     
 
 
@@ -192,22 +192,19 @@ def limit_list(request):
             return Response(deserialized.errors)
 
 
-        
 @api_view(['POST'])
 def indefinite_integral_list(request):
-
+    
     if request.method == 'POST':
-
         deserialized = Function(data=request.data)
-        
+
         if deserialized.is_valid():
 
             equation = deserialized.data['equation']
+
             answer = indefinite_integration_calculator(equation)
             return Response(answer, status=status.HTTP_201_CREATED)
         
-        else:
-            
+        else: 
             return Response(deserialized.errors)
-    
 

@@ -31,6 +31,7 @@ def output_func(function: str):
         function = function[:ind_of_ln_expr[0]] + "log({},{})".format(limit_base, limit_expr) + function[ind_of_ln_expr[1]:]
     return function
 
+
 ########################################################################################################################
 
 def newton_method(function: str, variable: str, number_of_iterations: int) -> str:
@@ -71,14 +72,15 @@ def differentiating_calculator(function: str, variable: str, degree: int) -> str
 ########################################################################################################################
 
 def indefinite_integration_calculator(function: str) -> str:
-  return output_func(sp.integrate(parse_func(function)))
+    ans = output_func(sp.integrate(parse_func(function)))
+    return ans 
 
 ########################################################################################################################
 
 def definite_integration_calculator(function:str, initial_point:float, end_point: float) -> str:
-  function = parse_func(function)
-  a = sp.lambdify(x, sp.integrate(sp.sympify(function))) 
-  return output_func("{:.5f}".format(a(end_point)-a(initial_point)))
+    function = parse_func(function)
+    a = sp.lambdify(x, sp.integrate(sp.sympify(function))) 
+    return output_func("{:.5f}".format(a(end_point)-a(initial_point)))
 
 #########################################################################################################################
 
