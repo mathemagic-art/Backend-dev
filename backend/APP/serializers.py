@@ -1,34 +1,27 @@
 from rest_framework import serializers
 
-class string(serializers.Serializer):
-    equation = serializers.CharField(max_length=300)
 
-
-class Function_Two_Numeric(serializers.Serializer):
+class String_(serializers.Serializer):
     
-    equation = serializers.CharField(max_length=300)
-    first = serializers.FloatField()
-    second = serializers.FloatField()
+    argument_1 = serializers.CharField(max_length=300)
 
-class Function_Three_Numeric(serializers.Serializer):
 
-    equation = serializers.CharField(max_length=300)
-    first = serializers.FloatField()
-    second = serializers.FloatField()
-    third = serializers.FloatField()
+class String_String_(serializers.Serializer):
+    
+    argument_1 = serializers.CharField(max_length=300)
+    argument_2 = serializers.CharField(max_length=300)
 
-class Function_Two_String(serializers.Serializer):
-    equation = serializers.CharField(max_length=300)
-    first = serializers.CharField(max_length=300)
-    second = serializers.CharField(max_length=300)
 
-class Function_String_Numeric(serializers.Serializer):
-    equation = serializers.CharField(max_length=300)
-    first = serializers.CharField(max_length=300)
-    second = serializers.IntegerField()
+class String_String_String_(serializers.Serializer):
+    
+    argument_1 = serializers.CharField(max_length=300)
+    argument_2 = serializers.CharField(max_length=300)
+    argument_3 = serializers.CharField(max_length=300)
 
-class string_string_int_float(serializers.Serializer):
-    equation = serializers.CharField(max_length=300)
-    first = serializers.CharField(max_length=300)
-    second = serializers.IntegerField()
-    third = serializers.FloatField()
+
+class String_String_String_String_(serializers.Serializer):
+    
+    argument_1 = serializers.CharField(max_length=300)
+    argument_2 = serializers.CharField(max_length=300)
+    argument_3 = serializers.CharField(max_length=300)
+    argument_4 = serializers.CharField(max_length=300)
