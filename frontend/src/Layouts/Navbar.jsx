@@ -1,3 +1,4 @@
+import React from "react";
 import NavLink from "../Components/NavLink";
 import Darkmode from "darkmode-js";
 import { ReactComponent as Logo } from "../Files/svgs/Logo.svg";

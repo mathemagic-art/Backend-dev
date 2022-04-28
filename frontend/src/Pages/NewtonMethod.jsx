@@ -8,7 +8,7 @@ import {ReactComponent as X2} from "../Files/svgs/xSquare.svg";
 import FunctionsMenu from "../Layouts/FunctionsMenu";
 
 const NewtonMethod = () => {
-  const [data, setData] = useState({})
+  const [data, setData] = useState({equation:"", first:"x", second:""})
   const [answer, setAnswer] = useState("")
   const [isOpen, setIsOpen] = useState(false);
 
@@ -17,6 +17,7 @@ const NewtonMethod = () => {
     const value = event.target.value;
     setData(values => ({...values, [name]: value}))
   }
+
 
   console.log(data)
 
@@ -29,9 +30,7 @@ const NewtonMethod = () => {
   //   // setData({equation: event.target.value});
   //   // console.log("samat")
   // };
-  // const handleFirst = (event) => {
-  //   setData({first: event.target.value})
-  // };
+
   // const handleSecond = (event) => {
   //   setData({second: event.target.value})
     
@@ -44,7 +43,7 @@ const NewtonMethod = () => {
 
   const handleReset = (event) => {
     event.preventDefault()
-    setData({equation:"", first:"", second:""})
+    setData({equation:"", first:"x", second:""})
     setAnswer("")
   }
 
@@ -98,31 +97,27 @@ const NewtonMethod = () => {
                 <Fx />
               </button>
             </div>
-            <label htmlFor="figure" className="ml-2 text-bright">
+            <label htmlFor="iteration" className="ml-2 text-bright">
               With Respect to
+            </label>
+            <select name="first" id="first" value={data.first} onChange={handleInput} className="w-full p-4 border-2  text-black border-primary rounded-xl mb-10 text-xl">
+                <option   value = "x" className="text-2xl">x</option>
+                <option  value = "y">y</option>
+                <option  value = "z">z</option>
+            </select>
+            <label htmlFor="figure" className="ml-2 text-bright">
+              Number of Iterations
             </label>
             <input
             required
               type="text"
               // id="figure"
-              name="first"
-              value={data.first}
+              name="second"
+              value={data.second}
               onChange={handleInput}
-              defaultValue="x"
               className="w-full p-4 border-2 text-black  border-primary rounded-xl mb-10 text-xl"
             />
-            <label htmlFor="iteration" className="ml-2 text-bright">
-              Number of Iterations
-            </label>
-            <input
-              required
-              type="text"
-              // id="iteration"
-              value={data.second}
-              name="second"
-              onChange={handleInput}
-              className="w-full p-4 border-2  text-black border-primary rounded-xl mb-10 text-xl"
-              />
+            
           </div>
           <div className=" flex justify-evenly">
             <button className="bg-primary text-white px-6 py-2 text-center text-lg rounded-md" type="submit" >
@@ -137,7 +132,7 @@ const NewtonMethod = () => {
         <div className=" w-1/2 mt-12 mr-20 flex flex-col text-white tablet:w-full tablet:pl-16 tablet:pb-16" >
           <p className="mt-24 ml-10 font-normal text-2xl flex">According to Newton's Method:<Newton className="ml-10 -mt-5"/></p>
           <div className="flex mt-10 pl-10 pt-10 h-full w-full flex-row font-normal text-2xl tracking-wide">
-            <p>The root of</p> <X2 className="mx-5 -mt-3"/><p>equals to </p><div className="ml-3 pt-4 pb-14 border-2 font-normal rounded-xl text-3xl -mt-5 px-3 border-double border-green-600 h-10 bg-white text-black">x(0)={answer !=="" ? answer:"_____________" }</div>
+            <p>The root of</p> <X2 className="mx-5 -mt-3"/><p>equals to </p><div className="ml-3 pt-4 pb-14 border-2 font-normal rounded-xl text-3xl -mt-5 px-3 border-double border-green-600 h-10 bg-white text-black">{data.first}(0)={answer !=="" ? answer:"_____________" }</div>
           </div>
         </div>
       </div>

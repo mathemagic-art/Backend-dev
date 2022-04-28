@@ -1,8 +1,8 @@
 from rest_framework import serializers
 
-class Function(serializers.Serializer):
-    
+class string(serializers.Serializer):
     equation = serializers.CharField(max_length=300)
+
 
 class Function_Two_Numeric(serializers.Serializer):
     
@@ -26,3 +26,9 @@ class Function_String_Numeric(serializers.Serializer):
     equation = serializers.CharField(max_length=300)
     first = serializers.CharField(max_length=300)
     second = serializers.IntegerField()
+
+class string_string_int_float(serializers.Serializer):
+    equation = serializers.CharField(max_length=300)
+    first = serializers.CharField(max_length=300)
+    second = serializers.IntegerField()
+    third = serializers.FloatField()
