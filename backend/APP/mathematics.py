@@ -84,13 +84,13 @@ def indefinite_integration_calculator(function: str, variable: str) -> str:
 
 ########################################################################################################################
 
-def definite_integration_calculator(function: str, initial_point: float, end_point: float) -> str:
-    
+def definite_integration_calculator(function: str, variable: str, initial_point: float, end_point: float) -> str:
+    variable = Symbol(variable)
     initial_point = float(initial_point)
     end_point = float(end_point)
 
     function = parse_func(function)
-    a = lambdify(x, integrate(sympify(function))) 
+    a = lambdify(variable, integrate(sympify(function), variable)) 
     return output_func("{:.5f}".format(a(end_point)-a(initial_point)))
 
 #########################################################################################################################
