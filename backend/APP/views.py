@@ -4,6 +4,7 @@ from rest_framework.response import Response
 from .serializers import *
 from .mathematics import *
 
+from rest_framework.generics import GenericAPIView
 
 @api_view(['POST'])
 def diff_list(request):
