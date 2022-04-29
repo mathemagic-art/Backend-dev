@@ -1,51 +1,37 @@
-########################
-# test for derivatives #
-########################
+                                                Performing test for the DERIVATIVE calculator
+link to access the DERIVATIVE page locally: http://127.0.0.1:8000/differentiation/
+TEST:
 
 input: 
 {
-    "arg_1_str": "sin(x)", 
-    "arg_2_str": "x", 
-    "arg_3_int": 1
+    "argument_1": "sin(x)", 
+    "argument_2": "x", 
+    "argument_3": 1
 }
+
 
 output: "cos(x)"
 
 
 -------------------------------------------------------------------------------------------------
 
-##############
-# for taylor #
-##############
+                                                Performing test for the TAYLOR SERIES calculator
+link to access the DERIVATIVE page locally: http://127.0.0.1:8000/differentiation/
+TEST:
 
 input :
 
 {
-<<<<<<< HEAD
-    "arg_1_str": "sin(x)",
-    "arg_2_str": "x",
-    "arg_3_int": 6,
-    "arg_4_float": 0.0
-=======
-"equation": "sin(x)",
-"first": "x",
-"second": 16,
-"third": 0
->>>>>>> b4f213a404a4bc04747cbc6245281c9e18c638b4
+    "argument_1": "sin(x)", 
+    "argument_2": "x", 
+    "argument_3": 16
+    "argument_4": 0
 }
 
-output: "x**5/120 - x**3/6 + x"
 
-input:
+output: "-x**15/1307674368000 + x**13/6227020800 - x**11/39916800 + x**9/362880 - x**7/5040 + x**5/120 - x**3/6 + x"
 
-{
-    "arg_1_str": "e^(x^2)",
-    "arg_2_int": 6,
-    "arg_3_float": 0.0
-}
-# I think here is mistake!!! (Elnazar)
 
-output: "x**4/2 + x**2 + 1"
 
 -------------------------------------------------------------------------------------------------
 
