@@ -8,7 +8,7 @@ import {ReactComponent as X2} from "../Files/svgs/xSquare.svg";
 import FunctionsMenu from "../Layouts/FunctionsMenu";
 
 const LimitCalc = () => {
-  const [data, setData] = useState({equation:"", first:"x", second:"x", third:"oo"})
+  const [data, setData] = useState({argument_1:"", argument_2:"x", argument_3:"+-", argument_4:"oo"})
   const [answer, setAnswer] = useState("")
   const [isOpen, setIsOpen] = useState(false);
 
@@ -19,6 +19,17 @@ const LimitCalc = () => {
   }
 
   console.log(data)
+
+  let variable = "f("+(data.argument_2)+")"
+
+
+  let approach = ""
+
+  if (data.argument_4 === "oo"){
+    approach = " ∞ "
+  }else{
+    approach = data.argument_4
+  }
 
   // const handleInput = (event) => {
   //   console.log(event.target)
@@ -44,7 +55,7 @@ const LimitCalc = () => {
 
   const handleReset = (event) => {
     event.preventDefault()
-    setData({equation:"", first:"x", second:"x", third: "oo"})
+    setData({argument_1:"", argument_2:"x", argument_3:"x", argument_4: "oo"})
     setAnswer("")
   }
 
@@ -60,7 +71,7 @@ const LimitCalc = () => {
   };
   
   const handleSubmit = (event) => {
-    axios.post("http://127.0.0.1:8000/limit/", data).then((res)=>{setAnswer(res.data)})
+    axios.post("http://127.0.0.1:8000/limit-calculator/", data).then((res)=>{setAnswer(res.data)})
     console.log(data)
     console.log(answer)
     event.preventDefault()
@@ -90,8 +101,8 @@ const LimitCalc = () => {
                 className="w-full p-4 border-2  border-primary rounded-l-xl text-xl"
                 type="text"
                 id="function"
-                name="equation"
-                value={data.equation}
+                name="argument_1"
+                value={data.argument_1}
                 onChange={handleInput}
                 
                 />{" "}
@@ -102,16 +113,16 @@ const LimitCalc = () => {
             <label htmlFor="first" className="ml-2 text-bright text-xl">
               Choose a variable
             </label>
-            <select name="first" value={data.first} onChange = {handleInput} className="w-full p-4 border-2 text-black text-xl border-primary rounded-xl mb-10">
+            <select name="argument_2" value={data.argument_2} onChange = {handleInput} className="w-full p-4 border-2 text-black text-xl border-primary rounded-xl mb-10">
                 <option value = "x">x</option>
-                <option value = "pi">π</option>
-                <option value = "h">h</option>
+                <option value = "y">y</option>
+                <option value = "z">z</option>
             </select>
             <label htmlFor="second" className="ml-2 text-bright text-xl">
               Side
             </label>
-            <select value = {data.second} name="second" onChange = {handleInput} className="w-full p-4 border-2 text-black text-xl border-primary rounded-xl mb-10">
-                <option value = "x">Two-sided</option>
+            <select value = {data.argument_3} name="argument_3" onChange = {handleInput} className="w-full p-4 border-2 text-black text-xl border-primary rounded-xl mb-10">
+                <option value = "+-">Two-sided</option>
                 <option value = "-">Left (-)</option>
                 <option value = "+">Right (+)</option>
             </select>
@@ -122,8 +133,8 @@ const LimitCalc = () => {
               required
               type="text"
               // id="iteration ∞"
-              value={data.third}
-              name="third"
+              value={data.argument_4}
+              name="argument_4"
               onChange={handleInput}
               className="w-full p-4 border-2  text-black border-primary rounded-xl mb-10 text-xl"
               defaultValue="oo"
@@ -142,7 +153,7 @@ const LimitCalc = () => {
         <div className=" w-1/2 mt-12 mr-20 flex flex-col text-white">
           <p className="mt-24 ml-10 font-normal text-2xl flex">According to Limit Rule's:<Newton className="ml-10 -mt-5"/></p>
           <div className="flex mt-10 pl-10 pt-10 h-full w-full flex-row font-normal text-2xl tracking-wide">
-          <p>The limits of {!data.argument_1? "f(x)": ("f(x) = " + data.argument_1)} as x approaches to {!data.argument_2? "": (data.argument_2)}</p><div className="ml-3 pt-4 pb-14 border-2 font-normal rounded-xl text-3xl -mt-5 px-3 border-double border-green-600 h-10 bg-white text-black">{answer !=="" ? answer:"_____________" }</div>
+          <p>The limit of {!data.argument_1? variable: (variable + " = " + data.argument_1)} as x approaches {approach} : {!data.argument_2 ? "": variable}=</p><div className="ml-3 pt-4 pb-14 border-2 font-normal rounded-xl text-3xl -mt-5 px-3 border-double border-green-600 h-10 bg-white text-black">{answer !=="" ? answer:"_____________" }</div>
           </div>
         </div>
       </div>
