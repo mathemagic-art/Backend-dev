@@ -58,7 +58,7 @@ const NewtonMethod = () => {
   };
   
   const handleSubmit = (event) => {
-    axios.post("http://127.0.0.1:8000/newtons-method/", data).then((res)=>{setAnswer(res.data)})
+    axios.post("newtons-method/", data).then((res)=>{setAnswer(res.data)})
     console.log(data)
     console.log(answer)
     event.preventDefault()
