@@ -52,37 +52,21 @@ OUTPUT: "0.5000"
 
 
 ----------------------------------------------------------------
+                                                Performing test for the SIMPSON METHOD calculator
+link to access the SIMPSON METHOD page locally: http://127.0.0.1:8000/differentiation/
+TEST:
 
-##############
-# for newton #
-##############
-
-
-input :
-
+INPUT: 
 {
-"equation": "x**2",
-"first": "x",
-"second": 4
+    "argument_1": "sin(x)", 
+    "argument_2": 0, 
+    "argument_3": 3.14159265358979323846 
 }
 
 
-output: "0.3125"
--------------------------------------------------------------------------------------------------
+OUTPUT: "2.00000"
 
-###############
-# for simpson #
-###############
 
-input:
-
-{
-    "equation": "sin(x)",
-    "first": 0,
-    "second": 3.14159265358979323846
-}
-
-output: between "1.99" and "2.0001"
 
 -----------------------------------------------------------------------
 ###############

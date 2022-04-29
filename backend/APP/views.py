@@ -82,7 +82,7 @@ def simpson_list(request):
             initial_point = deserialized.data['argument_2']
             end_point = deserialized.data['argument_3']
 
-            answer = taylor_series(function, initial_point, end_point)
+            answer = simpsons_method(function, initial_point, end_point)
             return Response(answer, status=status.HTTP_201_CREATED)
         
         else: 
