@@ -16,7 +16,7 @@ OUTPUT: "cos(x)"
 -----------------------------------------------------------------------------------------------------------------------------------
 
                                                 Performing test for the TAYLOR SERIES calculator
-link to access the DERIVATIVE page locally: http://127.0.0.1:8000/taylor-series/
+link to access the TAYLOR SERIES page locally: http://127.0.0.1:8000/taylor-series/
 TEST:
 
 INPUT:
@@ -24,7 +24,7 @@ INPUT:
 {
     "argument_1": "sin(x)", 
     "argument_2": "x", 
-    "argument_3": 16
+    "argument_3": 16,
     "argument_4": 0
 }
 
@@ -37,7 +37,7 @@ OUTPUT: "-x**15/1307674368000 + x**13/6227020800 - x**11/39916800 + x**9/362880 
 
 
                                                 Performing test for the NEWTON METHOD calculator
-link to access the DERIVATIVE page locally: http://127.0.0.1:8000/newtons-method/
+link to access the NEWTON METHOD page locally: http://127.0.0.1:8000/newtons-method/
 TEST:
 
 INPUT: 
@@ -69,20 +69,59 @@ OUTPUT: "2.00000"
 
 
 -----------------------------------------------------------------------
-###############
-# for rectangle  & trapezoid #
-###############
+
+                                                Performing test for the TRAPEZOID METHOD calculator
+link to access the TRAPEZOID METHOD page locally: http://127.0.0.1:8000/trapezoid-method/
+TEST:
+
+INPUT:
 
 {
-"equation": "x**2",
-"first": 0,
-"second": 2,
-"third": 46
+    "argument_1": "sin(x)", 
+    "argument_2": 0, 
+    "argument_3": 2,
+    "argument_4": 46
 }
 
-output: "2.58034"
+
+OUTPUT: "1.41592"
+
+---------------------------------------------------------------------------------------------------------
+                                               Performing test for the RECTANGLE METHOD calculator
+link to access the RECTANGLE METHOD page locally: http://127.0.0.1:8000/rectangle-method/
+TEST:
+
+INPUT:
+
+{
+    "argument_1": "sin(x)", 
+    "argument_2": 0, 
+    "argument_3": 2,
+    "argument_4": 46
+}
+
+
+OUTPUT: "1.39616"
+
 
 ---------------------------------------------------------------------------------------------------
+
+                                                Performing test for the DEFINITE INTEGRAL calculator
+link to access the  DEFINITE INTEGRAL page locally: http://127.0.0.1:8000/definite-integral/
+TEST:
+
+INPUT: 
+{
+    "argument_1": "sin(x)", 
+    "argument_2": 0, 
+    "argument_3": 3.14159265358979323846 
+}
+
+
+OUTPUT: "2.00000"
+
+
+
 ##########################
 # Differentiation        #
 ##########################
