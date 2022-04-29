@@ -48,6 +48,8 @@ const DiffCalculator = () => {
     setAnswer("");
   };
 
+
+  let variable = "f("+(data.argument_2)+")"
   // useEffect(() => {
 
   // }, [data, setData])
@@ -136,10 +138,10 @@ const DiffCalculator = () => {
           <div className="flex mt-10 pl-20 pt-10 h-full w-full flex-row font-normal text-2xl tracking-wide">
             <p>
               The Derivative of{" "}
-              {!data.equation ? "f(x)" : "f(x) = " + data.equation} equals to{" "}
+              {!data.argument_1 ? variable : (variable + " = ") + data.argument_1} equals to{" "}
             </p>
             <div className="ml-3 pt-4 pb-14 border-2 font-normal rounded-xl text-3xl -mt-5 px-3 border-double border-green-600 h-10 bg-white text-black">
-              f'(x)={answer !== "" ? answer : "_____________"}
+              {data.argument_3 === "1" ? "f'" : "f''"}({data.argument_2})={answer !== "" ? answer : "_____________"}
             </div>
           </div>
         </div>
