@@ -1,7 +1,7 @@
 import re
 from re import search, findall
 from math import factorial
-from numpy import linspace, random
+from numpy import linspace, random, var
 from sympy import Symbol, sympify, lambdify, diff, Float, limit, integrate, calculus, S
 from scipy import integrate as scipy_integrate
 import warnings
@@ -84,13 +84,13 @@ def indefinite_integration_calculator(function: str, variable: str) -> str:
 
 ########################################################################################################################
 
-def definite_integration_calculator(function: str, initial_point: float, end_point: float) -> str:
-    
+def definite_integration_calculator(function: str, variable: str, initial_point: float, end_point: float) -> str:
+    variable = Symbol(variable)
     initial_point = float(initial_point)
     end_point = float(end_point)
 
     function = parse_func(function)
-    a = lambdify(x, integrate(sympify(function))) 
+    a = lambdify(variable, integrate(sympify(function), variable)) 
     return output_func("{:.5f}".format(a(end_point)-a(initial_point)))
 
 #########################################################################################################################
@@ -117,14 +117,15 @@ def limit_calculator(function: str, variable : str, sign: str, approach: str) ->
             
 ########################################################################################################################
 
-def rectangle_method(function:str, initial_point: float, end_point: float, number_of_intervals: int) -> str:
+def rectangle_method(function:str, variable: str, initial_point: float, end_point: float, number_of_intervals: int) -> str:
 
+    variable = Symbol(variable)
     initial_point = float(initial_point)
     end_point = float(end_point)
     number_of_intervals = int(number_of_intervals)
 
     function = parse_func(function)
-    function = lambdify(x, function)
+    function = lambdify(variable, function)
     dx = (end_point - initial_point)/number_of_intervals
     total = 0.0
 
@@ -137,8 +138,9 @@ def rectangle_method(function:str, initial_point: float, end_point: float, numbe
 
 #######################################################################################################################
 
-def simpsons_method(function: str, initial_point: float, end_point: float) -> str:
+def simpsons_method(function: str, variable: str, initial_point: float, end_point: float) -> str:
 
+    variable = Symbol(variable)
     initial_point = float(initial_point)
     end_point = float(end_point)
 
@@ -171,8 +173,9 @@ def simpsons_method(function: str, initial_point: float, end_point: float) -> st
 
 ######################################################################################################################
 
-def trapezoid_method(function: str, initial_point: float, end_point: float, number_of_intervals: int) -> str:
+def trapezoid_method(function: str, variable: str, initial_point: float, end_point: float, number_of_intervals: int) -> str:
 
+    variable = Symbol(variable)
     initial_point = float(initial_point)
     end_point = float(end_point)
     number_of_intervals = int(number_of_intervals)
