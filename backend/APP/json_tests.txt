@@ -113,119 +113,48 @@ TEST:
 INPUT: 
 {
     "argument_1": "sin(x)", 
-    "argument_2": 0, 
-    "argument_3": 3.14159265358979323846 
+    "argument_2": 1, 
+    "argument_3": 3
 }
 
 
-OUTPUT: "2.00000"
+OUTPUT: "1.53029"
 
 
 
-##########################
-# Differentiation        #
-##########################
-
-input: 
-
-{
-    "equation": "x**2",
-    "first": "x",
-    "second": 1
-}
-
-
-output: "2*x"
 -----------------------------------------------------------------------------------------------------
 
+                                               Performing test for the LIMIT CALCULATOR calculator
+link to access the LIMIT CALCULATOR page locally: http://127.0.0.1:8000/limit-calculator/
+TEST:
 
-##########################
-# Definite Integral Test #
-##########################
-
-input: 
+INPUT:
 
 {
-    "equation": "x**2",
-    "first": "0",
-    "second": "2"
+    "argument_1": "1/x", 
+    "argument_2": "x", 
+    "argument_3": "-",
+    "argument_4": 0
 }
 
-output: "2.66667"
----------------------------------------------------------------------------------------------------
 
-#########################
-# Limit Calculator Test #
-#########################
-
-input: 
-{
-    "arg_1_str": "1/x",
-    "arg_2_str": "x",
-    "arg_3_str": "-",
-    "arg_4_str": "0"
-}
-
-output: "-oo"
-
-
-input: 
-{
-    "arg_1_str": "1/x",
-    "arg_2_str": "x",
-    "arg_3_str": "-",
-    "arg_4_str": "0"
-}
-
-output: "-oo"
-
-
+OUTPUT: "1.39616"
 
 ---------------------------------------------------------------------------------------------------
 
+                                              Performing test for the INDEFINITE INTEGRAL calculator
+link to access the INDEFINITE INTEGRAL page locally: http://127.0.0.1:8000/indefinite-integral/
+TEST:
 
----------------------------------------------------------------------------------------------------
-
-
-#################
-# Newton method #
-#################
-
-input: 
-
-
-
----------------------------------------------------------------------------------------------------
-
-
-#######################
-# indefinite integral #
-#######################
-
-
-input: 
+INPUT:
 
 {
-    "arg_1_str": "x^2"
+    "argument_1": "sin(x)", 
+    "argument_2": "x"
 }
 
-<<<<<<< HEAD
-output: ""
-=======
-output: 1.00000
 
--------------------------------------------------------------------------------------------------
+OUTPUT: -
 
-##########################
-# Intefinite Integral Test #
-##########################
 
-input: 
 
-{
-    "equation": "2*x"
-}
-
-output: "x**2"
-
->>>>>>> b4f213a404a4bc04747cbc6245281c9e18c638b4
