@@ -8,7 +8,7 @@ import {ReactComponent as X2} from "../Files/svgs/xSquare.svg";
 import FunctionsMenu from "../Layouts/FunctionsMenu";
 
 const TaylorCalc = () => {
-  const [data, setData] = useState({})
+  const [data, setData] = useState({argument_1: "", argument_2: "x", argument_3: "", argument_4: ""})
   const [answer, setAnswer] = useState("")
   const [isOpen, setIsOpen] = useState(false);
 
@@ -44,7 +44,7 @@ const TaylorCalc = () => {
 
   const handleReset = (event) => {
     event.preventDefault()
-    setData({equation:"", first:"", second:"", third:""})
+    setData({argument_1:"", argument_2:"x", argument_3:"", argument_4:""})
     setAnswer("")
   }
 
@@ -60,7 +60,7 @@ const TaylorCalc = () => {
   };
   
   const handleSubmit = (event) => {
-    axios.post("https://api-mathemagics.herokuapp.com/taylor/", data).then((res)=>{setAnswer(res.data)})
+    axios.post("http://127.0.0.1:8000/taylor-series/", data).then((res)=>{setAnswer(res.data)})
     console.log(data)
     console.log(answer)
     event.preventDefault()
@@ -89,8 +89,8 @@ const TaylorCalc = () => {
                 className="w-full p-4 border-2  border-primary rounded-l-xl text-xl"
                 type="text"
                 id="function"
-                name="equation"
-                value={data.equation}
+                name="argument_1"
+                value={data.argument_1}
                 onChange={handleInput}
                 
                 />{" "}
@@ -99,39 +99,39 @@ const TaylorCalc = () => {
               </button>
             </div>
             <label htmlFor="point" className="ml-2 text-bright text-xl">
-              Enter a point
+              Respect to
             </label>
             <input
             required
               type="text"
               // id="figure"
-              name="first"
+              name="argument_2"
               id="point"
-              value={data.first}
+              value={data.argument_2}
               onChange={handleInput}
               className="w-full p-4 border-2 text-black  border-primary rounded-xl mb-10 text-xl"
             />
             <label htmlFor="order" className="ml-2 text-bright text-xl">
-              Order = n
+              Number of iterations
             </label>
             <input
               required
               type="text"
               id="order"
-              value={data.second}
-              name="second"
+              value={data.argument_3}
+              name="argument_3"
               onChange={handleInput}
               className="w-full p-4 border-2  text-black border-primary rounded-xl mb-10 text-xl"
               />
               <label htmlFor="error" className="ml-2 text-bright text-xl">
-              The error at the point
+              Centered at
             </label>
             <input
               optional
               type="text"
               id="error"
-              value={data.third}
-              name="second"
+              value={data.argument_4}
+              name="argument_4"
               onChange={handleInput}
               className="w-full p-4 border-2  text-black border-primary rounded-xl mb-10 text-xl"
               />
@@ -149,7 +149,7 @@ const TaylorCalc = () => {
         <div className=" w-1/2 mt-12 mr-20 flex flex-col text-white">
           <p className="mt-24 ml-10 font-normal text-2xl flex">Based on Taylor Series Rule's:<Newton className="ml-10 -mt-5"/></p>
           <div className="flex mt-10 pl-10 pt-10 h-full w-full flex-row font-normal text-2xl tracking-wide">
-          <p>The answer for {!data.equation? "f(x)": ("f(x) = " + data.equation)} is: </p><div className="ml-3 pt-4 pb-14 border-2 font-normal rounded-xl text-3xl -mt-5 px-3 border-double border-green-600 h-10 bg-white text-black">{answer !=="" ? answer:"_____________" }</div>
+          <p>The answer for {!data.argument_1? "f(x)": ("f(x) = " + data.argument_1)} is: </p><div className="ml-3 pt-4 pb-14 border-2 font-normal rounded-xl text-3xl -mt-5 px-3 border-double border-green-600 h-10 bg-white text-black">{answer !=="" ? answer:"_____________" }</div>
           </div>
         </div>
       </div>
