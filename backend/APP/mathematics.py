@@ -1,4 +1,3 @@
-import re
 from re import search, findall
 from math import factorial
 from numpy import linspace, random, var
