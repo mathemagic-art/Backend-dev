@@ -32,6 +32,45 @@ def output_func(function: str) -> str:
 
 ########################################################################################################################
 
+
+def differentiating_calculator(function: str, variable: str, degree: int) -> str:
+    
+    degree = int(degree)
+
+    function = parse_func(function)
+    variable = Symbol(variable)
+    function_prime = function.diff(variable, degree)  
+    ans = output_func(function_prime)
+    return ans
+
+########################################################################################################################
+
+def taylor_series(function:str, variable: str, number_of_iterations: int, center: float) -> str:
+
+    number_of_iterations = int(number_of_iterations)
+    center = float(center)
+
+    function = parse_func(function)
+    variable = Symbol(variable)
+
+    if center == 0:
+        taylorPolynomial = str(lambdify(variable, function)(center))
+        for i in range(1, number_of_iterations):
+            f_diff = str(lambdify(variable, diff(function, variable, i))(center))
+            taylorPolynomial += '+' + f_diff +'/'+str(factorial(i))+'*({}-{})**{}'.format(variable, center, i)    
+        taylorPolynomial = sympify(taylorPolynomial, rational=True)
+    else:
+        taylorPolynomial = str(function.subs(variable, center))
+        for i in range(1, number_of_iterations):
+            f_diff = diff(function, variable, i)
+            f_diff = str(f_diff.subs(variable, center))
+            taylorPolynomial += '+' + f_diff +'/'+str(factorial(i))+'*({}-{})**{}'.format(variable, center, i)    
+        taylorPolynomial = sympify(taylorPolynomial, rational=True)
+    return output_func(taylorPolynomial)
+
+########################################################################################################################
+
+
 def newton_method(function: str, variable: str, number_of_iterations: int) -> str:
 
     number_of_iterations = int(number_of_iterations)
@@ -60,82 +99,9 @@ def newton_method(function: str, variable: str, number_of_iterations: int) -> st
         return ret
     except RuntimeWarning:
         return "Something went wrong. Please check the criteria."
-########################################################################################################################
-
-def differentiating_calculator(function: str, variable: str, degree: int) -> str:
-    
-    degree = int(degree)
-
-    function = parse_func(function)
-    variable = Symbol(variable)
-    function_prime = function.diff(variable, degree)  
-    ans = output_func(function_prime)
-    return ans
-########################################################################################################################
-
-def indefinite_integration_calculator(function: str, variable: str) -> str:
-    
-    variable = Symbol(variable)
-    function = parse_func(function)
-    ans = integrate(function, variable)
-
-    return output_func(ans)
 
 ########################################################################################################################
 
-def definite_integration_calculator(function: str, variable: str, initial_point: float, end_point: float) -> str:
-    variable = Symbol(variable)
-    initial_point = float(initial_point)
-    end_point = float(end_point)
-
-    function = parse_func(function)
-    a = lambdify(variable, integrate(sympify(function), variable)) 
-    return output_func("{:.5f}".format(a(end_point)-a(initial_point)))
-
-#########################################################################################################################
-
-
-def limit_calculator(function: str, variable : str, sign: str, approach: str) -> str:
-    
-    variable = Symbol(variable)
-    function = parse_func(function)
-    
-    if len(sign) == 1:        
-
-        ans = str(sympify(limit(function, variable, approach, sign)).evalf())
-        if 'oo' in ans:
-            return ans
-        else:
-            return '{:.5f}'.format(float(ans))
-    else:
-        ans = str(sympify(limit(function, variable, approach)).evalf())
-        if 'oo' in ans:
-            return ans
-        else:
-            return '{:.5f}'.format(float(ans))
-            
-########################################################################################################################
-
-def rectangle_method(function:str, variable: str, initial_point: float, end_point: float, number_of_intervals: int) -> str:
-
-    variable = Symbol(variable)
-    initial_point = float(initial_point)
-    end_point = float(end_point)
-    number_of_intervals = int(number_of_intervals)
-
-    function = parse_func(function)
-    function = lambdify(variable, function)
-    dx = (end_point - initial_point)/number_of_intervals
-    total = 0.0
-
-    for i in range (number_of_intervals):
-        total = total + function((initial_point + (i*dx)))
-
-    area = dx*total
-
-    return "{:.5f}".format(area)
-
-#######################################################################################################################
 
 def simpsons_method(function: str, variable: str, initial_point: float, end_point: float) -> str:
 
@@ -168,9 +134,10 @@ def simpsons_method(function: str, variable: str, initial_point: float, end_poin
         pol_func = find_polynomial(x_1, x_2, x_3, function(x_1), function(x_2), function(x_3))
         Area += scipy_integrate.quad(pol_func ,x_1, x_3)[0]
         
-    return "{:.5f}".format(Area)   
+    return "{:.5f}".format(Area)
 
-######################################################################################################################
+########################################################################################################################
+
 
 def trapezoid_method(function: str, variable: str, initial_point: float, end_point: float, number_of_intervals: int) -> str:
 
@@ -189,25 +156,69 @@ def trapezoid_method(function: str, variable: str, initial_point: float, end_poi
 
 ########################################################################################################################
 
-def taylor_series(function:str, variable: str, number_of_iterations: int, center: float) -> str:
 
-    number_of_iterations = int(number_of_iterations)
-    center = float(center)
+def rectangle_method(function:str, variable: str, initial_point: float, end_point: float, number_of_intervals: int) -> str:
+
+    variable = Symbol(variable)
+    initial_point = float(initial_point)
+    end_point = float(end_point)
+    number_of_intervals = int(number_of_intervals)
 
     function = parse_func(function)
-    variable = Symbol(variable)
+    function = lambdify(variable, function)
+    dx = (end_point - initial_point)/number_of_intervals
+    total = 0.0
 
-    if center == 0:
-        taylorPolynomial = str(lambdify(variable, function)(center))
-        for i in range(1, number_of_iterations):
-            f_diff = str(lambdify(variable, diff(function, variable, i))(center))
-            taylorPolynomial += '+' + f_diff +'/'+str(factorial(i))+'*({}-{})**{}'.format(variable, center, i)    
-        taylorPolynomial = sympify(taylorPolynomial, rational=True)
+    for i in range (number_of_intervals):
+        total = total + function((initial_point + (i*dx)))
+
+    area = dx*total
+
+    return "{:.5f}".format(area)
+
+########################################################################################################################
+
+
+def definite_integration_calculator(function: str, variable: str, initial_point: float, end_point: float) -> str:
+    variable = Symbol(variable)
+    initial_point = float(initial_point)
+    end_point = float(end_point)
+
+    function = parse_func(function)
+    a = lambdify(variable, integrate(sympify(function), variable)) 
+    return output_func("{:.5f}".format(a(end_point)-a(initial_point)))
+
+########################################################################################################################
+
+
+def indefinite_integration_calculator(function: str, variable: str) -> str:
+    
+    variable = Symbol(variable)
+    function = parse_func(function)
+    ans = integrate(function, variable)
+
+    return output_func(ans)
+
+########################################################################################################################
+
+
+def limit_calculator(function: str, variable : str, sign: str, approach: str) -> str:
+    
+    variable = Symbol(variable)
+    function = parse_func(function)
+    
+    if len(sign) == 1:        
+
+        ans = str(sympify(limit(function, variable, approach, sign)).evalf())
+        if 'oo' in ans:
+            return ans
+        else:
+            return '{:.5f}'.format(float(ans))
     else:
-        taylorPolynomial = str(function.subs(variable, center))
-        for i in range(1, number_of_iterations):
-            f_diff = diff(function, variable, i)
-            f_diff = str(f_diff.subs(variable, center))
-            taylorPolynomial += '+' + f_diff +'/'+str(factorial(i))+'*({}-{})**{}'.format(variable, center, i)    
-        taylorPolynomial = sympify(taylorPolynomial, rational=True)
-    return output_func(taylorPolynomial)
+        ans = str(sympify(limit(function, variable, approach)).evalf())
+        if 'oo' in ans:
+            return ans
+        else:
+            return '{:.5f}'.format(float(ans))
+            
+########################################################################################################################
