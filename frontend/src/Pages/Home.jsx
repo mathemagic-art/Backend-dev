@@ -1,4 +1,5 @@
 
+import React from "react";
 import Hero from "../Layouts/Hero";
 import Navbar from "../Layouts/Navbar";
 
