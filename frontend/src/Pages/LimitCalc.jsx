@@ -1,3 +1,4 @@
+import React from "react";
 import axios from "axios"
 import React, { useState, useEffect } from "react";
 // import MethodsCard from "../Components/MethodsCard";
@@ -111,13 +112,10 @@ const LimitCalc = () => {
               </button>
             </div>
             <label htmlFor="first" className="ml-2 text-bright text-xl">
-              Choose a variable
+              Respect to
             </label>
-            <select name="argument_2" value={data.argument_2} onChange = {handleInput} className="w-full p-4 border-2 text-black text-xl border-primary rounded-xl mb-10">
-                <option value = "x">x</option>
-                <option value = "y">y</option>
-                <option value = "z">z</option>
-            </select>
+            <input name="argument_2" value={data.argument_2} onChange = {handleInput} className="w-full p-4 border-2 text-black text-xl border-primary rounded-xl mb-10" />
+                
             <label htmlFor="second" className="ml-2 text-bright text-xl">
               Side
             </label>
