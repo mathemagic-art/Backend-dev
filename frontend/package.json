@@ -8,7 +8,11 @@
     "chokidar": "^3.5.3",
     "cra-template": "1.1.3",
     "darkmode-js": "^1.5.7",
+<<<<<<< HEAD
+    "npm": "^8.8.0",
+=======
     "equation-editor-next": "^0.0.11",
+>>>>>>> 482535937a8512c3889ab04c3da46a316cf4ba42
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-js-switch": "^1.1.6",
