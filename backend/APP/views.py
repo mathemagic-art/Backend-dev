@@ -5,26 +5,6 @@ from .serializers import *
 from .mathematics import *
 
 
-@api_view(['POST']) 
-def newton_list(request):
-
-    if request.method == 'POST':
-
-        deserialized = String_String_String_(data=request.data)
-
-        if deserialized.is_valid():
-
-            function = deserialized.data['argument_1']
-            variable = deserialized.data['argument_2']
-            number_of_iterations = deserialized.data['argument_3']
-
-            answer = newton_method(function, variable, number_of_iterations)
-            return Response(answer, status=status.HTTP_201_CREATED)
-        
-        else:
-
-            return Response(deserialized.error_messages)
-
 @api_view(['POST'])
 def diff_list(request):
 
@@ -44,7 +24,6 @@ def diff_list(request):
         else:
             
             return Response(deserialized.errors)
-
 
 
 @api_view(['POST'])
@@ -67,6 +46,27 @@ def taylor_list(request):
         else: 
             
             return Response(deserialized.errors)
+
+
+@api_view(['POST']) 
+def newton_list(request):
+
+    if request.method == 'POST':
+
+        deserialized = String_String_String_(data=request.data)
+
+        if deserialized.is_valid():
+
+            function = deserialized.data['argument_1']
+            variable = deserialized.data['argument_2']
+            number_of_iterations = deserialized.data['argument_3']
+
+            answer = newton_method(function, variable, number_of_iterations)
+            return Response(answer, status=status.HTTP_201_CREATED)
+        
+        else:
+
+            return Response(deserialized.error_messages)
 
 
 @api_view(['POST'])
@@ -130,26 +130,6 @@ def rectangle_list(request):
 
 
 @api_view(['POST'])
-def indefinite_integral_list(request):
-
-    if request.method == 'POST':
-
-        deserialized = String_String_(data=request.data)
-        
-        if deserialized.is_valid():
-
-            function = deserialized.data['argument_1']
-            variable = deserialized.data['argument_2']
-
-            answer = indefinite_integration_calculator(function, variable)
-            return Response(answer, status=status.HTTP_201_CREATED)
-        
-        else:
-            
-            return Response(deserialized.errors)
-    
-
-@api_view(['POST'])
 def definite_integral_list(request):
     
     if request.method == "POST":
@@ -166,6 +146,26 @@ def definite_integral_list(request):
             return Response(answer, status=status.HTTP_201_CREATED)
         
         else: 
+            return Response(deserialized.errors)
+
+            
+@api_view(['POST'])
+def indefinite_integral_list(request):
+
+    if request.method == 'POST':
+
+        deserialized = String_String_(data=request.data)
+        
+        if deserialized.is_valid():
+
+            function = deserialized.data['argument_1']
+            variable = deserialized.data['argument_2']
+
+            answer = indefinite_integration_calculator(function, variable)
+            return Response(answer, status=status.HTTP_201_CREATED)
+        
+        else:
+            
             return Response(deserialized.errors)
 
 

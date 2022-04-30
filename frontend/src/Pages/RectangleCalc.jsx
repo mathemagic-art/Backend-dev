@@ -1,5 +1,5 @@
 import axios from "axios"
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 // import MethodsCard from "../Components/MethodsCard";
 import Navbar from "../Layouts/Navbar";
 import { ReactComponent as Fx } from "../Files/svgs/fx.svg";
