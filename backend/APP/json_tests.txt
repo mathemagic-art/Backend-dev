@@ -1,104 +1,160 @@
+                                                Performing test for the DERIVATIVE calculator
+link to access the DERIVATIVE page locally: http://127.0.0.1:8000/differentiation/
+TEST:
 
-##############
-# for taylor #
-##############
-
-input :
-
+INPUT: 
 {
-    "arg_1_str": "sin(x)",
-    "arg_2_int": 6,
-    "arg_3_float": 0.0
+    "argument_1": "sin(x)", 
+    "argument_2": "x", 
+    "argument_3": 1
 }
 
-output: "x**5/120 - x**3/6 + x"
 
-input:
+OUTPUT: "cos(x)"
 
-{
-    "arg_1_str": "e^(x^2)",
-    "arg_2_int": 6,
-    "arg_3_float": 0.0
-}
-# I think here is mistake!!! (Elnazar)
 
-output: "x**4/2 + x**2 + 1"
+-----------------------------------------------------------------------------------------------------------------------------------
 
--------------------------------------------------------------------------------------------------
+                                                Performing test for the TAYLOR SERIES calculator
+link to access the TAYLOR SERIES page locally: http://127.0.0.1:8000/taylor-series/
+TEST:
 
-###############
-# for simpson #
-###############
-
-input:
+INPUT:
 
 {
-    "equation": "sin(x)",
-    "first": 0,
-    "second": 3.14159265358979323846
+    "argument_1": "sin(x)", 
+    "argument_2": "x", 
+    "argument_3": 16,
+    "argument_4": 0
 }
 
-output: between "1.99" and "2.0001"
+
+OUTPUT: "-x**15/1307674368000 + x**13/6227020800 - x**11/39916800 + x**9/362880 - x**7/5040 + x**5/120 - x**3/6 + x"
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------
+
+
+                                                Performing test for the NEWTON METHOD calculator
+link to access the NEWTON METHOD page locally: http://127.0.0.1:8000/newtons-method/
+TEST:
+
+INPUT: 
+{
+    "argument_1": "x**2", 
+    "argument_2": "x", 
+    "argument_3": 1
+}
+
+
+OUTPUT: "0.5000"
+
+
+----------------------------------------------------------------
+                                                Performing test for the SIMPSON METHOD calculator
+link to access the SIMPSON METHOD page locally: http://127.0.0.1:8000/differentiation/
+TEST:
+
+INPUT: 
+{
+    "argument_1": "sin(x)", 
+    "argument_2": 0, 
+    "argument_3": 3.14159265358979323846 
+}
+
+
+OUTPUT: "2.00000"
+
+
+
+-----------------------------------------------------------------------
+
+                                                Performing test for the TRAPEZOID METHOD calculator
+link to access the TRAPEZOID METHOD page locally: http://127.0.0.1:8000/trapezoid-method/
+TEST:
+
+INPUT:
+
+{
+    "argument_1": "sin(x)", 
+    "argument_2": 0, 
+    "argument_3": 2,
+    "argument_4": 46
+}
+
+
+OUTPUT: "1.41592"
+
+---------------------------------------------------------------------------------------------------------
+                                               Performing test for the RECTANGLE METHOD calculator
+link to access the RECTANGLE METHOD page locally: http://127.0.0.1:8000/rectangle-method/
+TEST:
+
+INPUT:
+
+{
+    "argument_1": "sin(x)", 
+    "argument_2": 0, 
+    "argument_3": 2,
+    "argument_4": 46
+}
+
+
+OUTPUT: "1.39616"
+
 
 ---------------------------------------------------------------------------------------------------
 
-##########################
-# Definite Integral Test #
-##########################
+                                                Performing test for the DEFINITE INTEGRAL calculator
+link to access the  DEFINITE INTEGRAL page locally: http://127.0.0.1:8000/definite-integral/
+TEST:
 
-input: 
-
+INPUT: 
 {
-    "equation": "x**2",
-    "first": "0",
-    "second": "2"
+    "argument_1": "sin(x)", 
+    "argument_2": 1, 
+    "argument_3": 3
 }
 
-output: "2.66667"
+
+OUTPUT: "1.53029"
+
+
+
+-----------------------------------------------------------------------------------------------------
+
+                                               Performing test for the LIMIT CALCULATOR calculator
+link to access the LIMIT CALCULATOR page locally: http://127.0.0.1:8000/limit-calculator/
+TEST:
+
+INPUT:
+
+{
+    "argument_1": "1/x", 
+    "argument_2": "x", 
+    "argument_3": "-",
+    "argument_4": 0
+}
+
+
+OUTPUT: "1.39616"
 
 ---------------------------------------------------------------------------------------------------
 
-##########################
-# Limit Calculator Test #
-##########################
+                                              Performing test for the INDEFINITE INTEGRAL calculator
+link to access the INDEFINITE INTEGRAL page locally: http://127.0.0.1:8000/indefinite-integral/
+TEST:
 
-input: 
+INPUT:
+
 {
-"equation": "sin(x)/x",
-"first": "x",
-"second": "0"
+    "argument_1": "sin(x)", 
+    "argument_2": "x"
 }
 
-output: 1.00000
 
----------------------------------------------------------------------------------------------------
-
-########################
-# test for derivatives #
-########################
-
-input: 
-{
-    "arg_1_str": "sin(x)", 
-    "arg_2_str": "x", 
-    "arg_3_int": 1
-}
-
-output: "cos(x)"
-
----------------------------------------------------------------------------------------------------
-
-
-#################
-# Newton method #
-#################
-
-input: 
-
-
-
-
-
+OUTPUT: -
 
 
 

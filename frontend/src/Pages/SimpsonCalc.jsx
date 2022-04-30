@@ -1,3 +1,4 @@
+import React from "react";
 import axios from "axios"
 import { useState, useEffect } from "react";
 // import MethodsCard from "../Components/MethodsCard";
@@ -8,7 +9,7 @@ import {ReactComponent as X2} from "../Files/svgs/xSquare.svg";
 import FunctionsMenu from "../Layouts/FunctionsMenu";
 
 const SimpsonCalc = () => {
-  const [data, setData] = useState({})
+  const [data, setData] = useState({argument_1: "", argument_2: "x", argument_3: "", argument_4: ""})
   const [answer, setAnswer] = useState("")
   const [isOpen, setIsOpen] = useState(false);
 
@@ -44,7 +45,7 @@ const SimpsonCalc = () => {
 
   const handleReset = (event) => {
     event.preventDefault()
-    setData({equation:"", first:"", second:"", third:""})
+    setData({argument_1:"", argument_2:"x", argument_3:"", argument_4:""})
     setAnswer("")
   }
 
@@ -60,7 +61,7 @@ const SimpsonCalc = () => {
   };
   
   const handleSubmit = (event) => {
-    axios.post("https://api-mathemagics.herokuapp.com/simpson/", data).then((res)=>{setAnswer(res.data)})
+    axios.post("simpsons-method/", data).then((res)=>{setAnswer(res.data)})
     console.log(data)
     console.log(answer)
     event.preventDefault()
@@ -89,8 +90,8 @@ const SimpsonCalc = () => {
                 className="w-full p-4 border-2  border-primary rounded-l-xl text-xl"
                 type="text"
                 id="function"
-                name="equation"
-                value={data.equation}
+                name="argument_1"
+                value={data.argument_1}
                 onChange={handleInput}
                 
                 />{" "}
@@ -99,38 +100,38 @@ const SimpsonCalc = () => {
               </button>
             </div>
             <label htmlFor="lower-limit" className="ml-2 text-bright text-xl">
-              Lower Limit = α
+              Respect to
             </label>
             <input
             required
               type="text"
               id="lower-limit"
-              name="first"
-              value={data.first}
+              name="argument_2"
+              value={data.argument_2}
               onChange={handleInput}
               className="w-full p-4 border-2 text-black  border-primary rounded-xl mb-10 text-xl"
             />
             <label htmlFor="upper-limit" className="ml-2 text-bright text-xl">
-              Upper Limit = β
+              Initial Point
             </label>
             <input
               required
               type="text"
               id="upper-limit"
-              value={data.second}
-              name="second"
+              value={data.argument_3}
+              name="argument_3"
               onChange={handleInput}
               className="w-full p-4 border-2  text-black border-primary rounded-xl mb-10 text-xl"
               />
               <label htmlFor="intervals" className="ml-2 text-bright text-xl">
-              Number of Subintervals = n
+              End Point
             </label>
             <input
               optional
               type="text"
               id="intervals"
-              value={data.third}
-              name="second"
+              value={data.argument_4}
+              name="argument_4"
               onChange={handleInput}
               className="w-full p-4 border-2  text-black border-primary rounded-xl mb-10 text-xl"
               />

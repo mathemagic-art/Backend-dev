@@ -5,18 +5,40 @@ from .serializers import *
 from .mathematics import *
 
 
+@api_view(['POST'])
+def diff_list(request):
+
+    if request.method == 'POST':
+
+        deserialized = String_String_String_(data=request.data)
+        
+        if deserialized.is_valid():
+
+            function = deserialized.data['argument_1']
+            variable = deserialized.data['argument_2']
+            degree = deserialized.data['argument_3']
+
+            answer = differentiating_calculator(function, variable, degree)
+            return Response(answer, status=status.HTTP_201_CREATED)
+        
+        else:
+            
+            return Response(deserialized.errors)
+
+
 @api_view(['POST']) 
 def newton_list(request):
 
     if request.method == 'POST':
 
-        deserialized = String_String_Integer(data=request.data)
+        deserialized = String_String_String_(data=request.data)
 
         if deserialized.is_valid():
 
-            function = deserialized.data['arg_1_str']
-            variable = deserialized.data['arg_2_str']
-            number_of_iterations = int(deserialized.data['arg_3_int'])
+            function = deserialized.data['argument_1']
+            variable = deserialized.data['argument_2']
+            number_of_iterations = deserialized.data['argument_3']
+
             answer = newton_method(function, variable, number_of_iterations)
             return Response(answer, status=status.HTTP_201_CREATED)
         
@@ -25,60 +47,26 @@ def newton_list(request):
             return Response(deserialized.error_messages)
 
 
-
-@api_view(['POST'])
-def diff_list(request):
-
-    if request.method == 'POST':
-
-<<<<<<< HEAD
-        deserialized = String_String_Integer(data=request.data)
-        
-        if deserialized.is_valid():
-
-            function = deserialized.data['arg_1_str']
-            variable = deserialized.data['arg_2_str']
-            degree = int(deserialized.data['arg_3_int'])
-
-            answer = differentiating_calculator(function, variable, degree)
-=======
-        deserialized = Function_String_Numeric(data=request.data)
-        
-        if deserialized.is_valid():
-
-            equation = deserialized.data['equation']
-            first = deserialized.data['first']
-            second = deserialized.data['second']
-            answer = differentiating_calculator(equation, first, second)
->>>>>>> origin/master
-            return Response(answer, status=status.HTTP_201_CREATED)
-        
-        else:
-            
-            return Response(deserialized.errors)
-    
-
-
 @api_view(['POST'])
 def taylor_list(request):
     
     if request.method == "POST":
 
-        deserialized = String_Integer_Float(data=request.data)
+        deserialized = String_String_String_String_(data=request.data)
 
         if deserialized.is_valid():
 
-            function = deserialized.data['arg_1_str']
-            num_of_iter = int(deserialized.data['arg_2_int'])
-            center = float(deserialized.data['arg_3_float'])
+            function = deserialized.data['argument_1']
+            variable = deserialized.data['argument_2']
+            number_of_iterations = deserialized.data['argument_3']
+            center = deserialized.data['argument_4']
 
-            answer = taylor_series(function, num_of_iter, center)
+            answer = taylor_series(function, variable, number_of_iterations, center)
             return Response(answer, status=status.HTTP_201_CREATED)
         
         else: 
             
             return Response(deserialized.errors)
-
 
 
 @api_view(['POST'])
@@ -86,20 +74,19 @@ def simpson_list(request):
     
     if request.method == "POST":
 
-        deserialized = String_Float_Float(data=request.data)
+        deserialized = String_String_String_(data=request.data)
 
         if deserialized.is_valid():
 
-            function = deserialized.data['arg_1_str']
-            initial_point = float(deserialized.data['arg_2_float'])
-            end_point = float(deserialized.data['arg_3_float'])
+            function = deserialized.data['argument_1']
+            initial_point = deserialized.data['argument_2']
+            end_point = deserialized.data['argument_3']
 
-            answer = taylor_series(function, initial_point, end_point)
+            answer = simpsons_method(function, initial_point, end_point)
             return Response(answer, status=status.HTTP_201_CREATED)
         
         else: 
             return Response(deserialized.errors)
-
 
 
 @api_view(['POST',])
@@ -107,14 +94,14 @@ def trapezoid_list(request):
 
     if request.method == 'POST':
 
-        deserialized = String_Float_Float_Integer(data=request.data)
+        deserialized = String_String_String_String_(data=request.data)
 
         if deserialized.is_valid():
 
-            function = deserialized.data['arg_1_str']
-            initial_point = float(deserialized.data['arg_2_float'])
-            end_point = float(deserialized.data['arg_3_float'])
-            number_interval = int(deserialized.data['arg_4_int'])
+            function = deserialized.data['argument_1']
+            initial_point = deserialized.data['argument_2']
+            end_point = deserialized.data['argument_3']
+            number_interval = deserialized.data['argument_4']
 
             answer = trapezoid_method(function, initial_point, end_point, number_interval)
             return Response(answer, status=status.HTTP_201_CREATED)
@@ -127,14 +114,14 @@ def trapezoid_list(request):
 def rectangle_list(request):
 
     if request.method == 'POST':
-        deserialized = String_Float_Float_Integer(data=request.data)
+        deserialized = String_String_String_String_(data=request.data)
         
         if deserialized.is_valid():
 
-            function = deserialized.data['arg_1_str']
-            initial_point = float(deserialized.data['arg_2_float'])
-            end_point = float(deserialized.data['arg_3_float'])
-            number_interval = float(deserialized.data['arg_4_int'])
+            function = deserialized.data['argument_1']
+            initial_point = deserialized.data['argument_2']
+            end_point = deserialized.data['argument_3']
+            number_interval = deserialized.data['argument_4']
 
             answer = rectangle_method(function, initial_point, end_point, number_interval)
             return Response(answer, status=status.HTTP_201_CREATED)
@@ -142,22 +129,19 @@ def rectangle_list(request):
             return Response(deserialized.error_messages)
 
 
-
-
-
-
-
 @api_view(['POST'])
 def indefinite_integral_list(request):
 
     if request.method == 'POST':
 
-        deserialized = Function(data=request.data)
+        deserialized = String_String_(data=request.data)
         
         if deserialized.is_valid():
 
-            equation = deserialized.data['equation']
-            answer = indefinite_integration_calculator(equation)
+            equation = deserialized.data['argument_1']
+            variable = deserialized.data['argument_2']
+
+            answer = indefinite_integration_calculator(equation, variable)
             return Response(answer, status=status.HTTP_201_CREATED)
         
         else:
@@ -165,21 +149,17 @@ def indefinite_integral_list(request):
             return Response(deserialized.errors)
     
 
-
-
-
-
 @api_view(['POST'])
 def definite_integral_list(request):
     
     if request.method == "POST":
-        deserialized = String_Float_Float(data=request.data)
+        deserialized = String_String_String_(data=request.data)
 
         if deserialized.is_valid():
 
-            function = deserialized.data['arg_1_str']
-            lower_bound = float(deserialized.data['arg_2_float'])
-            upper_bound = float(deserialized.data['arg_3_float'])
+            function = deserialized.data['argument_1']
+            lower_bound = deserialized.data['argument_2']
+            upper_bound = deserialized.data['argument_3']
             
             answer = definite_integration_calculator(function, lower_bound, upper_bound)
             return Response(answer, status=status.HTTP_201_CREATED)
@@ -192,37 +172,17 @@ def definite_integral_list(request):
 def limit_list(request):
     
     if request.method == "POST":
-        deserialized = String_String_String(data=request.data)
+        deserialized = String_String_String_String_(data=request.data)
 
         if deserialized.is_valid():
 
-            function = deserialized.data['arg_1_str']
-            variable = deserialized.data['arg_2_str']
-            approach = deserialized.data['arg_3_str']
+            function = deserialized.data['argument_1']
+            variable = deserialized.data['argument_2']
+            sign = deserialized.data['argument_3']
+            approach = deserialized.data['argument_4']
             
-            answer = limit_calculator(function, variable, approach)
+            answer = limit_calculator(function, variable, sign, approach)
             return Response(answer, status=status.HTTP_201_CREATED)
         
         else: 
             return Response(deserialized.errors)
-
-
-        
-@api_view(['POST'])
-def indefinite_integral_list(request):
-
-    if request.method == 'POST':
-
-        deserialized = Function(data=request.data)
-        
-        if deserialized.is_valid():
-
-            equation = deserialized.data['equation']
-            answer = indefinite_integration_calculator(equation)
-            return Response(answer, status=status.HTTP_201_CREATED)
-        
-        else:
-            
-            return Response(deserialized.errors)
-    
-

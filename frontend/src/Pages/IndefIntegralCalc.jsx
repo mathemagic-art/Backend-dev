@@ -1,6 +1,5 @@
-import React from "react";
 import axios from "axios"
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 // import MethodsCard from "../Components/MethodsCard";
 import Navbar from "../Layouts/Navbar";
 import { ReactComponent as Fx } from "../Files/svgs/fx.svg";
@@ -8,8 +7,8 @@ import {ReactComponent as Newton } from "../Files/svgs/newtonwhite.svg";
 import {ReactComponent as X2} from "../Files/svgs/xSquare.svg";
 import FunctionsMenu from "../Layouts/FunctionsMenu";
 
-const TaylorCalc = () => {
-  const [data, setData] = useState({argument_1: "", argument_2: "x", argument_3: "", argument_4: ""})
+const IndefIntegralCalc = () => {
+  const [data, setData] = useState({argument_1: "", argument_2: "x"})
   const [answer, setAnswer] = useState("")
   const [isOpen, setIsOpen] = useState(false);
 
@@ -28,7 +27,7 @@ const TaylorCalc = () => {
   // }
   // const handleFunction = (event) => {
   //   // setData({equation: event.target.value});
-  //   // console.log("samat")
+  //   // console.log("something")
   // };
   // const handleFirst = (event) => {
   //   setData({first: event.target.value})
@@ -40,12 +39,12 @@ const TaylorCalc = () => {
 
   // const handleClick = () =>{
   //   console.log(data)
-  //   // axios.post("https://api-mathemagics.herokuapp.com/taylor/", data).then((res)=>{setAnswer(res)})
+  //   // axios.post("https://api-mathemagics.herokuapp.com/definite-integral/", data).then((res)=>{setAnswer(res)})
   // };
 
   const handleReset = (event) => {
     event.preventDefault()
-    setData({argument_1:"", argument_2:"x", argument_3:"", argument_4:""})
+    setData({argument_1:"", argument_2:"x"})
     setAnswer("")
   }
 
@@ -61,7 +60,7 @@ const TaylorCalc = () => {
   };
   
   const handleSubmit = (event) => {
-    axios.post("taylor-series/", data).then((res)=>{setAnswer(res.data)})
+    axios.post("indefinite-integral/", data).then((res)=>{setAnswer(res.data)})
     console.log(data)
     console.log(answer)
     event.preventDefault()
@@ -73,12 +72,12 @@ const TaylorCalc = () => {
       {isOpen ? <FunctionsMenu /> : ""}
       <div className="flex">
         <form onSubmit={handleSubmit}>
-        <div className="ml-32 mt-12 border-2 w-[55%] h-[95%] rounded-3xl text-white p-10 bg-dark bg-opacity-30">
+        <div className="ml-32 mt-12 border-2 w-[50%] h-[95%] rounded-3xl text-white p-10 bg-dark bg-opacity-30">
           <h2 className="text-center text-3xl font-primary text-primary">
-            Taylor Series Calculator
+            Indefinite Integral Calculator
           </h2>
           <p className="text-center text-text mb-10">
-            Approximate a function as a polynomial with an infinite number of terms{" "}
+            Find areas and volumes by adding the slices to find the whole.{" "}
           </p>
           <div>
             <label htmlFor="function" className="ml-2 text-bright text-xl">
@@ -99,43 +98,28 @@ const TaylorCalc = () => {
                 <Fx />
               </button>
             </div>
-            <label htmlFor="point" className="ml-2 text-bright text-xl">
-              Respect to
+            <label htmlFor="list" className="ml-2 text-bright text-xl">
+              Integral type
             </label>
-            <input
-            required
-              type="text"
-              // id="figure"
-              name="argument_2"
-              id="point"
-              value={data.argument_2}
-              onChange={handleInput}
-              className="w-full p-4 border-2 text-black  border-primary rounded-xl mb-10 text-xl"
-            />
-            <label htmlFor="order" className="ml-2 text-bright text-xl">
-              Number of iterations
+            <select id = "list" name="" value='' onChange = '' className="w-full p-4 border-2 text-black text-xl border-primary rounded-xl mb-10">
+                <option value = "type">Indefinite Integral</option>
+                <option value = "type1">Definite Integral</option>
+                
+            </select>
+            
+            <label htmlFor="variable" className="ml-2 text-bright text-xl">
+              With respect to variable
             </label>
             <input
               required
               type="text"
-              id="order"
-              value={data.argument_3}
-              name="argument_3"
+              id="variable"
+              value={data.argument_2}
+              name="argument_2"
               onChange={handleInput}
               className="w-full p-4 border-2  text-black border-primary rounded-xl mb-10 text-xl"
               />
-              <label htmlFor="error" className="ml-2 text-bright text-xl">
-              Centered at
-            </label>
-            <input
-              optional
-              type="text"
-              id="error"
-              value={data.argument_4}
-              name="argument_4"
-              onChange={handleInput}
-              className="w-full p-4 border-2  text-black border-primary rounded-xl mb-10 text-xl"
-              />
+             
           </div>
           <div className=" flex justify-evenly">
             <button className="bg-primary text-white px-6 py-2 text-center text-lg rounded-md" type="submit" >
@@ -148,7 +132,7 @@ const TaylorCalc = () => {
         </div>
         </form>
         <div className=" w-1/2 mt-12 mr-20 flex flex-col text-white">
-          <p className="mt-24 ml-10 font-normal text-2xl flex">Based on Taylor Series Rule's:<Newton className="ml-10 -mt-5"/></p>
+          <p className="mt-24 ml-10 font-normal text-2xl flex">Based on Integral Rule's:<Newton className="ml-10 -mt-5"/></p>
           <div className="flex mt-10 pl-10 pt-10 h-full w-full flex-row font-normal text-2xl tracking-wide">
           <p>The answer for {!data.argument_1? "f(x)": ("f(x) = " + data.argument_1)} is: </p><div className="ml-3 pt-4 pb-14 border-2 font-normal rounded-xl text-3xl -mt-5 px-3 border-double border-green-600 h-10 bg-white text-black">{answer !=="" ? answer:"_____________" }</div>
           </div>
@@ -158,4 +142,4 @@ const TaylorCalc = () => {
   );
 };
 
-export default TaylorCalc;
+export default IndefIntegralCalc;
