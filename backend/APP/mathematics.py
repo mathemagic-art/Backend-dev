@@ -78,7 +78,7 @@ def indefinite_integration_calculator(function: str, variable: str) -> str:
     
     variable = Symbol(variable)
     function = parse_func(function)
-    ans = lambdify(variable, integrate(sympify(function)))
+    ans = integrate(function, variable)
 
     return output_func(ans)
 
