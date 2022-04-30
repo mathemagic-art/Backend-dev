@@ -8,7 +8,7 @@ import {ReactComponent as X2} from "../Files/svgs/xSquare.svg";
 import FunctionsMenu from "../Layouts/FunctionsMenu";
 
 const IndefIntegralCalc = () => {
-  const [data, setData] = useState({})
+  const [data, setData] = useState({argument_1: "", argument_2: "x"})
   const [answer, setAnswer] = useState("")
   const [isOpen, setIsOpen] = useState(false);
 
@@ -44,7 +44,7 @@ const IndefIntegralCalc = () => {
 
   const handleReset = (event) => {
     event.preventDefault()
-    setData({equation:"", first:"", second:""})
+    setData({argument_1:"", argument_2:"x"})
     setAnswer("")
   }
 
@@ -60,7 +60,7 @@ const IndefIntegralCalc = () => {
   };
   
   const handleSubmit = (event) => {
-    axios.post("https://api-mathemagics.herokuapp.com/definite-integral/", data).then((res)=>{setAnswer(res.data)})
+    axios.post("indefinite-integral/", data).then((res)=>{setAnswer(res.data)})
     console.log(data)
     console.log(answer)
     event.preventDefault()
@@ -89,8 +89,8 @@ const IndefIntegralCalc = () => {
                 className="w-full p-4 border-2  border-primary rounded-l-xl text-xl"
                 type="text"
                 id="function"
-                name="equation"
-                value={data.equation}
+                name="argument_1"
+                value={data.argument_1}
                 onChange={handleInput}
                 
                 />{" "}
@@ -101,7 +101,7 @@ const IndefIntegralCalc = () => {
             <label htmlFor="list" className="ml-2 text-bright text-xl">
               Integral type
             </label>
-            <select id = "list" value={data.first} onChange = {handleInput} className="w-full p-4 border-2 text-black text-xl border-primary rounded-xl mb-10">
+            <select id = "list" name="" value='' onChange = '' className="w-full p-4 border-2 text-black text-xl border-primary rounded-xl mb-10">
                 <option value = "type">Indefinite Integral</option>
                 <option value = "type1">Definite Integral</option>
                 
@@ -114,8 +114,8 @@ const IndefIntegralCalc = () => {
               required
               type="text"
               id="variable"
-              value={data.third}
-              name="second"
+              value={data.argument_2}
+              name="argument_2"
               onChange={handleInput}
               className="w-full p-4 border-2  text-black border-primary rounded-xl mb-10 text-xl"
               />
@@ -134,7 +134,7 @@ const IndefIntegralCalc = () => {
         <div className=" w-1/2 mt-12 mr-20 flex flex-col text-white">
           <p className="mt-24 ml-10 font-normal text-2xl flex">Based on Integral Rule's:<Newton className="ml-10 -mt-5"/></p>
           <div className="flex mt-10 pl-10 pt-10 h-full w-full flex-row font-normal text-2xl tracking-wide">
-          <p>The answer for {!data.equation? "f(x)": ("f(x) = " + data.equation)} is: </p><div className="ml-3 pt-4 pb-14 border-2 font-normal rounded-xl text-3xl -mt-5 px-3 border-double border-green-600 h-10 bg-white text-black">{answer !=="" ? answer:"_____________" }</div>
+          <p>The answer for {!data.argument_1? "f(x)": ("f(x) = " + data.argument_1)} is: </p><div className="ml-3 pt-4 pb-14 border-2 font-normal rounded-xl text-3xl -mt-5 px-3 border-double border-green-600 h-10 bg-white text-black">{answer !=="" ? answer:"_____________" }</div>
           </div>
         </div>
       </div>
