@@ -8,7 +8,7 @@ import {ReactComponent as X2} from "../Files/svgs/xSquare.svg";
 import FunctionsMenu from "../Layouts/FunctionsMenu";
 
 const SimpsonCalc = () => {
-  const [data, setData] = useState({argument_1: "", argument_2: "", argument_3: "", argument_4: ""})
+  const [data, setData] = useState({argument_1: "", argument_2: "x", argument_3: "", argument_4: ""})
   const [answer, setAnswer] = useState("")
   const [isOpen, setIsOpen] = useState(false);
 
@@ -44,7 +44,7 @@ const SimpsonCalc = () => {
 
   const handleReset = (event) => {
     event.preventDefault()
-    setData({equation:"", first:"", second:"", third:""})
+    setData({argument_1:"", argument_2:"x", argument_3:"", argument_4:""})
     setAnswer("")
   }
 

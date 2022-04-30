@@ -60,7 +60,7 @@ const RectangleCalc = () => {
   };
   
   const handleSubmit = (event) => {
-    axios.post("https://api-mathemagics.herokuapp.com/rectangle/", data).then((res)=>{setAnswer(res.data)})
+    axios.post("rectangle-method/", data).then((res)=>{setAnswer(res.data)})
     console.log(data)
     console.log(answer)
     event.preventDefault()
@@ -89,8 +89,8 @@ const RectangleCalc = () => {
                 className="w-full p-4 border-2  border-primary rounded-l-xl text-xl"
                 type="text"
                 id="function"
-                name="equation"
-                value={data.equation}
+                name="argument_1"
+                value={data.argument_1}
                 onChange={handleInput}
                 
                 />{" "}
@@ -99,14 +99,26 @@ const RectangleCalc = () => {
               </button>
             </div>
             <label htmlFor="lower-limit" className="ml-2 text-bright text-xl">
+              Respect to
+            </label>
+            <input
+            required
+              type="text"
+              id="lower-limit"
+              name="argument_2"
+              value={data.argument_2}
+              onChange={handleInput}
+              className="w-full p-4 border-2 text-black  border-primary rounded-xl mb-10 text-xl"
+            />
+            <label htmlFor="lower-limit" className="ml-2 text-bright text-xl">
               Lower Limit = α
             </label>
             <input
             required
               type="text"
               id="lower-limit"
-              name="first"
-              value={data.first}
+              name="argument_3"
+              value={data.argument_3}
               onChange={handleInput}
               className="w-full p-4 border-2 text-black  border-primary rounded-xl mb-10 text-xl"
             />
@@ -117,8 +129,8 @@ const RectangleCalc = () => {
               required
               type="text"
               id="upper-limit"
-              value={data.second}
-              name="second"
+              value={data.argument_4}
+              name="argument_4"
               onChange={handleInput}
               className="w-full p-4 border-2  text-black border-primary rounded-xl mb-10 text-xl"
               />
@@ -129,8 +141,8 @@ const RectangleCalc = () => {
               optional
               type="text"
               id="intervals"
-              value={data.third}
-              name="second"
+              value={data.argument_5}
+              name="argument_5"
               onChange={handleInput}
               className="w-full p-4 border-2  text-black border-primary rounded-xl mb-10 text-xl"
               />
@@ -148,7 +160,7 @@ const RectangleCalc = () => {
         <div className=" w-1/2 mt-12 mr-20 flex flex-col text-white">
           <p className="mt-24 ml-10 font-normal text-2xl flex">Based on Midpoint Rule's:<Newton className="ml-10 -mt-5"/></p>
           <div className="flex mt-10 pl-10 pt-10 h-full w-full flex-row font-normal text-2xl tracking-wide">
-          <p>The answer for {!data.equation? "f(x)": ("f(x) = " + data.equation)} is: </p><div className="ml-3 pt-4 pb-14 border-2 font-normal rounded-xl text-3xl -mt-5 px-3 border-double border-green-600 h-10 bg-white text-black">{answer !=="" ? answer:"_____________" }</div>
+          <p>The answer for {!data.argument_1? "f(x)": ("f(x) = " + data.argument_2)} is: </p><div className="ml-3 pt-4 pb-14 border-2 font-normal rounded-xl text-3xl -mt-5 px-3 border-double border-green-600 h-10 bg-white text-black">{answer !=="" ? answer:"_____________" }</div>
           </div>
         </div>
       </div>
