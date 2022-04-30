@@ -1,4 +1,3 @@
-import re
 from re import search, findall
 from math import factorial
 from numpy import linspace, random, var
@@ -41,10 +40,10 @@ def newton_method(function: str, variable: str, number_of_iterations: int) -> st
         variable = Symbol(variable)
         f = lambdify(variable, function) #lambdify expression of the input function
         f_d = lambdify(variable, diff(function, variable))  #lambdify expression of the derivative of the input function
-        interval = re.findall('Interval.*?\(.*?\)',  str(calculus.util.continuous_domain(function, variable, S.Reals))) #checking the domain
+        interval = findall('Interval.*?\(.*?\)',  str(calculus.util.continuous_domain(function, variable, S.Reals))) #checking the domain
         if interval: 
             interval = interval[0]
-            interval = re.findall('\(.*?\)', interval)[0][1:-1].split(',')
+            interval = findall('\(.*?\)', interval)[0][1:-1].split(',')
             if interval[0] == '-oo':
                 x_i = int(interval[1]) - 1
             elif interval[1] == 'oo':
@@ -78,7 +77,7 @@ def indefinite_integration_calculator(function: str, variable: str) -> str:
     
     variable = Symbol(variable)
     function = parse_func(function)
-    ans = lambdify(variable, integrate(sympify(function)))
+    ans = integrate(function, variable)
 
     return output_func(ans)
 
