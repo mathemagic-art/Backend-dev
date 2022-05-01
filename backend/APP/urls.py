@@ -3,13 +3,13 @@ from .views import *
 
 
 urlpatterns = [    
-    path('differentiation/', diff_list),                          #Abbosjon  
-    path('taylor-series/', taylor_list),                          #Elnazar   
-    path('newtons-method/', newton_list),                         #Abbosjon  
-    path('simpsons-method/', simpson_list),                       #Elnazar   
-    path('trapezoid-method/', trapezoid_list),                    #Ilkhom    
-    path('rectangle-method/', rectangle_list),                    #Eldar      
-    path('definite-integral/', definite_integral_list),           #Ilkhom    
-    path('limit-calculator/', limit_list),                        #Eldar     
-    path('indefinite-integral/', indefinite_integral_list),       #Aizada    
+    path('differentiation/', differentiation_api),               # Abbosjon  
+    path('taylor-series/', taylors_method_api),                  # Elnazar   
+    path('newtons-method/', newtons_method_api),                 # Abbosjon  
+    path('simpsons-method/', simpsons_method_api),               # Elnazar   
+    path('trapezoid-method/', trapezoid_method_api),             # Ilkhom    
+    path('rectangle-method/', rectangle_method_api),             # Eldar      
+    path('definite-integral/', definite_integral_api),           # Ilkhom         
+    path('indefinite-integral/', indefinite_integral_api),       # Aizada    
+    path('limit-calculator/', limit_api),                        # Eldar
 ]

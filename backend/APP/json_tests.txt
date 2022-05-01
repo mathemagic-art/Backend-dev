@@ -2,15 +2,16 @@
 link to access the DERIVATIVE page locally: http://127.0.0.1:8000/differentiation/
 TEST:
 
-INPUT: 
+INPUT:
+
 {
     "argument_1": "sin(x)", 
     "argument_2": "x", 
     "argument_3": 1
 }
 
-
 OUTPUT: "cos(x)"
+Comment: -
 
 
 -----------------------------------------------------------------------------------------------------------------------------------
@@ -28,9 +29,8 @@ INPUT:
     "argument_4": 0
 }
 
-
 OUTPUT: "-x**15/1307674368000 + x**13/6227020800 - x**11/39916800 + x**9/362880 - x**7/5040 + x**5/120 - x**3/6 + x"
-
+Comment: -
 
 
 --------------------------------------------------------------------------------------------------------------------------------------------
@@ -40,32 +40,34 @@ OUTPUT: "-x**15/1307674368000 + x**13/6227020800 - x**11/39916800 + x**9/362880 
 link to access the NEWTON METHOD page locally: http://127.0.0.1:8000/newtons-method/
 TEST:
 
-INPUT: 
+INPUT:
+
 {
     "argument_1": "x**2", 
     "argument_2": "x", 
-    "argument_3": 1
+    "argument_3": 2
 }
 
-
-OUTPUT: "0.5000"
-
+OUTPUT: "2.2500"
+Comment: -
 
 ----------------------------------------------------------------
                                                 Performing test for the SIMPSON METHOD calculator
-link to access the SIMPSON METHOD page locally: http://127.0.0.1:8000/differentiation/
+link to access the SIMPSON METHOD page locally: http://127.0.0.1:8000/simpsons-method/
 TEST:
 
 INPUT: 
+
 {
-    "argument_1": "sin(x)", 
-    "argument_2": 0, 
-    "argument_3": 3.14159265358979323846 
+    "argument_1": "x**2", 
+    "argument_2": "x", 
+    "argument_3": 0,
+    "argument_4": 1
+
 }
 
-
-OUTPUT: "2.00000"
-
+OUTPUT: -
+Comment: Returns an error in line 114 mathematics.py
 
 
 -----------------------------------------------------------------------
@@ -77,14 +79,17 @@ TEST:
 INPUT:
 
 {
-    "argument_1": "sin(x)", 
-    "argument_2": 0, 
-    "argument_3": 2,
-    "argument_4": 46
+    "argument_1": "x**3", 
+    "argument_2": "x", 
+    "argument_3": 0, 
+    "argument_4": 2,
+    "argument_5": 4
 }
 
 
-OUTPUT: "1.41592"
+
+OUTPUT: "4.25000"
+Comment: -
 
 ---------------------------------------------------------------------------------------------------------
                                                Performing test for the RECTANGLE METHOD calculator
@@ -94,15 +99,15 @@ TEST:
 INPUT:
 
 {
-    "argument_1": "sin(x)", 
-    "argument_2": 0, 
-    "argument_3": 2,
-    "argument_4": 46
+    "argument_1": "x**2", 
+    "argument_2": "x", 
+    "argument_3": 0, 
+    "argument_4": 2,
+    "argument_5": 4
 }
 
-
-OUTPUT: "1.39616"
-
+OUTPUT: "1.75000"
+Comment: -
 
 ---------------------------------------------------------------------------------------------------
 
@@ -111,37 +116,20 @@ link to access the  DEFINITE INTEGRAL page locally: http://127.0.0.1:8000/defini
 TEST:
 
 INPUT: 
+
 {
     "argument_1": "sin(x)", 
-    "argument_2": 1, 
-    "argument_3": 3
+    "argument_2": "x",
+    "argument_3": 0, 
+    "argument_4": 3.14159265358979323846
 }
 
 
-OUTPUT: "1.53029"
-
+OUTPUT: "2.0000"
+Comment: -
 
 
 -----------------------------------------------------------------------------------------------------
-
-                                               Performing test for the LIMIT CALCULATOR calculator
-link to access the LIMIT CALCULATOR page locally: http://127.0.0.1:8000/limit-calculator/
-TEST:
-
-INPUT:
-
-{
-    "argument_1": "1/x", 
-    "argument_2": "x", 
-    "argument_3": "-",
-    "argument_4": 0
-}
-
-
-OUTPUT: "1.39616"
-
----------------------------------------------------------------------------------------------------
-
                                               Performing test for the INDEFINITE INTEGRAL calculator
 link to access the INDEFINITE INTEGRAL page locally: http://127.0.0.1:8000/indefinite-integral/
 TEST:
@@ -149,12 +137,32 @@ TEST:
 INPUT:
 
 {
-    "argument_1": "sin(x)", 
+    "argument_1": "x**2", 
     "argument_2": "x"
 }
 
 
-OUTPUT: -
+OUTPUT: "x**3/3"
+Comment: -
 
+--------------------------------------------------------------------------------------------
+                                               Performing test for the LIMIT CALCULATOR calculator
+link to access the LIMIT CALCULATOR page locally: http://127.0.0.1:8000/limit-calculator/
+TEST:
+
+INPUT:
+
+{
+    "argument_1": "1/x**2", 
+    "argument_2": "x", 
+    "argument_3": "-",
+    "argument_4": 0
+}
+
+
+OUTPUT: "oo"
+Comment: -
+
+---------------------------------------------------------------------------------------------------
 
 
