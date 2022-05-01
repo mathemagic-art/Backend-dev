@@ -1,8 +1,9 @@
 from re import search, findall
 from math import factorial
 from numpy import linspace, random, var
-from sympy import Symbol, sympify, lambdify, diff, Float, limit, integrate, calculus, S
+from sympy import Symbol, parse_expr, sympify, lambdify, diff, Float, limit, integrate, calculus, S
 from scipy import integrate as scipy_integrate
+from latex2sympy2 import latex2sympy
 import warnings
 warnings.filterwarnings("error")
 warnings.filterwarnings("ignore", category=UserWarning)
@@ -11,8 +12,23 @@ x = Symbol('x')
 ########################################################################################################################
 # parsing and output functions 
  
-def parse_func(function: str):
+def latex_to_sympy(function:str):
+    function = function.replace('\frac', '\\frac')
+    function = function.replace('\tan', '\\tan')
+    function = function.replace('\arcsin', '\\arcsin')
+    function = function.replace('\arccos', '\\arccos')
+    function = function.replace('\arctan', '\\arctan')
+    function = function.replace('\arccot', '\\arccot')
+    function = str(latex2sympy(function))
+    while search('exp\((.*?)\)', function) != None:
+        expression = search('exp\((.*?)\)', function).string
+        ind_of_ln_expr = list(search('exp\((.*?)\)', function).span())
+        ins_exp = findall('exp\((.*?)\)', expression)[0]
+        function = function[:ind_of_ln_expr[0]] + "e**({})".format(ins_exp) + function[ind_of_ln_expr[1]:]
+    return function
 
+def parse_func(function: str) -> str: 
+    function = latex_to_sympy(function) 
     return sympify(function.replace('e', 'E'), convert_xor=True)
 
 def output_func(function: str) -> str:
@@ -42,7 +58,6 @@ def differentiating_calculator(function: str, variable: str, degree: int) -> str
     function_prime = function.diff(variable, degree)  
     ans = output_func(function_prime)
     return ans
-
 ########################################################################################################################
 
 def taylor_series(function:str, variable: str, number_of_iterations: int, center: float) -> str:
