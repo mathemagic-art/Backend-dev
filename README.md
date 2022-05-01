@@ -1,8 +1,6 @@
-# django-rest-api
+# Django-Rest-API made for "Mathemagics.art"
 
-# Mathemagics Project
-
-A REST api written in Django for people with deadlines. API's are open source and anyone can use it for non-commercial needs. You can find detailed documentation at www.api-mathemagics.herokuapp.com 
+A REST api written in Django for people who struggles with Calculus but loves coding. API's are open source and anyone can use it for non-commercial needs. You can find detailed documentation at www.api-mathemagics.herokuapp.com 
 
 ## Technologies used
 * [Django](https://www.djangoproject.com/): The web framework for perfectionists with deadlines (Django builds better web apps with less code).
