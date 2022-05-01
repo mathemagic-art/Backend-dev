@@ -6,7 +6,7 @@ from .mathematics import *
 
 
 @api_view(['POST'])
-def diff_list(request):
+def differentiation_api(request):
 
     if request.method == 'POST':
 
@@ -27,7 +27,7 @@ def diff_list(request):
 
 
 @api_view(['POST'])
-def taylor_list(request):
+def taylors_method_api(request):
     
     if request.method == "POST":
 
@@ -49,7 +49,7 @@ def taylor_list(request):
 
 
 @api_view(['POST']) 
-def newton_list(request):
+def newtons_method_api(request):
 
     if request.method == 'POST':
 
@@ -70,19 +70,22 @@ def newton_list(request):
 
 
 @api_view(['POST'])
-def simpson_list(request):
+def simpsons_method_api(request):
     
     if request.method == "POST":
 
-        deserialized = String_String_String_(data=request.data)
+        deserialized = String_String_String_String_(data=request.data)
 
         if deserialized.is_valid():
 
             function = deserialized.data['argument_1']
-            initial_point = deserialized.data['argument_2']
-            end_point = deserialized.data['argument_3']
+            variable = deserialized.data['argument_2']
+            initial_point = deserialized.data['argument_3']
 
-            answer = simpsons_method(function, initial_point, end_point)
+
+            end_point = deserialized.data['argument_4']
+
+            answer = simpsons_method(function,variable, initial_point, end_point)
             return Response(answer, status=status.HTTP_201_CREATED)
         
         else: 
@@ -90,20 +93,27 @@ def simpson_list(request):
 
 
 @api_view(['POST',])
-def trapezoid_list(request):
+def trapezoid_method_api(request):
 
     if request.method == 'POST':
 
-        deserialized = String_String_String_String_(data=request.data)
+
+        deserialized = String_String_String_String_String_(data=request.data)
+
+
+
 
         if deserialized.is_valid():
 
             function = deserialized.data['argument_1']
-            initial_point = deserialized.data['argument_2']
-            end_point = deserialized.data['argument_3']
-            number_interval = deserialized.data['argument_4']
+            variable = deserialized.data['argument_2']
+            initial_point = deserialized.data['argument_3']
+            end_point = deserialized.data['argument_4']
 
-            answer = trapezoid_method(function, initial_point, end_point, number_interval)
+            number_of_intervals = deserialized.data['argument_5']
+
+            answer = trapezoid_method(function, variable, initial_point, end_point, number_of_intervals)
+
             return Response(answer, status=status.HTTP_201_CREATED)
         else:
             return Response(deserialized.error_messages)
@@ -111,30 +121,35 @@ def trapezoid_list(request):
 
 
 @api_view(['POST',])
-def rectangle_list(request):
+def rectangle_method_api(request):
 
     if request.method == 'POST':
-        deserialized = String_String_String_String_(data=request.data)
+
+        deserialized = String_String_String_String_String_(data=request.data)
+
         
         if deserialized.is_valid():
 
             function = deserialized.data['argument_1']
-            initial_point = deserialized.data['argument_2']
-            end_point = deserialized.data['argument_3']
-            number_interval = deserialized.data['argument_4']
+            variable = deserialized.data['argument_2']
+            initial_point = deserialized.data['argument_3']
+            end_point = deserialized.data['argument_4']
 
-            answer = rectangle_method(function, initial_point, end_point, number_interval)
+            number_of_intervals = deserialized.data['argument_5']
+
+            answer = rectangle_method(function, variable, initial_point, end_point, number_of_intervals)
+
             return Response(answer, status=status.HTTP_201_CREATED)
         else:
             return Response(deserialized.error_messages)
 
 
 @api_view(['POST'])
-def definite_integral_list(request):
+def definite_integral_api(request):
     
     if request.method == "POST":
         deserialized = String_String_String_String_(data=request.data)
-
+    
         if deserialized.is_valid():
 
             function = deserialized.data['argument_1']
@@ -145,14 +160,14 @@ def definite_integral_list(request):
             answer = definite_integration_calculator(function, variable, initial_point, end_point)
             return Response(answer, status=status.HTTP_201_CREATED)
         
-        else: 
+        else:
+            
             return Response(deserialized.errors)
 
             
 @api_view(['POST'])
-def indefinite_integral_list(request):
+def indefinite_integral_api(request):
 
-    if request.method == 'POST':
 
         deserialized = String_String_(data=request.data)
         
@@ -170,7 +185,7 @@ def indefinite_integral_list(request):
 
 
 @api_view(['POST'])
-def limit_list(request):
+def limit_api(request):
     
     if request.method == "POST":
         deserialized = String_String_String_String_(data=request.data)
