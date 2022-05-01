@@ -113,8 +113,9 @@ TEST:
 INPUT: 
 {
     "argument_1": "sin(x)", 
-    "argument_2": 1, 
-    "argument_3": 3
+    "argument_2": "x"
+    "argument_3": 0, 
+    "argument_3": 3.14159265358979323846
 }
 
 
