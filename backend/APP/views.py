@@ -74,15 +74,16 @@ def simpson_list(request):
     
     if request.method == "POST":
 
-        deserialized = String_String_String_(data=request.data)
+        deserialized = String_String_String_String_(data=request.data)
 
         if deserialized.is_valid():
 
             function = deserialized.data['argument_1']
-            initial_point = deserialized.data['argument_2']
-            end_point = deserialized.data['argument_3']
+            variable = deserialized.data['argument_2']
+            initial_point = deserialized.data['argument_3']
+            end_point = deserialized.data['argument_4']
 
-            answer = simpsons_method(function, initial_point, end_point)
+            answer = simpsons_method(function,variable, initial_point, end_point)
             return Response(answer, status=status.HTTP_201_CREATED)
         
         else: 
@@ -94,16 +95,17 @@ def trapezoid_list(request):
 
     if request.method == 'POST':
 
-        deserialized = String_String_String_String_(data=request.data)
+        deserialized = String_String_String_String_String(data=request.data)
 
         if deserialized.is_valid():
 
             function = deserialized.data['argument_1']
-            initial_point = deserialized.data['argument_2']
-            end_point = deserialized.data['argument_3']
-            number_interval = deserialized.data['argument_4']
+            variable = deserialized.data['argument_2']
+            initial_point = deserialized.data['argument_3']
+            end_point = deserialized.data['argument_4']
+            number_interval = deserialized.data['argument_5']
 
-            answer = trapezoid_method(function, initial_point, end_point, number_interval)
+            answer = trapezoid_method(function, variable, initial_point, end_point, number_interval)
             return Response(answer, status=status.HTTP_201_CREATED)
         else:
             return Response(deserialized.error_messages)
