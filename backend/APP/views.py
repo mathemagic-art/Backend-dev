@@ -95,7 +95,7 @@ def trapezoid_method_api(request):
 
     if request.method == 'POST':
 
-        deserialized = String_String_String_String_String(data=request.data)
+        deserialized = String_String_String_String_String_(data=request.data)
 
         if deserialized.is_valid():
 
@@ -116,7 +116,7 @@ def trapezoid_method_api(request):
 def rectangle_method_api(request):
 
     if request.method == 'POST':
-        deserialized = String_String_String_String_String(data=request.data)
+        deserialized = String_String_String_String_String_(data=request.data)
         
         if deserialized.is_valid():
 
