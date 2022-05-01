@@ -28,7 +28,7 @@ def latex_to_sympy(function:str):
     return function
 
 def parse_func(function: str) -> str: 
-    function = latex_to_sympy(function) 
+#    function = latex_to_sympy(function) 
     return sympify(function.replace('e', 'E'), convert_xor=True)
 
 def output_func(function: str) -> str:
@@ -114,29 +114,6 @@ def newton_method(function: str, variable: str, number_of_iterations: int) -> st
         return ret
     except RuntimeWarning:
         return "Something went wrong. Please check the criteria."
-<<<<<<< HEAD
-########################################################################################################################
-
-def differentiating_calculator(function: str, variable: str, degree: int) -> str:
-    
-    degree = int(degree)
-
-    function = parse_func(function)
-    variable = Symbol(variable)
-    function_prime = function.diff(variable, degree)  
-    ans = output_func(function_prime)
-    return ans
-########################################################################################################################
-
-def indefinite_integration_calculator(function: str, variable: str) -> str:
-    
-    variable = Symbol(variable)
-    function = parse_func(function)
-    ans = integrate(function, variable)
-
-    return output_func(ans)
-=======
->>>>>>> master
 
 ########################################################################################################################
 
@@ -172,7 +149,7 @@ def simpsons_method(function: str, variable: str, initial_point: float, end_poin
         pol_func = find_polynomial(x_1, x_2, x_3, function(x_1), function(x_2), function(x_3))
         Area += scipy_integrate.quad(pol_func ,x_1, x_3)[0]
         
-    return "{:.5f}".format(Area)
+    return str(Float(Area).round(5))
 
 ########################################################################################################################
 
@@ -190,7 +167,7 @@ def trapezoid_method(function: str, variable: str, initial_point: float, end_poi
     for i in range(1, number_of_intervals):
         A = A + function(initial_point + i*dx)
     Area = dx * A
-    return "{:.5f}".format(Area)
+    return str(Float(Area).round(5))
 
 ########################################################################################################################
 
@@ -212,7 +189,7 @@ def rectangle_method(function:str, variable: str, initial_point: float, end_poin
 
     area = dx*total
 
-    return "{:.5f}".format(area)
+    return str(Float(area).round(5))
 
 ########################################################################################################################
 
@@ -224,7 +201,7 @@ def definite_integration_calculator(function: str, variable: str, initial_point:
 
     function = parse_func(function)
     a = lambdify(variable, integrate(sympify(function), variable)) 
-    return output_func("{:.5f}".format(a(end_point)-a(initial_point)))
+    return str(Float(a(end_point)-a(initial_point)).round(5))
 
 ########################################################################################################################
 
@@ -251,12 +228,12 @@ def limit_calculator(function: str, variable : str, sign: str, approach: str) ->
         if 'oo' in ans:
             return ans
         else:
-            return '{:.5f}'.format(float(ans))
+            return str(Float(ans).round(5))
     else:
         ans = str(sympify(limit(function, variable, approach)).evalf())
         if 'oo' in ans:
             return ans
         else:
-            return '{:.5f}'.format(float(ans))
+            return str(Float(ans).round(5))
             
 ########################################################################################################################
