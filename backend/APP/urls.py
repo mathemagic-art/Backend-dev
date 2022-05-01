@@ -12,4 +12,5 @@ urlpatterns = [
     path('definite-integral/', definite_integral_api),           # Ilkhom         
     path('indefinite-integral/', indefinite_integral_api),       # Aizada    
     path('limit-calculator/', limit_api),                        # Eldar
+    path('universal_integral/', universal_integral_api),         # Jasurbek
 ]

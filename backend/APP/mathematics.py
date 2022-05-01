@@ -222,3 +222,17 @@ def limit_calculator(function: str, variable : str, sign: str, approach: str) ->
             return '{:.5f}'.format(float(ans))
             
 ########################################################################################################################
+
+def universal_integral(type: str, function: str, variable: str, initial_point: float, end_point: float):
+    if type == "type2":
+        variable = Symbol(variable)
+        initial_point = float(initial_point)
+        end_point = float(end_point)
+        function = parse_func(function)
+        a = lambdify(variable, integrate(sympify(function), variable)) 
+        return output_func("{:.5f}".format(a(end_point)-a(initial_point)))
+    else:
+        variable = Symbol(variable)
+        function = parse_func(function)
+        ans = integrate(function, variable)
+        return output_func(ans)
