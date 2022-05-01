@@ -6,7 +6,7 @@ from .mathematics import *
 
 
 @api_view(['POST'])
-def diff_list(request):
+def differentiation_api(request):
 
     if request.method == 'POST':
 
@@ -27,7 +27,7 @@ def diff_list(request):
 
 
 @api_view(['POST'])
-def taylor_list(request):
+def taylors_method_api(request):
     
     if request.method == "POST":
 
@@ -49,7 +49,7 @@ def taylor_list(request):
 
 
 @api_view(['POST']) 
-def newton_list(request):
+def newtons_method_api(request):
 
     if request.method == 'POST':
 
@@ -70,7 +70,7 @@ def newton_list(request):
 
 
 @api_view(['POST'])
-def simpson_list(request):
+def simpsons_method_api(request):
     
     if request.method == "POST":
 
@@ -91,7 +91,7 @@ def simpson_list(request):
 
 
 @api_view(['POST',])
-def trapezoid_list(request):
+def trapezoid_method_api(request):
 
     if request.method == 'POST':
 
@@ -113,7 +113,7 @@ def trapezoid_list(request):
 
 
 @api_view(['POST',])
-def rectangle_list(request):
+def rectangle_method_api(request):
 
     if request.method == 'POST':
         deserialized = String_String_String_String_String(data=request.data)
@@ -133,7 +133,7 @@ def rectangle_list(request):
 
 
 @api_view(['POST'])
-def definite_integral_list(request):
+def definite_integral_api(request):
     
     if request.method == "POST":
         deserialized = String_String_String_String_(data=request.data)
@@ -154,7 +154,7 @@ def definite_integral_list(request):
 
             
 @api_view(['POST'])
-def indefinite_integral_list(request):
+def indefinite_integral_api(request):
 
 
         deserialized = String_String_(data=request.data)
@@ -173,7 +173,7 @@ def indefinite_integral_list(request):
 
 
 @api_view(['POST'])
-def limit_list(request):
+def limit_api(request):
     
     if request.method == "POST":
         deserialized = String_String_String_String_(data=request.data)
