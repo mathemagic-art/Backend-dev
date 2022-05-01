@@ -114,6 +114,29 @@ def newton_method(function: str, variable: str, number_of_iterations: int) -> st
         return ret
     except RuntimeWarning:
         return "Something went wrong. Please check the criteria."
+<<<<<<< HEAD
+########################################################################################################################
+
+def differentiating_calculator(function: str, variable: str, degree: int) -> str:
+    
+    degree = int(degree)
+
+    function = parse_func(function)
+    variable = Symbol(variable)
+    function_prime = function.diff(variable, degree)  
+    ans = output_func(function_prime)
+    return ans
+########################################################################################################################
+
+def indefinite_integration_calculator(function: str, variable: str) -> str:
+    
+    variable = Symbol(variable)
+    function = parse_func(function)
+    ans = integrate(function, variable)
+
+    return output_func(ans)
+=======
+>>>>>>> master
 
 ########################################################################################################################
 
