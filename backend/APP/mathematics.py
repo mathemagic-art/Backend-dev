@@ -113,7 +113,7 @@ def simpsons_method(function: str, variable: str, initial_point: float, end_poin
      
         a = (x1*(y3-y2) + x2*(y1-y3) + x3*(y2-y1))/((x1-x2)*(x1-x3)*(x2-x3))
         b = ((y2-y1)/(x2-x1)) - a*(x1+x2) 
-        c = y1 - a*x1**2 - b*x1
+        c = (y1 - a*x1**2 - b*x1)
      
         return lambdify(x, sympify('{}*x**2 + {}*x + {}'.format(a, b, c)))
     
