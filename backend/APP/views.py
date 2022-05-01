@@ -146,6 +146,7 @@ def definite_integral_api(request):
             end_point = deserialized.data['argument_4']
             
             answer = definite_integration_calculator(function, variable, initial_point, end_point)
+
             return Response(answer, status=status.HTTP_201_CREATED)
         
         else:
@@ -179,7 +180,6 @@ def limit_api(request):
         deserialized = String_String_String_String_(data=request.data)
 
         if deserialized.is_valid():
-
             function = deserialized.data['argument_1']
             variable = deserialized.data['argument_2']
             sign = deserialized.data['argument_3']
@@ -192,8 +192,7 @@ def limit_api(request):
             return Response(deserialized.errors)
 
 @api_view(['POST'])
-def universal_integral_api(request):
-    
+def universal_integral_api(request):   
     if request.method == "POST":
         deserialized = String_String_String_String_String_(data=request.data)
     

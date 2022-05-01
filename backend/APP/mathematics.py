@@ -8,8 +8,6 @@ warnings.filterwarnings("error")
 warnings.filterwarnings("ignore", category=UserWarning)
 x = Symbol('x')
 
-########################################################################################################################
-# parsing and output functions 
  
 def parse_func(function: str):
 
@@ -188,7 +186,6 @@ def definite_integration_calculator(function: str, variable: str, initial_point:
     a = lambdify(variable, integrate(sympify(function), variable)) 
     return output_func("{:.5f}".format(a(end_point)-a(initial_point)))
 
-########################################################################################################################
 
 
 def indefinite_integration_calculator(function: str, variable: str) -> str:
@@ -199,7 +196,7 @@ def indefinite_integration_calculator(function: str, variable: str) -> str:
 
     return output_func(ans)
 
-########################################################################################################################
+
 
 
 def limit_calculator(function: str, variable : str, sign: str, approach: str) -> str:
@@ -236,3 +233,5 @@ def universal_integral(type: str, function: str, variable: str, initial_point: f
         function = parse_func(function)
         ans = integrate(function, variable)
         return output_func(ans)
+
+
