@@ -1,10 +1,14 @@
-from rest_framework import status
+from django import views
+from rest_framework import status, generics, views
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .serializers import *
 from .mathematics import *
 
 from rest_framework.generics import GenericAPIView
+from drf_yasg.utils import swagger_auto_schema
+from drf_yasg import openapi
+
 
 @api_view(['POST'])
 def diff_list(request):
@@ -148,25 +152,35 @@ def indefinite_integral_list(request):
         else:
             
             return Response(deserialized.errors)
-    
-
-@api_view(['POST'])
-def definite_integral_list(request):
-    
-    if request.method == "POST":
-        deserialized = String_String_String_(data=request.data)
-
-        if deserialized.is_valid():
-
-            function = deserialized.data['argument_1']
-            lower_bound = deserialized.data['argument_2']
-            upper_bound = deserialized.data['argument_3']
-            
-            answer = definite_integration_calculator(function, lower_bound, upper_bound)
-            return Response(answer, status=status.HTTP_201_CREATED)
         
-        else: 
-            return Response(deserialized.errors)
+
+class Integral(views.APIView):
+    # serializer_class = email
+    global definite_integral_list
+    
+    # token_param_config = openapi.Parameter('token', in_=openapi.IN_QUERY, description='Description', type=openapi.TYPE_STRING )
+    
+    # @swagger_auto_schema(manual_parameters=[token_param_config])
+    
+    
+    @api_view(['POST'])
+    def definite_integral_list(request):
+        
+        
+        if request.method == "POST":
+            deserialized = String_String_String_(data=request.data)
+
+            if deserialized.is_valid():
+
+                function = deserialized.data['argument_1']
+                lower_bound = deserialized.data['argument_2']
+                upper_bound = deserialized.data['argument_3']
+                
+                answer = definite_integration_calculator(function, lower_bound, upper_bound)
+                return Response(answer, status=status.HTTP_201_CREATED)
+            
+            else: 
+                return Response(deserialized.errors)
 
 
 @api_view(['POST'])
