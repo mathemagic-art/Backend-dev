@@ -124,33 +124,33 @@ def simpsons_method(function: str, variable: str, initial_point: float, end_poin
     initial_point = float(initial_point)
     end_point = float(end_point)
 
-    # def find_polynomial(x1, x2, x3, y1, y2, y3):
+    def find_polynomial(x1, x2, x3, y1, y2, y3):
      
-    #     a = (x1*(y3-y2) + x2*(y1-y3) + x3*(y2-y1))/((x1-x2)*(x1-x3)*(x2-x3))
-    #     b = ((y2-y1)/(x2-x1)) - a*(x1+x2) 
-    #     c = (y1 - a*x1**2 - b*x1)
+        a = (x1*(y3-y2) + x2*(y1-y3) + x3*(y2-y1))/((x1-x2)*(x1-x3)*(x2-x3))
+        b = ((y2-y1)/(x2-x1)) - a*(x1+x2) 
+        c = (y1 - a*x1**2 - b*x1)
      
-    #     return lambdify(x, sympify('{}*x**2 + {}*x + {}'.format(a, b, c)))
+        return lambdify(x, sympify('{}*x**2 + {}*x + {}'.format(a, b, c)))
     
-    # n = random.randint(5, 50)
-    # function = parse_func(function)
-    # function = lambdify(x, function)
+    n = random.randint(5, 50)
+    function = parse_func(function)
+    function = lambdify(x, function)
     
-    # if n % 2 != 0:
-    #     n += 1
+    if n % 2 != 0:
+        n += 1
     
-    # x_values = linspace(initial_point, end_point, n+1)
-    # dx = (end_point-initial_point)/n
-    # Area = 0
+    x_values = linspace(initial_point, end_point, n+1)
+    dx = (end_point-initial_point)/n
+    Area = 0
     
-    # for i in range(0, len(x_values)-2, 2):
+    for i in range(0, len(x_values)-2, 2):
         
-    #     x_1, x_2, x_3 = x_values[i], x_values[i+1], x_values[i+2] 
-    #     pol_func = find_polynomial(x_1, x_2, x_3, function(x_1), function(x_2), function(x_3))
-    #     Area += scipy_integrate.quad(pol_func ,x_1, x_3)[0]
-    Area = 3.0000
+        x_1, x_2, x_3 = x_values[i], x_values[i+1], x_values[i+2] 
+        pol_func = find_polynomial(x_1, x_2, x_3, function(x_1), function(x_2), function(x_3))
+        Area += scipy_integrate.quad(pol_func ,x_1, x_3)[0]
+        
     return str(Float(Area).round(4)) if '.0000' not in str(Float(Area).round(4)) else str(Float(Area).round(4))[:str(Float(Area).round(4)).index('.')]
-print(simpsons_method('x**2','x', 4, 6))
+
 ########################################################################################################################
 
 
@@ -167,7 +167,7 @@ def trapezoid_method(function: str, variable: str, initial_point: float, end_poi
     for i in range(1, number_of_intervals):
         A = A + function(initial_point + i*dx)
     Area = dx * A
-    return str(Float(Area).round(5))
+    return str(Float(Area).round(4)) if '.0000' not in str(Float(Area).round(4)) else str(Float(Area).round(4))[:str(Float(Area).round(4)).index('.')]
 
 ########################################################################################################################
 
@@ -189,7 +189,7 @@ def rectangle_method(function:str, variable: str, initial_point: float, end_poin
 
     area = dx*total
 
-    return str(Float(area).round(5))
+    return str(Float(area).round(4)) if '.0000' not in str(Float(area).round(4)) else str(Float(area).round(4))[:str(Float(area).round(4)).index('.')]
 
 ########################################################################################################################
 
@@ -228,12 +228,12 @@ def limit_calculator(function: str, variable : str, sign: str, approach: str) ->
         if 'oo' in ans:
             return ans
         else:
-            return str(Float(ans).round(5))
+            return str(Float(ans).round(4)) if '.0000' not in str(Float(ans).round(4)) else str(Float(ans).round(4))[:str(Float(ans).round(4)).index('.')]
     else:
         ans = str(sympify(limit(function, variable, approach)).evalf())
         if 'oo' in ans:
             return ans
         else:
-            return str(Float(ans).round(5))
+            return str(Float(ans).round(4)) if '.0000' not in str(Float(ans).round(4)) else str(Float(ans).round(4))[:str(Float(ans).round(4)).index('.')]
             
 ########################################################################################################################
