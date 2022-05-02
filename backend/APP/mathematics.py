@@ -222,18 +222,13 @@ def limit_calculator(function: str, variable : str, sign: str, approach: str) ->
     variable = Symbol(variable)
     function = parse_func(function)
     
-    if len(sign) == 1:        
-
-        ans = str(sympify(limit(function, variable, approach, sign)).evalf())
-        if 'oo' in ans:
-            return ans
-        else:
-            return str(Float(ans).round(4)) if '.0000' not in str(Float(ans).round(4)) else str(Float(ans).round(4))[:str(Float(ans).round(4)).index('.')]
+    if sign == '+' or sign == '-':        
+        ans = str(sympify(limit(function, variable, approach, sign)).evalf())    
     else:
         ans = str(sympify(limit(function, variable, approach)).evalf())
-        if 'oo' in ans:
-            return ans
-        else:
-            return str(Float(ans).round(4)) if '.0000' not in str(Float(ans).round(4)) else str(Float(ans).round(4))[:str(Float(ans).round(4)).index('.')]
+    if 'oo' in ans:
+        return ans
+    else:
+        return str(Float(ans).round(4)) if '.0000' not in str(Float(ans).round(4)) else str(Float(ans).round(4))[:str(Float(ans).round(4)).index('.')]
             
 ########################################################################################################################
