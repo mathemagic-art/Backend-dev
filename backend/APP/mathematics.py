@@ -149,7 +149,7 @@ def simpsons_method(function: str, variable: str, initial_point: float, end_poin
         pol_func = find_polynomial(x_1, x_2, x_3, function(x_1), function(x_2), function(x_3))
         Area += scipy_integrate.quad(pol_func ,x_1, x_3)[0]
         
-    return str(Float(Area).round(5))
+    return str(Float(Area).round(4)) if '.0000' not in str(Float(Area).round(4)) else str(Float(Area).round(4))[:str(Float(Area).round(4)).index('.')]
 
 ########################################################################################################################
 
@@ -167,7 +167,7 @@ def trapezoid_method(function: str, variable: str, initial_point: float, end_poi
     for i in range(1, number_of_intervals):
         A = A + function(initial_point + i*dx)
     Area = dx * A
-    return str(Float(Area).round(5))
+    return str(Float(Area).round(4)) if '.0000' not in str(Float(Area).round(4)) else str(Float(Area).round(4))[:str(Float(Area).round(4)).index('.')]
 
 ########################################################################################################################
 
@@ -189,7 +189,7 @@ def rectangle_method(function:str, variable: str, initial_point: float, end_poin
 
     area = dx*total
 
-    return str(Float(area).round(5))
+    return str(Float(area).round(4)) if '.0000' not in str(Float(area).round(4)) else str(Float(area).round(4))[:str(Float(area).round(4)).index('.')]
 
 ########################################################################################################################
 
@@ -222,18 +222,13 @@ def limit_calculator(function: str, variable : str, sign: str, approach: str) ->
     variable = Symbol(variable)
     function = parse_func(function)
     
-    if len(sign) == 1:        
-
-        ans = str(sympify(limit(function, variable, approach, sign)).evalf())
-        if 'oo' in ans:
-            return ans
-        else:
-            return str(Float(ans).round(5))
+    if sign == '+' or sign == '-':        
+        ans = str(sympify(limit(function, variable, approach, sign)).evalf())    
     else:
         ans = str(sympify(limit(function, variable, approach)).evalf())
-        if 'oo' in ans:
-            return ans
-        else:
-            return str(Float(ans).round(5))
+    if 'oo' in ans:
+        return ans
+    else:
+        return str(Float(ans).round(4)) if '.0000' not in str(Float(ans).round(4)) else str(Float(ans).round(4))[:str(Float(ans).round(4)).index('.')]
             
 ########################################################################################################################
