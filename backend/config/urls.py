@@ -31,7 +31,7 @@ urlpatterns = [
 
     path('openapi', get_schema_view(
         title="Mathemagics API",
-        description="""You can use JSON examples to test API requests.
+        description="""Use JSON examples to test API requests. Change inputs with the "string" line in the POST requests.  
 ---------------------------------------------------------------------------------------------------
 
                                                 JSON test example for the DERIVATIVE calculator
