@@ -82,7 +82,7 @@ def simpsons_method_api(request):
             variable = deserialized.data['argument_2']
             initial_point = deserialized.data['argument_3']
             end_point = deserialized.data['argument_4']
-
+            
             answer = simpsons_method(function,variable, initial_point, end_point)
             return Response(answer, status=status.HTTP_201_CREATED)
         
@@ -94,7 +94,6 @@ def simpsons_method_api(request):
 def trapezoid_method_api(request):
 
     if request.method == 'POST':
-
         deserialized = String_String_String_String_String_(data=request.data)
 
         if deserialized.is_valid():
@@ -104,8 +103,8 @@ def trapezoid_method_api(request):
             initial_point = deserialized.data['argument_3']
             end_point = deserialized.data['argument_4']
             number_interval = deserialized.data['argument_5']
-
             answer = trapezoid_method(function, variable, initial_point, end_point, number_interval)
+
             return Response(answer, status=status.HTTP_201_CREATED)
         else:
             return Response(deserialized.error_messages)
@@ -117,6 +116,7 @@ def rectangle_method_api(request):
 
     if request.method == 'POST':
         deserialized = String_String_String_String_String_(data=request.data)
+
         
         if deserialized.is_valid():
 
@@ -125,8 +125,8 @@ def rectangle_method_api(request):
             initial_point = deserialized.data['argument_3']
             end_point = deserialized.data['argument_4']
             number_interval = deserialized.data['argument_5']
-
             answer = rectangle_method(function, variable , initial_point, end_point, number_interval)
+            
             return Response(answer, status=status.HTTP_201_CREATED)
         else:
             return Response(deserialized.error_messages)
