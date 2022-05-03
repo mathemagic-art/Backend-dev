@@ -30,8 +30,162 @@ urlpatterns = [
     ), name='swagger-ui'),
 
     path('openapi', get_schema_view(
-        title="Your Project",
-        description="API for all things …",
+        title="Mathemagics API",
+        description="""You can use JSON examples to test API requests.
+---------------------------------------------------------------------------------------------------
+
+                                                JSON test example for the DERIVATIVE calculator
+
+
+INPUT:
+
+{
+    "argument_1": "sin(x)", 
+    "argument_2": "x", 
+    "argument_3": 1
+}
+
+OUTPUT: "cos(x)"
+
+
+-----------------------------------------------------------------------------------------------------------------------------------
+
+                                                JSON test example for the TAYLOR SERIES calculator
+
+INPUT:
+
+{
+    "argument_1": "sin(x)", 
+    "argument_2": "x", 
+    "argument_3": 16,
+    "argument_4": 0
+}
+
+OUTPUT: "-x**15/1307674368000 + x**13/6227020800 - x**11/39916800 + x**9/362880 - x**7/5040 + x**5/120 - x**3/6 + x"
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------
+
+
+                                                JSON test example for the NEWTON METHOD calculator
+
+
+INPUT:
+
+{
+    "argument_1": "x**2", 
+    "argument_2": "x", 
+    "argument_3": 2
+}
+
+OUTPUT: "2.2500"
+
+----------------------------------------------------------------
+                                                JSON test example for the SIMPSON METHOD calculator
+
+
+INPUT: 
+
+{
+    "argument_1": "x**2", 
+    "argument_2": "x", 
+    "argument_3": 0,
+    "argument_4": 1
+}
+
+OUTPUT: -
+
+
+-----------------------------------------------------------------------
+
+                                                JSON test example for the TRAPEZOID METHOD calculator
+
+
+INPUT:
+
+{
+    "argument_1": "x**3", 
+    "argument_2": "x", 
+    "argument_3": 0, 
+    "argument_4": 2,
+    "argument_5": 4
+}
+
+
+
+OUTPUT: "4.25000"
+
+---------------------------------------------------------------------------------------------------------
+                                               JSON test example for the RECTANGLE METHOD calculator
+
+
+INPUT:
+
+{
+    "argument_1": "x**2", 
+    "argument_2": "x", 
+    "argument_3": 0, 
+    "argument_4": 2,
+    "argument_5": 4
+}
+
+OUTPUT: "1.75000"
+
+---------------------------------------------------------------------------------------------------
+
+                                                JSON test example for the DEFINITE INTEGRAL calculator
+
+
+INPUT: 
+
+{
+    "argument_1": "sin(x)", 
+    "argument_2": "x",
+    "argument_3": 0, 
+    "argument_4": 3.14159265358979323846
+}
+
+
+OUTPUT: "2.0000"
+
+
+-----------------------------------------------------------------------------------------------------
+                                              JSON test example for the INDEFINITE INTEGRAL calculator
+
+
+
+INPUT:
+
+{
+    "argument_1": "x**2", 
+    "argument_2": "x"
+}
+
+
+OUTPUT: "x**3/3"
+
+--------------------------------------------------------------------------------------------
+                                               JSON test example for the LIMIT CALCULATOR calculator
+
+
+INPUT:
+
+{
+    "argument_1": "1/x**2", 
+    "argument_2": "x", 
+    "argument_3": "-",
+    "argument_4": 0
+}
+
+
+OUTPUT: "oo"
+
+
+---------------------------------------------------------------------------------------------------
+
+
+
+        """,
         version="1.0.0"
     ), name='openapi-schema'),
 ]
