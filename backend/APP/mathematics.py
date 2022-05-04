@@ -1,7 +1,7 @@
 from re import search, findall
 from math import factorial
 from numpy import linspace, random, var
-from sympy import Symbol, parse_expr, sympify, lambdify, diff, Float, limit, integrate, calculus, S
+from sympy import Symbol, latex, parse_expr, sympify, lambdify, diff, Float, limit, integrate, calculus, S
 from scipy import integrate as scipy_integrate
 from latex2sympy2 import latex2sympy
 import warnings
@@ -20,11 +20,11 @@ def latex_to_sympy(function:str):
     function = function.replace('\arctan', '\\arctan')
     function = function.replace('\arccot', '\\arccot')
     function = str(latex2sympy(function))
-    while search('exp\((.*?)\)', function) != None:
-        expression = search('exp\((.*?)\)', function).string
-        ind_of_ln_expr = list(search('exp\((.*?)\)', function).span())
-        ins_exp = findall('exp\((.*?)\)', expression)[0]
-        function = function[:ind_of_ln_expr[0]] + "e**({})".format(ins_exp) + function[ind_of_ln_expr[1]:]
+    # while search('exp\((.*?)\)', function) != None:
+    #     expression = search('exp\((.*?)\)', function).string
+    #     ind_of_ln_expr = list(search('exp\((.*?)\)', function).span())
+    #     ins_exp = findall('exp\((.*?)\)', expression)[0]
+    #     function = function[:ind_of_ln_expr[0]] + "e**({})".format(ins_exp) + function[ind_of_ln_expr[1]:]
     return function
 
 def parse_func(function: str) -> str: 
@@ -46,6 +46,82 @@ def output_func(function: str) -> str:
         function = function[:ind_of_ln_expr[0]] + "log({},{})".format(limit_base, limit_expr) + function[ind_of_ln_expr[1]:]
     return function
 
+# def parse_func2(function: str): 
+#     function = function.replace('\frac', '\\frac')
+#     function = function.replace('\tan', '\\tan')
+#     function = function.replace('\arcsin', '\\arcsin')
+#     function = function.replace('\arccos', '\\arccos')
+#     function = function.replace('\arctan', '\\arctan')
+#     function = function.replace('\arccot', '\\arccot')
+#     function = latex_to_sympy(function) 
+#     return function
+
+
+
+# def output_func2(function: str):
+#     function = latex(sympify(function))
+#     function = str(function).replace('log', 'ln')
+#     copy_func = function
+#     for i in ['\\', 'left', 'right', '(', ')', ' ']:
+#         copy_func = copy_func.replace(i, '')
+    
+#     while search('frac\{ln\{(.*?)\}\}\{ln\{(.*?)\}\}', copy_func) != None:
+#         expr = search('frac\{ln\{(.*?)\}\}\{ln\{(.*?)\}\}', copy_func).string
+#         ind_of_expr = list(search('frac\{ln\{(.*?)\}\}\{ln\{(.*?)\}\}', copy_func).span())
+        
+#         def get_key_ind(index, num, iter, expr):
+#             '''This function is for finding the boarder indexies of the expression '''
+#             ind = index + num
+#             key_ind = 0
+#             for i in range(iter):
+#                 n = 0
+#                 while True:
+#                     if expr[ind] == '{':
+#                         n += 1
+                
+#                     elif expr[ind] == '}':
+#                         n -= 1
+                        
+#                     if n == 0:
+#                         key_ind = ind
+#                         break
+#                     ind += 1
+#                 ind = key_ind + 1
+#             return key_ind
+#         key_ind = get_key_ind(ind_of_expr[0], 5, 2, function)
+
+#         def edit_inner_func(expr):
+#             result = expr
+#             expr_copy = expr
+#             changed_expr = expr
+#             for i in ['ln', 'sin', 'cos', 'tan', 'cot', 'arcsin', 'arccos', 'arctan', 'arccot']:
+#                 while i in expr_copy:
+#                     init_ind, end_ind = search('{}'.format(i)+'\{(.*?)\}', expr).span()
+#                     subexpr = '\\' + expr[init_ind:init_ind+len(i)+1] + '(' + expr[init_ind+len(i)+1: end_ind-1] + ')' + '}'
+#                     changed_expr = expr[:init_ind] + subexpr + expr[end_ind:]
+#                     expr_copy = expr[:init_ind] + expr[end_ind:] 
+#                 result = changed_expr
+#             return result
+
+#         init_ind = search('ln\{(.*?)\}', expr).span()[0]
+#         end_ind = get_key_ind(0, 7, 1, expr)
+#         limit_expr = expr[init_ind+2:end_ind+1]
+
+#         expr = expr[end_ind+1:]
+
+#         init_ind = search('ln\{(.*?)\}', expr).span()[0]
+#         end_ind = get_key_ind(init_ind, 2, 1, expr)
+#         limit_base = expr[init_ind+2:end_ind+1]
+#         print(1)
+#         function = function[:ind_of_expr[0]] + "\\log_{} ({})".format(edit_inner_func(limit_base), edit_inner_func(limit_expr)) + function[key_ind+1:] 
+#         copy_func = function
+#     return function
+
+
+
+
+
+# print(output_func2('log(x)/log(3)'))
 ########################################################################################################################
 
 
