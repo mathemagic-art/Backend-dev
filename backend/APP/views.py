@@ -3,7 +3,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .serializers import *
 from .calculators import *
-from .test_genearators import *
+# from .test_genearators import *
 
 
 @api_view(['POST'])
@@ -219,10 +219,10 @@ def generate_differentiation_api(request):
         
         if deserialized.is_valid():
 
-            function = deserialized.data['argument_1']
+            level = deserialized.data['argument_1']
             
 
-            answer = generateDifferentiation(function)
+            answer = generateDifferentiation(level)
             return Response(answer, status=status.HTTP_201_CREATED)
         
         else:

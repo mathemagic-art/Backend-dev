@@ -323,7 +323,7 @@ def universal_integral(type: str, function: str, variable: str, initial_point: f
 
 #########################################################################################################################
 
-def generateDifferentiation(level=2):
+def generateDifferentiation(level:str):
 
     # dependencies
     problem = ''
