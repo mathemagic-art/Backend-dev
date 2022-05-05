@@ -3,7 +3,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .serializers import *
 from .calculators import *
-# from .test_genearators import *
+from .test_genearators import *
 
 
 @api_view(['POST'])
@@ -212,7 +212,7 @@ def universal_integral_api(request):
 
 
 @api_view(['POST'])
-def generate_differentiation_api(request):
+def test_differentiation_api(request):
 
 
         deserialized = String_(data=request.data)
