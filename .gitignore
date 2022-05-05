@@ -2,7 +2,7 @@
 backend/**/__pycache__/
 backend/APP/migrations/
 backend/db.sqlite3
-
+backend/APP/temp*
 
 
 

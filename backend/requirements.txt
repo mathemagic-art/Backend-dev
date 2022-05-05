@@ -1,7 +1,9 @@
+antlr4-python3-runtime==4.7.2
 asgiref==3.5.0
 Django==3.2.13
 django-cors-headers==3.11.0
 djangorestframework==3.13.1
+latex2sympy2==1.7.6
 mpmath==1.2.1
 numpy==1.21.5
 pytz==2022.1
@@ -11,4 +13,4 @@ reparse==3.0
 scipy==1.8.0
 sqlparse==0.4.2
 sympy==1.10.1
-typing-extensions==4.1.1
+typing_extensions==4.1.1
