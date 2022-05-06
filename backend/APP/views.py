@@ -2,7 +2,8 @@ from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .serializers import *
-from .mathematics import *
+from .calculators import *
+from .test_genearators import *
 
 
 @api_view(['POST'])
@@ -172,7 +173,6 @@ def indefinite_integral_api(request):
             
             return Response(deserialized.errors)
 
-
 @api_view(['POST'])
 def limit_api(request):
     
@@ -209,3 +209,24 @@ def universal_integral_api(request):
         else:
             
             return Response(deserialized.errors)
+
+
+@api_view(['POST'])
+def test_differentiation_api(request):
+
+
+        deserialized = String_(data=request.data)
+        
+        if deserialized.is_valid():
+
+            level = deserialized.data['argument_1']
+            
+
+            answer = generateDifferentiation(level)
+            return Response(answer, status=status.HTTP_201_CREATED)
+        
+        else:
+            
+            return Response(deserialized.errors)
+
+
