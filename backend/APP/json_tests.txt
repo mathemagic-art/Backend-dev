@@ -168,10 +168,10 @@ Comment: -
 DIFF TEST GEN
 
 INPUT:
-
+# argument is level of the question;
 {
     "argument_1": "1"
 }
-OUTPUT;  "(5*x**2)*(4*x**2)" (random)
+OUTPUT:  "(5*x**2)*(4*x**2)" (each run gives random answer)
 
 ---------------------------------------------------------------------------
