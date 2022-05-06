@@ -1,4 +1,5 @@
-def generateDifferentiation(level=2):
+from random import choice, randint
+def generateDifferentiation(level:str):
 
     # dependencies
     problem = ''
@@ -26,15 +27,15 @@ def generateDifferentiation(level=2):
         return problem
 
     # logic
-    if level == 1:
+    if level == '1':
         problem += "({}){}({})".format(polynomial(),
                                        random_operator, polynomial())
 
-    if level == 2:
+    if level == '2':
         problem += "({}){}({})".format(trigonometric(),
                                        random_operator, trigonometric())
 
-    if level == 3:
+    if level == '3':
         coeff_1 = randint(2, 5)
         coeff_2 = randint(2, 5)
         power_1 = randint(2, 5)
