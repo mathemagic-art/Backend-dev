@@ -1,5 +1,6 @@
 from pydoc import apropos
 from random import choice, randint, choices
+from regex import E
 from scipy import rand
 from sympy import Symbol, sympify, Symbol, oo, Integer
 
@@ -44,8 +45,7 @@ def arcfunc(level=0):
     return problem
     return problem
 
-def expon(level=0):
-    base = choices(['1', '2', 'E', '3', '4'], weights=[1, 1, 3, 1, 1], k = 1)[0]
+def expon(level=0, base = choices(['1', '2', 'E', '3', '4'], weights=[1, 1, 3, 1, 1], k = 1)[0]):
     if level == 0:
         problem = '{}**(x)'.format(base)
     elif level == 1:
@@ -54,8 +54,7 @@ def expon(level=0):
         problem += '{}**({})'.format(base, polynomial())
     return problem
 
-def lg(level=0):
-    base = choices(['1', '2', 'E', '3', '4'], weights=[1, 1, 3, 1, 1], k = 1)[0]
+def lg(level=0, base = choices(['1', '2', 'E', '3', '4'], weights=[1, 1, 3, 1, 1], k = 1)[0]):
     if level == 0:
         problem = 'log(x, {})'.format(base)
     elif level == 1:
@@ -81,13 +80,14 @@ def generateDifferentiation(level='1'):
     if level == '3':
         problem += polynomial() + '+{}*'.format(randint(-5, 5)) + trigonometric(1) + '+{}*'.format(randint(-5, 5)) + expon(1) + '+{}*'.format(randint(-5, 5)) + lg(1)
     if level == '4':
-        problem += '(' + polynomial() + '+{}*'.format(randint(-5, 5)) + trigonometric(1) + '+{}*'.format(randint(-5, 5)) + expon(1) + '+{}*'.format(randint(-5, 5)) + lg(1) + '+' + arcfunc(0) +')/(' + polynomial() + ')'
+        problem += '(' + polynomial() + '+{}*'.format(randint(-5, 5)) + trigonometric(1) + '+{}*'.format(randint(-5, 5)) + expon(1) + '+{}*'.format(randint(-5, 5)) + lg(3) + '+' + arcfunc(0) +')/(' + polynomial() + ')'
     return sympify(str(sympify(problem)).replace('zoo', '5'))
 
 
 def generateLimit(level='1'):
     problem = ''
     if level == '1': #добавить, чтобы лимит был равен какому ненулевовму значению с choices
+
         problem += '(' + polynomial() + ')/(' + polynomial() + ')'
         approach = oo
 
@@ -129,4 +129,17 @@ def generateLimit(level='1'):
         problem += '({})/({} - sqrt({}))'.format(polynomial(), int(sq**0.5), linear_func(coeff=coeff, free=free))
     return sympify(problem), approach
 
-print(generateLimit(1))
+def generateIntegral(level='1'):
+    problem = ''
+    if level == '1':
+        problem += polynomial()
+    if level == '2':
+        problem += polynomial() + '+{}*'.format(randint(-5, 5)) + trigonometric(1)
+    if level == '3':
+        problem += polynomial() + '+{}*'.format(randint(-5, 5)) + trigonometric(1) + '+{}*'.format(randint(-5, 5)) + expon(1, 'E') + '+{}*'.format(randint(-5, 5)) + lg(1, 'E')
+    if level == '4':
+        arc = choice(['1/({}**2+({})**2)'.format(randint(1, 5), linear_func()), 
+                    '1/({}**2-({})**2)'.format(randint(1, 5), linear_func()),
+                    'x/({})'.format(linear_func())])
+        problem += arc + '+{}*'.format(randint(-5, 5)) + expon(1) + '+{}*'.format(randint(-5, 5)) + lg(1)
+    return sympify(str(sympify(problem)).replace('zoo', '5'))
