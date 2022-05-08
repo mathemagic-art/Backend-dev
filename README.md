@@ -6,6 +6,7 @@ https://api-mathemagics.herokuapp.com/
 ## Technologies used
 * [Django](https://www.djangoproject.com/): (v 3.2.13) The web framework for perfectionists with deadlines (Django builds better web apps with less code).
 * [Django REST Framework](www.django-rest-framework.org/): (v 3.13.1) A powerful and flexible toolkit for building Web APIs
+* Other dependencies are found at ./backend/requirements.txt
 
 
 ## Installation
