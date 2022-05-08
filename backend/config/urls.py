@@ -34,32 +34,41 @@ urlpatterns = [
         description="""Use JSON examples to test API requests. Change inputs with the "string" line in the POST requests.  
 ---------------------------------------------------------------------------------------------------
 
-                                                JSON test example for the DERIVATIVE calculator
+                                               DERIVATIVE calculator JSON test example 
 
 
 INPUT:
 
-{
+argument_1 =  equation \n
+argument_2 =  variable \n
+argument_3 =  degree
+
+    {
     "argument_1": "sin(x)", 
     "argument_2": "x", 
     "argument_3": 1
-}
+    }
 
 OUTPUT: "cos(x)"
 
 
 -----------------------------------------------------------------------------------------------------------------------------------
 
-                                                JSON test example for the TAYLOR SERIES calculator
+                                                TAYLOR SERIES calculator JSON test example
 
 INPUT:
 
-{
+argument_1 =  equation\n
+argument_2 =  variable\n 
+argument_3 =  number of iterations\n
+argument_4 =  centered at
+
+    {
     "argument_1": "sin(x)", 
     "argument_2": "x", 
     "argument_3": 16,
     "argument_4": 0
-}
+    }
 
 OUTPUT: "-x**15/1307674368000 + x**13/6227020800 - x**11/39916800 + x**9/362880 - x**7/5040 + x**5/120 - x**3/6 + x"
 
@@ -67,121 +76,194 @@ OUTPUT: "-x**15/1307674368000 + x**13/6227020800 - x**11/39916800 + x**9/362880 
 --------------------------------------------------------------------------------------------------------------------------------------------
 
 
-                                                JSON test example for the NEWTON METHOD calculator
+                                                NEWTON METHOD calculator JSON test example
 
 
 INPUT:
 
-{
+argument_1 =  equation \n
+argument_2 =  variable \n
+argument_3 =  number of iterations
+
+    {
     "argument_1": "x**2", 
     "argument_2": "x", 
     "argument_3": 2
-}
+    }
 
 OUTPUT: "2.2500"
 
 ----------------------------------------------------------------
-                                                JSON test example for the SIMPSON METHOD calculator
+                                                SIMPSON METHOD calculator JSON test example
 
 
 INPUT: 
 
-{
+argument_1 =  equation\n
+argument_2 =  variable\n 
+argument_3 =  initial point\n
+argument_4 =  end point
+
+    {
     "argument_1": "x**2", 
     "argument_2": "x", 
     "argument_3": 0,
     "argument_4": 1
-}
+    }
 
 OUTPUT: -
 
 
 -----------------------------------------------------------------------
 
-                                                JSON test example for the TRAPEZOID METHOD calculator
+                                                TRAPEZOID METHOD calculator JSON test example
 
 
 INPUT:
 
-{
+argument_1 =  equation\n
+argument_2 =  variable\n 
+argument_3 =  initial point\n
+argument_4 =  end point\n
+argument_5 =  number of intervals
+
+    {
     "argument_1": "x**3", 
     "argument_2": "x", 
     "argument_3": 0, 
     "argument_4": 2,
     "argument_5": 4
-}
+    }
 
 
 
 OUTPUT: "4.25000"
 
 ---------------------------------------------------------------------------------------------------------
-                                               JSON test example for the RECTANGLE METHOD calculator
+                                               RECTANGLE METHOD calculator JSON test example
 
 
 INPUT:
 
-{
+argument_1 =  equation\n
+argument_2 =  variable\n 
+argument_3 =  initial point\n
+argument_4 =  end point\n
+argument_5 =  number of intervals
+
+    {
     "argument_1": "x**2", 
     "argument_2": "x", 
     "argument_3": 0, 
     "argument_4": 2,
     "argument_5": 4
-}
+    }
 
 OUTPUT: "1.75000"
 
 ---------------------------------------------------------------------------------------------------
 
-                                                JSON test example for the DEFINITE INTEGRAL calculator
+                                                UNIVERSAL INTEGRAL calculator JSON test example
 
 
 INPUT: 
 
-{
-    "argument_1": "sin(x)", 
-    "argument_2": "x",
-    "argument_3": 0, 
-    "argument_4": 3.14159265358979323846
-}
+argument_1 =  type\n
+argument_2 =  equation\n
+argument_3 =  variable\n 
+argument_4 =  initial point\n
+argument_5 =  end point
+
+
+    {
+    "argument_1": "definite", 
+    "argument_2": "sin(x)", 
+    "argument_3": "x",
+    "argument_4": 0, 
+    "argument_5": 3.14159265358979323846
+    }
 
 
 OUTPUT: "2.0000"
 
 
 -----------------------------------------------------------------------------------------------------
-                                              JSON test example for the INDEFINITE INTEGRAL calculator
+
+                                                DEFINITE INTEGRAL calculator JSON test example
+
+
+INPUT: 
+
+argument_1 =  equation\n
+argument_2 =  variable\n 
+argument_3 =  initial point\n
+argument_4 =  end point
+
+    {
+    "argument_1": "sin(x)", 
+    "argument_2": "x",
+    "argument_3": 0, 
+    "argument_4": 3.14159265358979323846
+    }
+
+
+OUTPUT: "2.0000"
+
+
+-----------------------------------------------------------------------------------------------------
+
+                                              INDEFINITE INTEGRAL calculator JSON test example
 
 
 
 INPUT:
 
-{
+argument_1 =  equation\n
+argument_2 =  variable\n 
+
+    {
     "argument_1": "x**2", 
     "argument_2": "x"
-}
+    }
 
 
 OUTPUT: "x**3/3"
 
 --------------------------------------------------------------------------------------------
-                                               JSON test example for the LIMIT CALCULATOR calculator
+                                               LIMIT CALCULATOR calculator JSON test example
 
 
 INPUT:
 
-{
+argument_1 =  equation\n
+argument_2 = variable\n
+argument_3 = sign, from which side\n
+argument_4 = aproaches to
+
+    {
     "argument_1": "1/x**2", 
     "argument_2": "x", 
     "argument_3": "-",
     "argument_4": 0
-}
+    }
 
 
 OUTPUT: "oo"
 
 
 ---------------------------------------------------------------------------------------------------
+                                               JSON test example for the  DERIVATIVE TEST GENERATOR calculator
+
+
+INPUT:
+
+argument_1 = level of the question : from 1 to 3
+
+    {
+    "argument_1": "1"
+    }
+
+OUTPUT:  "(5*x**2)*(4*x**2)" (each run gives randomly generated question)
 
 
 

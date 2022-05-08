@@ -312,7 +312,7 @@ def limit_calculator(function: str, variable : str, sign: str, approach: str) ->
 ########################################################################################################################
 
 def universal_integral(type: str, function: str, variable: str, initial_point: float, end_point: float):
-    if type == "type2":
+    if type == "definite":
         variable = Symbol(variable)
         initial_point = float(initial_point)
         end_point = float(end_point)
@@ -326,3 +326,7 @@ def universal_integral(type: str, function: str, variable: str, initial_point: f
         return output_func(ans)
 
 #########################################################################################################################
+<<<<<<< HEAD
+=======
+
+>>>>>>> 85408032095be8933ec3571c11a5156ca458cf97
