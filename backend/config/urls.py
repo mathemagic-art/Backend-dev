@@ -252,18 +252,18 @@ OUTPUT: "oo"
 
 
 ---------------------------------------------------------------------------------------------------
-                                               JSON test example for the  DERIVATIVE TEST GENERATOR calculator
+                                                TEST GENERATOR JSON test examples
 
 
 INPUT:
 
-argument_1 = level of the question : from 1 to 3
+argument_1 = level of the question : from 1 to 4
 
     {
     "argument_1": "1"
     }
 
-OUTPUT:  "(5*x**2)*(4*x**2)" (each run gives randomly generated question)
+OUTPUT: (each run gives randomly generated question in "latex" string)
 
 
 
