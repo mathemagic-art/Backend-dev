@@ -57,70 +57,80 @@ def output_func(function: str) -> str:
 
 
 
-# def output_func2(function: str):
-#     function = latex(sympify(function))
-#     function = str(function).replace('log', 'ln')
-#     copy_func = function
-#     for i in ['\\', 'left', 'right', '(', ')', ' ']:
-#         copy_func = copy_func.replace(i, '')
+def output_func2(function: str): ## consider the case when we are multiplying function with log [sin(x)*log(x)]/[log(3)] or [x**2*log(x)]/[sin(x)*log(2)]
+    function = latex(sympify(function))
+    function = str(function).replace('log', 'ln')
+    copy_func = function
+    for i in ['\\', 'left', 'right', '(', ')', ' ']:
+        copy_func = copy_func.replace(i, '')
     
-#     while search('frac\{ln\{(.*?)\}\}\{ln\{(.*?)\}\}', copy_func) != None:
-#         expr = search('frac\{ln\{(.*?)\}\}\{ln\{(.*?)\}\}', copy_func).string
-#         ind_of_expr = list(search('frac\{ln\{(.*?)\}\}\{ln\{(.*?)\}\}', copy_func).span())
-        
-#         def get_key_ind(index, num, iter, expr):
-#             '''This function is for finding the boarder indexies of the expression '''
-#             ind = index + num
-#             key_ind = 0
-#             for i in range(iter):
-#                 n = 0
-#                 while True:
-#                     if expr[ind] == '{':
-#                         n += 1
+    while search('frac\{(.*?)ln\{(.*?)\}\}\{(.*?)ln\{(.*?)\}\}', copy_func) != None:
+        expr = search('frac\{(.*?)ln\{(.*?)\}\}\{(.*?)ln\{(.*?)\}\}', copy_func).string
+        ind_of_expr = list(search('frac\{(.*?)ln\{(.*?)\}\}\{(.*?)ln\{(.*?)\}\}', copy_func).span())
+        print(expr)
+        def get_key_ind(index, num, iter, expr):
+            '''This function is for finding the boarder indexies of the expression '''
+            ind = index + num
+            key_ind = 0
+            for i in range(iter):
+                n = 0
+                while True:
+                    if expr[ind] == '{':
+                        n += 1
                 
-#                     elif expr[ind] == '}':
-#                         n -= 1
+                    elif expr[ind] == '}':
+                        n -= 1
                         
-#                     if n == 0:
-#                         key_ind = ind
-#                         break
-#                     ind += 1
-#                 ind = key_ind + 1
-#             return key_ind
-#         key_ind = get_key_ind(ind_of_expr[0], 5, 2, function)
+                    if n == 0:
+                        key_ind = ind
+                        break
+                    ind += 1
+                ind = key_ind + 1
+            return key_ind
+        key_ind = get_key_ind(ind_of_expr[0], 5, 2, function)
 
-#         def edit_inner_func(expr):
-#             result = expr
-#             expr_copy = expr
-#             changed_expr = expr
-#             for i in ['ln', 'sin', 'cos', 'tan', 'cot', 'arcsin', 'arccos', 'arctan', 'arccot']:
-#                 while i in expr_copy:
-#                     init_ind, end_ind = search('{}'.format(i)+'\{(.*?)\}', expr).span()
-#                     subexpr = '\\' + expr[init_ind:init_ind+len(i)+1] + '(' + expr[init_ind+len(i)+1: end_ind-1] + ')' + '}'
-#                     changed_expr = expr[:init_ind] + subexpr + expr[end_ind:]
-#                     expr_copy = expr[:init_ind] + expr[end_ind:] 
-#                 result = changed_expr
-#             return result
+        def edit_inner_func(expr):
+            result = expr
+            expr_copy = expr
+            changed_expr = expr
+            for i in ['ln', 'sin', 'cos', 'tan', 'cot', 'arcsin', 'arccos', 'arctan', 'arccot']:
+                while i in expr_copy:
+                    init_ind, end_ind = search('{}'.format(i)+'\{(.*?)\}', expr).span()
+                    subexpr = '\\' + expr[init_ind:init_ind+len(i)+1] + '(' + expr[init_ind+len(i)+1: end_ind-1] + ')' + '}'
+                    changed_expr = expr[:init_ind] + subexpr + expr[end_ind:]
+                    expr_copy = expr[:init_ind] + expr[end_ind:] 
+                result = changed_expr
+            return result
+        subexpr = search('(.*?)ln\{(.*?)\}', expr).string
+        coeff_id = search('(.*?)ln\{(.*?)\}', expr).span()[0]
+        coeff1 = ''
+        while subexpr[coeff_id] != 'l':
+            if subexpr[coeff_id] not in ['f', 'r', 'a', 'c', '{']:
+                coeff1 += subexpr[coeff_id]
+            coeff_id += 1
+        print(coeff1)
+        init_ind = search('ln\{(.*?)\}', expr).span()[0]
+        end_ind = get_key_ind(0, 7+len(coeff1), 1, expr)
+        log_expr = expr[init_ind+2:end_ind+1]
+        
+        expr = expr[end_ind+1:]
+        subexpr = search('(.*?)ln\{(.*?)\}', expr).string
+        
+        coeff_id = search('(.*?)ln\{(.*?)\}', expr).span()[0]
+        coeff2 = ''
+        while subexpr[coeff_id] != 'l':
+            if subexpr[coeff_id] not in ['{', '}']:
+                coeff2 += subexpr[coeff_id]
+            coeff_id += 1
+        print(coeff2)
+        init_ind = search('ln\{(.*?)\}', expr).span()[0]
+        end_ind = get_key_ind(init_ind, 2, 1, expr)
+        log_base = expr[init_ind+2:end_ind+1]
+        function = function[:ind_of_expr[0]] + "\\frac{{{}}}{{{}}}\\log_{} ({})".format(coeff1, coeff2, edit_inner_func(log_base), edit_inner_func(log_expr)) + function[key_ind+1:] 
+        copy_func = function
+    return function
 
-#         init_ind = search('ln\{(.*?)\}', expr).span()[0]
-#         end_ind = get_key_ind(0, 7, 1, expr)
-#         limit_expr = expr[init_ind+2:end_ind+1]
-
-#         expr = expr[end_ind+1:]
-
-#         init_ind = search('ln\{(.*?)\}', expr).span()[0]
-#         end_ind = get_key_ind(init_ind, 2, 1, expr)
-#         limit_base = expr[init_ind+2:end_ind+1]
-#         print(1)
-#         function = function[:ind_of_expr[0]] + "\\log_{} ({})".format(edit_inner_func(limit_base), edit_inner_func(limit_expr)) + function[key_ind+1:] 
-#         copy_func = function
-#     return function
-
-
-
-
-
-# print(output_func2('log(x)/log(3)'))
+print(output_func2('(3*log(x))/(4*log(3))'))
 ########################################################################################################################
 
 
