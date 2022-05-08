@@ -3,8 +3,10 @@ from pydoc import apropos
 from random import choice, randint, choices
 from regex import E
 from scipy import rand
+
 from sympy import Symbol, sympify, Symbol, oo, Integer, latex
 from re import search
+
 
 x = Symbol('x')
 
@@ -153,7 +155,7 @@ def output_func2(function: str): ## consider the case when we are multiplying fu
     #     copy_func = function
     return function
 
-######################################################################################
+
 # test generators 
 
 def generateDifferentiation(level='1'):
@@ -171,10 +173,12 @@ def generateDifferentiation(level='1'):
         problem += polynomial() + '+{}*'.format(randint(-5, 5)) + trigonometric(1) + '+{}*'.format(randint(-5, 5)) + expon(1) + '+{}*'.format(randint(-5, 5)) + lg(1)
     if level == '4':
         problem += '(' + polynomial() + '+{}*'.format(randint(-5, 5)) + trigonometric(1) + '+{}*'.format(randint(-5, 5)) + expon(1) + '+{}*'.format(randint(-5, 5)) + lg(3) + '+' + arcfunc(0) +')/(' + polynomial() + ')'
+
     problem = sympify(str(sympify(problem)).replace('zoo', '5'))
     print(problem)
     problem = output_func2(problem)
     return problem
+
 
 def generateLimit(level='1'):
     problem = ''
@@ -219,6 +223,7 @@ def generateLimit(level='1'):
                     approach = sympify(approach[::-1]).round(number_floats-i-1)
                     break
         problem += '({})/({} - sqrt({}))'.format(polynomial(), int(sq**0.5), linear_func(coeff=coeff, free=free))
+        
     problem = output_func2(sympify(problem))
     approach = output_func2(approach)
     return [problem, approach]
@@ -240,3 +245,4 @@ def generateIntegral(level='1'):
     problem = sympify(str(sympify(problem)).replace('zoo', '5'))
     problem = output_func2(problem)
     return(problem)
+

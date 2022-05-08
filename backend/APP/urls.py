@@ -2,6 +2,7 @@ from django.urls import path
 from .views import *
 
 
+
 urlpatterns = [    
     path('differentiation/', differentiation_api),               # Abbosjon  
     path('taylor-series/', taylors_method_api),                  # Elnazar   
@@ -12,5 +13,6 @@ urlpatterns = [
     path('definite-integral/', definite_integral_api),           # Ilkhom         
     path('indefinite-integral/', indefinite_integral_api),       # Aizada    
     path('limit-calculator/', limit_api),                        # Eldar
-    path('universal_integral/', universal_integral_api),         # Jasurbek
+    path('universal-integral/', universal_integral_api),         # Jasurbek
+    path('test-differentiation/', test_differentiation_api),     # Eldar
 ]
