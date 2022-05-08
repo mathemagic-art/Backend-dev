@@ -81,7 +81,7 @@ def generateDifferentiation(level='1'):
         problem += polynomial() + '+{}*'.format(randint(-5, 5)) + trigonometric(1) + '+{}*'.format(randint(-5, 5)) + expon(1) + '+{}*'.format(randint(-5, 5)) + lg(1)
     if level == '4':
         problem += '(' + polynomial() + '+{}*'.format(randint(-5, 5)) + trigonometric(1) + '+{}*'.format(randint(-5, 5)) + expon(1) + '+{}*'.format(randint(-5, 5)) + lg(3) + '+' + arcfunc(0) +')/(' + polynomial() + ')'
-    return sympify(str(sympify(problem)).replace('zoo', '5'))
+    return str(sympify(str(sympify(problem)).replace('zoo', '5')))
 
 ##############################################################################################################
 
@@ -98,7 +98,7 @@ def generateIntegral(level='1'):
                     '1/({}**2-({})**2)'.format(randint(1, 5), linear_func()),
                     'x/({})'.format(linear_func())])
         problem += arc + '+{}*'.format(randint(-5, 5)) + expon(1) + '+{}*'.format(randint(-5, 5)) + lg(1)
-    return sympify(str(sympify(problem)).replace('zoo', '5'))
+    return str(sympify(str(sympify(problem)).replace('zoo', '5')))
 
 ##############################################################################################################
 
