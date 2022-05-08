@@ -200,4 +200,52 @@ def limit_list(request):
             return Response(answer, status=status.HTTP_201_CREATED)
         
         else: 
+<<<<<<< Updated upstream
             return Response(deserialized.errors)
+=======
+            return Response(deserialized.errors)
+
+@api_view(['POST'])
+def universal_integral_api(request):   
+    if request.method == "POST":
+        deserialized = String_String_String_String_String_(data=request.data)
+    
+        if deserialized.is_valid():
+            type = deserialized.data['argument_1']
+            function = deserialized.data['argument_2']
+            variable = deserialized.data['argument_3']
+            initial_point = deserialized.data['argument_4']
+            end_point = deserialized.data['argument_5']
+            
+            answer = universal_integral(type, function, variable, initial_point, end_point)
+            return Response(answer, status=status.HTTP_201_CREATED)
+        
+        else:
+            
+            return Response(deserialized.errors)
+
+
+@api_view(['POST'])
+def test_differentiation_api(request):
+        deserialized = String_(data=request.data)
+        if deserialized.is_valid():
+            level = deserialized.data['argument_1']
+            answer = generateDifferentiation(level)
+            return Response(answer, status=status.HTTP_201_CREATED)
+        else:
+            return Response(deserialized.errors)
+            
+
+@api_view(['POST'])
+def test_indefinite_integral_api(request):
+        deserialized = String_(data=request.data)
+        if deserialized.is_valid():
+            level = deserialized.data['argument_1']
+            answer = generateIntegral(level)
+            return Response(answer, status=status.HTTP_201_CREATED)
+        else:
+            return Response(deserialized.errors)
+            
+
+
+>>>>>>> Stashed changes
