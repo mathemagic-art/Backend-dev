@@ -222,4 +222,13 @@ def test_differentiation_api(request):
             return Response(deserialized.errors)
             
 
+@api_view(['POST'])
+def test_indefinite_integral_api(request):
+        deserialized = String_(data=request.data)
+        if deserialized.is_valid():
+            level = deserialized.data['argument_1']
+            answer = generateIntegral(level)
+            return Response(answer, status=status.HTTP_201_CREATED)
+        else:
+            return Response(deserialized.errors)
 
