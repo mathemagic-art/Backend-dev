@@ -3,9 +3,9 @@ from pydoc import apropos
 from random import choice, randint, choices
 from regex import E
 from scipy import rand
-
-from sympy import Symbol, sympify, Symbol, oo, Integer, latex
+from sympy import Symbol, sympify, Symbol, oo, Integer, latex, expand, simplify, trigsimp
 from re import search
+from latex2sympy2 import latex2sympy
 
 
 x = Symbol('x')
@@ -68,11 +68,25 @@ def lg(level=0, base = choices(['1', '2', 'E', '3', '4'], weights=[1, 1, 3, 1, 1
     return problem
 
 ######################################################################################
-# latex output converter
+# latex output converter and input
+
+def parse_func(function: str) -> str: 
+    try:
+        function = sympify(function.replace('e', 'E'), convert_xor=True)
+    except:
+        function = function.replace('\frac', '\\frac')
+        function = function.replace('\tan', '\\tan')
+        function = function.replace('\arcsin', '\\arcsin')
+        function = function.replace('\arccos', '\\arccos')
+        function = function.replace('\arctan', '\\arctan')
+        function = function.replace('\arccot', '\\arccot')
+        function = latex2sympy(function)
+    return function
+
+
 def output_func2(function: str): ## consider the case when we are multiplying function with log [sin(x)*log(x)]/[log(3)] or [x**2*log(x)]/[sin(x)*log(2)]
     function = latex(sympify(function))
     function = str(function).replace('log', 'ln')
- 
  
     # copy_func = function                       unstabel working part
     # for i in ['\\', 'left', 'right', '(', ')', ' ']:
@@ -246,3 +260,12 @@ def generateIntegral(level='1'):
     problem = output_func2(problem)
     return(problem)
 
+##############################################################################################
+# compare function
+def compare(user_input:str, answer:str):
+    user_input = trigsimp(simplify(parse_func(user_input).expand()))
+    answer = trigsimp(simplify(parse_func(answer).expand()))
+    if user_input - answer == 0:
+        return True
+    else:
+        return False
