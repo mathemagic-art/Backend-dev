@@ -232,3 +232,24 @@ def test_indefinite_integral_api(request):
         else:
             return Response(deserialized.errors)
 
+@api_view(['POST'])
+def test_limit_api(request):
+        deserialized = String_(data=request.data)
+        if deserialized.is_valid():
+            level = deserialized.data['argument_1']
+            answer = generateLimit(level)
+            return Response(answer, status=status.HTTP_201_CREATED)
+        else:
+            return Response(deserialized.errors)
+
+@api_view(['POST'])
+def compare_api(request):
+        deserialized = String_String_(data=request.data)
+        if deserialized.is_valid():
+            user_input = deserialized.data['argument_1']
+            result = deserialized.data['argument_2']
+            answer = compare(user_input, result)
+            return Response(answer, status=status.HTTP_201_CREATED)
+        else:
+            return Response(deserialized.errors)
+

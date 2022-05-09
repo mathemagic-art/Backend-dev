@@ -15,5 +15,7 @@ urlpatterns = [
     path('limit-calculator/', limit_api),                        # Eldar
     path('universal-integral/', universal_integral_api),         # Jasurbek
     path('test-differentiation/', test_differentiation_api),     # Eldar
-    path('test-indefinite-integral', test_indefinite_integral_api), #Rauf
+    path('test-indefinite-integral', test_indefinite_integral_api),#Rauf
+    path('test-limit', test_limit_api),                          #Ilkhom
+    path('compare', compare_api),                                #Ilkhom
 ]

@@ -55,7 +55,6 @@ def output_func(function: str): ## consider the case when we are multiplying fun
     function = latex(sympify(function))
     function = str(function).replace('log', 'ln')
   
-  
     # copy_func = function    #this part of code does not work stable
     # for i in ['\\', 'left', 'right', '(', ')', ' ']:
     #     copy_func = copy_func.replace(i, '')
@@ -326,7 +325,3 @@ def universal_integral(type: str, function: str, variable: str, initial_point: f
         return output_func(ans)
 
 #########################################################################################################################
-<<<<<<< HEAD
-=======
-
->>>>>>> 85408032095be8933ec3571c11a5156ca458cf97

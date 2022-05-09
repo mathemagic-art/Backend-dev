@@ -6,6 +6,9 @@ from scipy import rand
 from sympy import Symbol, sympify, Symbol, oo, Integer, latex, expand, simplify, trigsimp
 from re import search
 from latex2sympy2 import latex2sympy
+from .calculators import *
+
+from APP.calculators import differentiating_calculator
 
 
 x = Symbol('x')
@@ -175,6 +178,7 @@ def output_func2(function: str): ## consider the case when we are multiplying fu
 def generateDifferentiation(level='1'):
 
     # dependencies
+    result = ""
     problem = ''
     # logic
     if level == '1':
@@ -189,17 +193,18 @@ def generateDifferentiation(level='1'):
         problem += '(' + polynomial() + '+{}*'.format(randint(-5, 5)) + trigonometric(1) + '+{}*'.format(randint(-5, 5)) + expon(1) + '+{}*'.format(randint(-5, 5)) + lg(3) + '+' + arcfunc(0) +')/(' + polynomial() + ')'
 
     problem = sympify(str(sympify(problem)).replace('zoo', '5'))
-    print(problem)
     problem = output_func2(problem)
-    return problem
+    result = differentiating_calculator(problem,"x","1")
+    return [problem,result]
 
 
 def generateLimit(level='1'):
+    result = ''
     problem = ''
     if level == '1': #добавить, чтобы лимит был равен какому ненулевовму значению с choices
 
         problem += '(' + polynomial() + ')/(' + polynomial() + ')'
-        approach = oo
+        approach = 'oo'
 
     if level == '2':
         coeff = randint(1, 5)
@@ -237,13 +242,16 @@ def generateLimit(level='1'):
                     approach = sympify(approach[::-1]).round(number_floats-i-1)
                     break
         problem += '({})/({} - sqrt({}))'.format(polynomial(), int(sq**0.5), linear_func(coeff=coeff, free=free))
-        
+    
+    result = limit_calculator(problem,"x","0",approach)    
     problem = output_func2(sympify(problem))
     approach = output_func2(approach)
-    return [problem, approach]
+    
+    return [problem, approach,result]
 
 
 def generateIntegral(level='1'):
+    result = ''
     problem = ''
     if level == '1':
         problem += polynomial()
@@ -258,14 +266,16 @@ def generateIntegral(level='1'):
         problem += arc + '+{}*'.format(randint(-5, 5)) + expon(1) + '+{}*'.format(randint(-5, 5)) + lg(1)
     problem = sympify(str(sympify(problem)).replace('zoo', '5'))
     problem = output_func2(problem)
-    return(problem)
+    result = indefinite_integration_calculator(problem,"x")
+    return [problem,result]
 
 ##############################################################################################
 # compare function
+
 def compare(user_input:str, answer:str):
     user_input = trigsimp(simplify(parse_func(user_input).expand()))
     answer = trigsimp(simplify(parse_func(answer).expand()))
     if user_input - answer == 0:
-        return True
+        return "True"
     else:
-        return False
+        return "False"
