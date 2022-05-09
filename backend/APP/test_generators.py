@@ -3,12 +3,11 @@ from pydoc import apropos
 from random import choice, randint, choices
 from regex import E
 from scipy import rand
-from sympy import Symbol, sympify, Symbol, oo, Integer, latex, expand, simplify, trigsimp
+from sympy import O, Symbol, sympify, Symbol, oo, Integer, latex, expand, simplify, trigsimp
 from re import search
 from latex2sympy2 import latex2sympy
-from .calculators import *
+from calculators import *
 
-from APP.calculators import differentiating_calculator
 
 
 x = Symbol('x')
@@ -90,6 +89,8 @@ def parse_func(function: str) -> str:
 def output_func2(function: str): ## consider the case when we are multiplying function with log [sin(x)*log(x)]/[log(3)] or [x**2*log(x)]/[sin(x)*log(2)]
     function = latex(sympify(function))
     function = str(function).replace('log', 'ln')
+    function = function.replace('\\', '\\\\')
+    
  
     # copy_func = function                       unstabel working part
     # for i in ['\\', 'left', 'right', '(', ')', ' ']:
@@ -171,7 +172,7 @@ def output_func2(function: str): ## consider the case when we are multiplying fu
     #         function = function[:ind_of_expr[0]] + "\\frac{{{}}}{{{}}}\\log_{} ({})".format(coeff1, coeff2, edit_inner_func(log_base), edit_inner_func(log_expr)) + function[key_ind+1:] 
     #     copy_func = function
     return function
-
+print(output_func2('sin(x)'))
 
 # test generators 
 
@@ -282,4 +283,4 @@ def compare(user_input:str, answer:str):
             return True
         else:
             return False
-print(compare('oo', "oo"))
+
