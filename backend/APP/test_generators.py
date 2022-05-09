@@ -273,7 +273,6 @@ def generateIntegral(level='1'):
 # compare function
 
 def compare(user_input:str, answer:str):
-<<<<<<< HEAD
     if user_input == answer:
         return True
     else:
@@ -284,11 +283,3 @@ def compare(user_input:str, answer:str):
         else:
             return False
 print(compare('oo', "oo"))
-=======
-    user_input = trigsimp(simplify(parse_func(user_input).expand()))
-    answer = trigsimp(simplify(parse_func(answer).expand()))
-    if user_input - answer == 0:
-        return "True"
-    else:
-        return "False"
->>>>>>> 7c5589598abf9910c7caa1183235d9b463853652
