@@ -263,9 +263,13 @@ def generateIntegral(level='1'):
 ##############################################################################################
 # compare function
 def compare(user_input:str, answer:str):
-    user_input = trigsimp(simplify(parse_func(user_input).expand()))
-    answer = trigsimp(simplify(parse_func(answer).expand()))
-    if user_input - answer == 0:
+    if user_input == answer:
         return True
     else:
-        return False
+        user_input = trigsimp(simplify(parse_func(user_input).expand()))
+        answer = trigsimp(simplify(parse_func(answer).expand()))
+        if user_input - answer == 0:
+            return True
+        else:
+            return False
+print(compare('oo', "oo"))
