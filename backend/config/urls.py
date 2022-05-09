@@ -252,22 +252,38 @@ OUTPUT: "oo"
 
 
 ---------------------------------------------------------------------------------------------------
-                                               JSON test example for the  DERIVATIVE TEST GENERATOR calculator
+                                                TEST GENERATOR JSON test examples
 
 
 INPUT:
 
-argument_1 = level of the question : from 1 to 3
+argument_1 = level of the question : from 1 -> 4 (for limit-generator from 1 -> 3)
 
     {
     "argument_1": "1"
     }
 
-OUTPUT:  "(5*x**2)*(4*x**2)" (each run gives randomly generated question)
+OUTPUT: (each run gives randomly generated question in "latex" string)
+
+----------------------------------------------------------------------------------------------------
+                                                CHECKER JSON test examples
+
+INPUT:
+
+argument_1 = user's input 
+
+argument_2 = true answer
+
+    {
+    "argument_1": "2*x", 
+    "argument_2": "x*2"
+    }
+
+OUTPUT: "True"
 
 
 
         """,
-        version="1.0.0"
+        version="1.1.4"
     ), name='openapi-schema'),
 ]
