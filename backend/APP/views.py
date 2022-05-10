@@ -2,7 +2,8 @@ from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .serializers import *
-from .mathematics import *
+from .calculators import *
+from .test_generators import *
 
 
 @api_view(['POST'])
@@ -112,7 +113,7 @@ def trapezoid_method_api(request):
 
 
 @api_view(['POST',])
-def rectangle_method_api(request):
+def midpoint_method_api(request):
 
     if request.method == 'POST':
         deserialized = String_String_String_String_String_(data=request.data)
@@ -125,7 +126,7 @@ def rectangle_method_api(request):
             initial_point = deserialized.data['argument_3']
             end_point = deserialized.data['argument_4']
             number_interval = deserialized.data['argument_5']
-            answer = rectangle_method(function, variable , initial_point, end_point, number_interval)
+            answer = midpoint_method(function, variable , initial_point, end_point, number_interval)
             
             return Response(answer, status=status.HTTP_201_CREATED)
         else:
@@ -172,7 +173,6 @@ def indefinite_integral_api(request):
             
             return Response(deserialized.errors)
 
-
 @api_view(['POST'])
 def limit_api(request):
     
@@ -209,3 +209,47 @@ def universal_integral_api(request):
         else:
             
             return Response(deserialized.errors)
+
+
+@api_view(['POST'])
+def test_differentiation_api(request):
+        deserialized = String_(data=request.data)
+        if deserialized.is_valid():
+            level = deserialized.data['argument_1']
+            answer = generateDifferentiation(level)
+            return Response(answer, status=status.HTTP_201_CREATED)
+        else:
+            return Response(deserialized.errors)
+            
+
+@api_view(['POST'])
+def test_indefinite_integral_api(request):
+        deserialized = String_(data=request.data)
+        if deserialized.is_valid():
+            level = deserialized.data['argument_1']
+            answer = generateIntegral(level)
+            return Response(answer, status=status.HTTP_201_CREATED)
+        else:
+            return Response(deserialized.errors)
+
+@api_view(['POST'])
+def test_limit_api(request):
+        deserialized = String_(data=request.data)
+        if deserialized.is_valid():
+            level = deserialized.data['argument_1']
+            answer = generateLimit(level)
+            return Response(answer, status=status.HTTP_201_CREATED)
+        else:
+            return Response(deserialized.errors)
+
+@api_view(['POST'])
+def compare_api(request):
+        deserialized = String_String_(data=request.data)
+        if deserialized.is_valid():
+            user_input = deserialized.data['argument_1']
+            result = deserialized.data['argument_2']
+            answer = compare(user_input, result)
+            return Response(answer, status=status.HTTP_201_CREATED)
+        else:
+            return Response(deserialized.errors)
+
