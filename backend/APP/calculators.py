@@ -21,7 +21,10 @@ def parse_func(function: str) -> str:
         function = function.replace('\arccos', '\\arccos')
         function = function.replace('\arctan', '\\arctan')
         function = function.replace('\arccot', '\\arccot')
+        # try:
         function = latex2sympy(function)
+        # except:
+        #     pass
     return function
 
 # def output_func(function: str) -> str:
@@ -141,25 +144,38 @@ def differentiating_calculator(function: str, variable: str, degree: int) -> str
 def taylor_series(function:str, variable: str, number_of_iterations: int, center: float) -> str:
 
     number_of_iterations = int(number_of_iterations)
-    center = float(center)
-
+    center = float(center) 
     function = parse_func(function)
+    f = lambdify(variable, function)
     variable = Symbol(variable)
 
     if center == 0:
-        taylorPolynomial = str(lambdify(variable, function)(center))
+        taylorPolynomial = str(lambdify(variable, function)(center).round(3))
         for i in range(1, number_of_iterations):
             f_diff = str(lambdify(variable, diff(function, variable, i))(center))
             taylorPolynomial += '+' + f_diff +'/'+str(factorial(i))+'*({}-{})**{}'.format(variable, center, i)    
         taylorPolynomial = sympify(taylorPolynomial, rational=True)
     else:
-        taylorPolynomial = str(function.subs(variable, center))
+        taylorPolynomial = str(function.subs(variable, center).round(3))
         for i in range(1, number_of_iterations):
             f_diff = diff(function, variable, i)
-            f_diff = str(f_diff.subs(variable, center))
-            taylorPolynomial += '+' + f_diff +'/'+str(factorial(i))+'*({}-{})**{}'.format(variable, center, i)    
-        taylorPolynomial = sympify(taylorPolynomial, rational=True)
-    return [output_func(taylorPolynomial), taylorPolynomial]
+            f_diff = f_diff.subs(variable, center).round(4)
+            coeff = str(round(f_diff/factorial(i), 4))
+            taylorPolynomial += '+' + coeff +'*({}-{})**{}'.format(variable, center, i)    
+        taylorPolynomial = sympify(taylorPolynomial)
+    
+
+    taylorF = lambdify(variable, taylorPolynomial)
+    xmin, xmax, ymin, ymax = 0, 0, 0, 0
+    while abs(taylorF(xmin) - f(xmin)) < 0.01:
+        xmin -= 1
+    while abs(taylorF(xmax) - f(xmax)) < 0.01:
+        xmax += 1
+    ymax = int(max(taylorF(xmin), f(xmin), taylorF(xmax), f(xmax)))+1
+    ymin = int(min(taylorF(xmin), f(xmin), taylorF(xmax), f(xmax)))-1
+    xmin *= 2
+    xmax *= 2
+    return [output_func(taylorPolynomial), taylorPolynomial, xmin, xmax, ymin, ymax]
 
 ########################################################################################################################
 
@@ -196,7 +212,7 @@ def newton_method(function: str, variable: str, number_of_iterations: int) -> st
     except RuntimeWarning:
         return "Something went wrong. Please check the criteria."
 
-print(newton_method('sin(x)', 'x', '5'))
+#print(newton_method('sin(x)', 'x', '5'))
 ########################################################################################################################
 
 
