@@ -55,7 +55,6 @@ def output_func(function: str): ## consider the case when we are multiplying fun
     function = latex(sympify(function))
     function = str(function).replace('log', 'ln')
   
-  
     # copy_func = function    #this part of code does not work stable
     # for i in ['\\', 'left', 'right', '(', ')', ' ']:
     #     copy_func = copy_func.replace(i, '')
@@ -251,24 +250,23 @@ def trapezoid_method(function: str, variable: str, initial_point: float, end_poi
 ########################################################################################################################
 
 
-def rectangle_method(function:str, variable: str, initial_point: float, end_point: float, number_of_intervals: int) -> str:
+def midpoint_method(function:str, variable: str, initial_point: float, end_point: float, number_of_intervals: int) -> str:
 
     variable = Symbol(variable)
     initial_point = float(initial_point)
     end_point = float(end_point)
     number_of_intervals = int(number_of_intervals)
-
+    x_val = linspace(initial_point, end_point, number_of_intervals+1)
     function = parse_func(function)
     function = lambdify(variable, function)
     dx = (end_point - initial_point)/number_of_intervals
     total = 0.0
 
-    for i in range (number_of_intervals):
-        total = total + function((initial_point + (i*dx)))
+    for i in range(len(x_val)-1):
+        total += dx*function((x_val[i]+x_val[i+1])/2)
 
-    area = dx*total
 
-    return str(Float(area).round(4)) if '.0000' not in str(Float(area).round(4)) else str(Float(area).round(4))[:str(Float(area).round(4)).index('.')]
+    return str(Float(total).round(4)) if '.0000' not in str(Float(total).round(4)) else str(Float(total).round(4))[:str(Float(total).round(4)).index('.')]
 
 ########################################################################################################################
 

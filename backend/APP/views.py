@@ -113,7 +113,7 @@ def trapezoid_method_api(request):
 
 
 @api_view(['POST',])
-def rectangle_method_api(request):
+def midpoint_method_api(request):
 
     if request.method == 'POST':
         deserialized = String_String_String_String_String_(data=request.data)
@@ -126,7 +126,7 @@ def rectangle_method_api(request):
             initial_point = deserialized.data['argument_3']
             end_point = deserialized.data['argument_4']
             number_interval = deserialized.data['argument_5']
-            answer = rectangle_method(function, variable , initial_point, end_point, number_interval)
+            answer = midpoint_method(function, variable , initial_point, end_point, number_interval)
             
             return Response(answer, status=status.HTTP_201_CREATED)
         else:

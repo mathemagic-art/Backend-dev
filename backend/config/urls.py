@@ -140,7 +140,7 @@ argument_5 =  number of intervals
 OUTPUT: "4.25000"
 
 ---------------------------------------------------------------------------------------------------------
-                                               RECTANGLE METHOD calculator JSON test example
+                                               MIDPOINT METHOD calculator JSON test example
 
 
 INPUT:
