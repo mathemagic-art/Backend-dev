@@ -159,6 +159,7 @@ def taylor_series(function:str, variable: str, number_of_iterations: int, center
             f_diff = str(f_diff.subs(variable, center))
             taylorPolynomial += '+' + f_diff +'/'+str(factorial(i))+'*({}-{})**{}'.format(variable, center, i)    
         taylorPolynomial = sympify(taylorPolynomial, rational=True)
+    
     return output_func(taylorPolynomial)
 
 ########################################################################################################################
@@ -238,8 +239,9 @@ def trapezoid_method(function: str, variable: str, initial_point: float, end_poi
     initial_point = float(initial_point)
     end_point = float(end_point)
     number_of_intervals = int(number_of_intervals)
+    function = parse_func(function)
+    function = lambdify(variable, function)
 
-    function = lambdify(x, function)
     dx = (end_point - initial_point)/number_of_intervals
     A = 1/2 *(function(initial_point) + function(end_point))
     for i in range(1, number_of_intervals):
@@ -267,7 +269,6 @@ def midpoint_method(function:str, variable: str, initial_point: float, end_point
 
 
     return str(Float(total).round(4)) if '.0000' not in str(Float(total).round(4)) else str(Float(total).round(4))[:str(Float(total).round(4)).index('.')]
-
 ########################################################################################################################
 
 
