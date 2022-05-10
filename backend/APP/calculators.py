@@ -159,7 +159,7 @@ def taylor_series(function:str, variable: str, number_of_iterations: int, center
             f_diff = str(f_diff.subs(variable, center))
             taylorPolynomial += '+' + f_diff +'/'+str(factorial(i))+'*({}-{})**{}'.format(variable, center, i)    
         taylorPolynomial = sympify(taylorPolynomial, rational=True)
-    return output_func(taylorPolynomial)
+    return [output_func(taylorPolynomial), taylorPolynomial]
 
 ########################################################################################################################
 
@@ -170,6 +170,7 @@ def newton_method(function: str, variable: str, number_of_iterations: int) -> st
     try:
         function = parse_func(function)
         variable = Symbol(variable)
+        array_of_lines = []
         f = lambdify(variable, function) #lambdify expression of the input function
         f_d = lambdify(variable, diff(function, variable))  #lambdify expression of the derivative of the input function
         interval = findall('Interval.*?\(.*?\)',  str(calculus.util.continuous_domain(function, variable, S.Reals))) #checking the domain
@@ -185,14 +186,17 @@ def newton_method(function: str, variable: str, number_of_iterations: int) -> st
         else:
             x_i = random.randint(1, 10)
         for i in range(int(number_of_iterations)):
+            tang = str(sympify(f(x_i) + f_d(x_i)*(x-x_i)))
+            array_of_lines.append(tang)
             x_i = x_i - (f(x_i)/f_d(x_i))
         ret = str(Float(x_i).round(4))
         if '.0000' in ret:
             ret = ret[:ret.index('.')]
-        return ret
+        return [ret, array_of_lines[0], array_of_lines[-1]]
     except RuntimeWarning:
         return "Something went wrong. Please check the criteria."
 
+print(newton_method('sin(x)', 'x', '5'))
 ########################################################################################################################
 
 
