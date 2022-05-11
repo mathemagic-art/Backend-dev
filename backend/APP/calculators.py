@@ -14,16 +14,20 @@ x = Symbol('x')
 def parse_func(function: str) -> str: 
     try:
         function = sympify(function.replace('e', 'E'), convert_xor=True)
+        return function
     except:
-        function = function.replace('\frac', '\\frac')
-        function = function.replace('\tan', '\\tan')
-        function = function.replace('\arcsin', '\\arcsin')
-        function = function.replace('\arccos', '\\arccos')
-        function = function.replace('\arctan', '\\arctan')
-        function = function.replace('\arccot', '\\arccot')
-        function = latex2sympy(function)
-    return function
-
+        try:
+            function = function.replace('\frac', '\\frac')
+            function = function.replace('\tan', '\\tan')
+            function = function.replace('\arcsin', '\\arcsin')
+            function = function.replace('\arccos', '\\arccos')
+            function = function.replace('\arctan', '\\arctan')
+            function = function.replace('\arccot', '\\arccot')
+            function = latex2sympy(function)
+        except:
+            return False
+        return function
+# print(parse_func('['))
 # def output_func(function: str) -> str:
 #     function = str(function).replace('log', 'ln')
 #     function = function.replace('E', 'e')
@@ -131,36 +135,62 @@ def output_func(function: str): ## consider the case when we are multiplying fun
 
 def differentiating_calculator(function: str, variable: str, degree: int) -> str:    
     function = parse_func(function)
-    degree = int(degree)
-    variable = Symbol(variable)
-    function_prime = function.diff(variable, degree)  
-    ans = output_func(function_prime)
-    return ans
+
+    if function is False:
+        return "Check your function"
+    else:
+        degree = int(degree)
+        variable = Symbol(variable)
+        function_prime = function.diff(variable, degree)  
+        ans = output_func(function_prime)
+        return ans
+
+print(differentiating_calculator('[', 'x', 1))
 ########################################################################################################################
 
 def taylor_series(function:str, variable: str, number_of_iterations: int, center: float) -> str:
 
     number_of_iterations = int(number_of_iterations)
-    center = float(center)
-
+    center = float(center) 
     function = parse_func(function)
-    variable = Symbol(variable)
 
-    if center == 0:
-        taylorPolynomial = str(lambdify(variable, function)(center))
-        for i in range(1, number_of_iterations):
-            f_diff = str(lambdify(variable, diff(function, variable, i))(center))
-            taylorPolynomial += '+' + f_diff +'/'+str(factorial(i))+'*({}-{})**{}'.format(variable, center, i)    
-        taylorPolynomial = sympify(taylorPolynomial, rational=True)
+    if function is False:
+        return "Check your function"
     else:
-        taylorPolynomial = str(function.subs(variable, center))
-        for i in range(1, number_of_iterations):
-            f_diff = diff(function, variable, i)
-            f_diff = str(f_diff.subs(variable, center))
-            taylorPolynomial += '+' + f_diff +'/'+str(factorial(i))+'*({}-{})**{}'.format(variable, center, i)    
-        taylorPolynomial = sympify(taylorPolynomial, rational=True)
     
-    return output_func(taylorPolynomial)
+        try:
+            f = lambdify(variable, function)
+            variable = Symbol(variable)
+
+            if center == 0:
+                taylorPolynomial = str(lambdify(variable, function)(center).round(3))
+                for i in range(1, number_of_iterations):
+                    f_diff = str(lambdify(variable, diff(function, variable, i))(center))
+                    taylorPolynomial += '+' + f_diff +'/'+str(factorial(i))+'*({}-{})**{}'.format(variable, center, i)    
+                taylorPolynomial = sympify(taylorPolynomial, rational=True)
+            else:
+                taylorPolynomial = str(function.subs(variable, center).round(3))
+                for i in range(1, number_of_iterations):
+                    f_diff = diff(function, variable, i)
+                    f_diff = f_diff.subs(variable, center).round(4)
+                    coeff = str(round(f_diff/factorial(i), 4))
+                    taylorPolynomial += '+' + coeff +'*({}-{})**{}'.format(variable, center, i)    
+                taylorPolynomial = sympify(taylorPolynomial)
+        except:
+            return 'Error! Invalid input!'
+
+
+        taylorF = lambdify(variable, taylorPolynomial)
+        xmin, xmax, ymin, ymax = 0, 0, 0, 0
+        while abs(taylorF(xmin) - f(xmin)) < 0.01:
+            xmin -= 1
+        while abs(taylorF(xmax) - f(xmax)) < 0.01:
+            xmax += 1
+        ymax = int(max(taylorF(xmin), f(xmin), taylorF(xmax), f(xmax)))+1
+        ymin = int(min(taylorF(xmin), f(xmin), taylorF(xmax), f(xmax)))-1
+        xmin *= 2
+        xmax *= 2
+        return [output_func(taylorPolynomial), str(taylorPolynomial), str(xmin), str(xmax), str(ymin), str(ymax)]
 
 ########################################################################################################################
 
@@ -170,158 +200,193 @@ def newton_method(function: str, variable: str, number_of_iterations: int) -> st
     number_of_iterations = int(number_of_iterations)
     try:
         function = parse_func(function)
-        variable = Symbol(variable)
-        f = lambdify(variable, function) #lambdify expression of the input function
-        f_d = lambdify(variable, diff(function, variable))  #lambdify expression of the derivative of the input function
-        interval = findall('Interval.*?\(.*?\)',  str(calculus.util.continuous_domain(function, variable, S.Reals))) #checking the domain
-        if interval: 
-            interval = interval[0]
-            interval = findall('\(.*?\)', interval)[0][1:-1].split(',')
-            if interval[0] == '-oo':
-                x_i = int(interval[1]) - 1
-            elif interval[1] == 'oo':
-                x_i = int(interval[0]) + 1
-            else:
-                x_i = int(interval[0]) + (int(interval[1]) - int(interval[0]))/2
+
+        if function is False:
+            return "Check your function"
         else:
-            x_i = random.randint(1, 10)
-        for i in range(int(number_of_iterations)):
-            x_i = x_i - (f(x_i)/f_d(x_i))
-        ret = str(Float(x_i).round(4))
-        if '.0000' in ret:
-            ret = ret[:ret.index('.')]
-        return ret
+            variable = Symbol(variable)
+            array_of_lines = []
+            f = lambdify(variable, function) #lambdify expression of the input function
+            f_d = lambdify(variable, diff(function, variable))  #lambdify expression of the derivative of the input function
+            interval = findall('Interval.*?\(.*?\)',  str(calculus.util.continuous_domain(function, variable, S.Reals))) #checking the domain
+            if interval: 
+                interval = interval[0]
+                interval = findall('\(.*?\)', interval)[0][1:-1].split(',')
+                if interval[0] == '-oo':
+                    x_i = int(interval[1]) - 1
+                elif interval[1] == 'oo':
+                    x_i = int(interval[0]) + 1
+                else:
+                    x_i = int(interval[0]) + (int(interval[1]) - int(interval[0]))/2
+            else:
+                x_i = random.randint(1, 10)
+            for i in range(int(number_of_iterations)):
+                tang = str(sympify(f(x_i) + f_d(x_i)*(x-x_i)))
+                array_of_lines.append(tang)
+                x_i = x_i - (f(x_i)/f_d(x_i))
+            ret = str(Float(x_i).round(4))
+            if '.0000' in ret:
+                ret = ret[:ret.index('.')]
+            return [ret, array_of_lines[0], array_of_lines[-1]]
     except RuntimeWarning:
         return "Something went wrong. Please check the criteria."
 
+#print(newton_method('sin(x)', 'x', '5'))
 ########################################################################################################################
 
 
 def simpsons_method(function: str, variable: str, initial_point: float, end_point: float) -> str:
 
-    variable = Symbol(variable)
-    initial_point = float(initial_point)
-    end_point = float(end_point)
-
-    def find_polynomial(x1, x2, x3, y1, y2, y3):
-     
-        a = (x1*(y3-y2) + x2*(y1-y3) + x3*(y2-y1))/((x1-x2)*(x1-x3)*(x2-x3))
-        b = ((y2-y1)/(x2-x1)) - a*(x1+x2) 
-        c = (y1 - a*x1**2 - b*x1)
-     
-        return lambdify(x, sympify('{}*x**2 + {}*x + {}'.format(a, b, c)))
-    
-    n = random.randint(5, 50)
     function = parse_func(function)
-    function = lambdify(x, function)
-    
-    if n % 2 != 0:
-        n += 1
-    
-    x_values = linspace(initial_point, end_point, n+1)
-    dx = (end_point-initial_point)/n
-    Area = 0
-    
-    for i in range(0, len(x_values)-2, 2):
+
+    if function is False:
+        return "Check your function"
+    else:
+        variable = Symbol(variable)
+        initial_point = float(initial_point)
+        end_point = float(end_point)
+
+        def find_polynomial(x1, x2, x3, y1, y2, y3):
         
-        x_1, x_2, x_3 = x_values[i], x_values[i+1], x_values[i+2] 
-        pol_func = find_polynomial(x_1, x_2, x_3, function(x_1), function(x_2), function(x_3))
-        Area += scipy_integrate.quad(pol_func ,x_1, x_3)[0]
+            a = (x1*(y3-y2) + x2*(y1-y3) + x3*(y2-y1))/((x1-x2)*(x1-x3)*(x2-x3))
+            b = ((y2-y1)/(x2-x1)) - a*(x1+x2) 
+            c = (y1 - a*x1**2 - b*x1)
         
-    return str(Float(Area).round(4)) if '.0000' not in str(Float(Area).round(4)) else str(Float(Area).round(4))[:str(Float(Area).round(4)).index('.')]
+            return lambdify(x, sympify('{}*x**2 + {}*x + {}'.format(a, b, c)))
+        
+        n = random.randint(5, 50)
+        function = lambdify(x, function)
+        
+        if n % 2 != 0:
+            n += 1
+        
+        x_values = linspace(initial_point, end_point, n+1)
+        dx = (end_point-initial_point)/n
+        Area = 0
+        
+        for i in range(0, len(x_values)-2, 2):
+            
+            x_1, x_2, x_3 = x_values[i], x_values[i+1], x_values[i+2] 
+            pol_func = find_polynomial(x_1, x_2, x_3, function(x_1), function(x_2), function(x_3))
+            Area += scipy_integrate.quad(pol_func ,x_1, x_3)[0]
+            
+        return str(Float(Area).round(4)) if '.0000' not in str(Float(Area).round(4)) else str(Float(Area).round(4))[:str(Float(Area).round(4)).index('.')]
 
 ########################################################################################################################
 
 
 def trapezoid_method(function: str, variable: str, initial_point: float, end_point: float, number_of_intervals: int) -> str:
-
-    variable = Symbol(variable)
-    initial_point = float(initial_point)
-    end_point = float(end_point)
-    number_of_intervals = int(number_of_intervals)
     function = parse_func(function)
-    function = lambdify(variable, function)
 
-    dx = (end_point - initial_point)/number_of_intervals
-    A = 1/2 *(function(initial_point) + function(end_point))
-    for i in range(1, number_of_intervals):
-        A = A + function(initial_point + i*dx)
-    Area = dx * A
-    return str(Float(Area).round(4)) if '.0000' not in str(Float(Area).round(4)) else str(Float(Area).round(4))[:str(Float(Area).round(4)).index('.')]
+    if function is False:
+        return "Check your function"
+    else:
+        variable = Symbol(variable)
+        initial_point = float(initial_point)
+        end_point = float(end_point)
+        number_of_intervals = int(number_of_intervals)
+
+        function = lambdify(variable, function)
+        dx = (end_point - initial_point)/number_of_intervals
+        A = 1/2 *(function(initial_point) + function(end_point))
+        for i in range(1, number_of_intervals):
+            A = A + function(initial_point + i*dx)
+        Area = dx * A
+        return str(Float(Area).round(4)) if '.0000' not in str(Float(Area).round(4)) else str(Float(Area).round(4))[:str(Float(Area).round(4)).index('.')]
 
 ########################################################################################################################
 
 
 def midpoint_method(function:str, variable: str, initial_point: float, end_point: float, number_of_intervals: int) -> str:
-
-    variable = Symbol(variable)
-    initial_point = float(initial_point)
-    end_point = float(end_point)
-    number_of_intervals = int(number_of_intervals)
-    x_val = linspace(initial_point, end_point, number_of_intervals+1)
     function = parse_func(function)
-    function = lambdify(variable, function)
-    dx = (end_point - initial_point)/number_of_intervals
-    total = 0.0
 
-    for i in range(len(x_val)-1):
-        total += dx*function((x_val[i]+x_val[i+1])/2)
+    if function is False:
+        return "Check your function"
+    else:
+        variable = Symbol(variable)
+        initial_point = float(initial_point)
+        end_point = float(end_point)
+        number_of_intervals = int(number_of_intervals)
+        x_val = linspace(initial_point, end_point, number_of_intervals+1)
+        function = lambdify(variable, function)
+        dx = (end_point - initial_point)/number_of_intervals
+        total = 0.0
+
+        for i in range(len(x_val)-1):
+            total += dx*function((x_val[i]+x_val[i+1])/2)
 
 
-    return str(Float(total).round(4)) if '.0000' not in str(Float(total).round(4)) else str(Float(total).round(4))[:str(Float(total).round(4)).index('.')]
+        return str(Float(total).round(4)) if '.0000' not in str(Float(total).round(4)) else str(Float(total).round(4))[:str(Float(total).round(4)).index('.')]
+
 ########################################################################################################################
 
 
 def definite_integration_calculator(function: str, variable: str, initial_point: float, end_point: float) -> str:
-    variable = Symbol(variable)
-    initial_point = float(initial_point)
-    end_point = float(end_point)
-
     function = parse_func(function)
-    a = lambdify(variable, integrate(sympify(function), variable)) 
-    return str(Float(a(end_point)-a(initial_point)).round(5))
+
+    if function is False:
+        return "Check your function"
+    else:
+        variable = Symbol(variable)
+        initial_point = float(initial_point)
+        end_point = float(end_point)
+
+        a = lambdify(variable, integrate(sympify(function), variable)) 
+        return str(Float(a(end_point)-a(initial_point)).round(5))
 
 
 
 def indefinite_integration_calculator(function: str, variable: str) -> str:
-    
-    variable = Symbol(variable)
-    function = parse_func(function)
-    ans = integrate(function, variable)
 
-    return output_func(ans)
+    function = parse_func(function)
+
+    if function is False:
+        return "Check your function"
+    else:    
+        variable = Symbol(variable)
+        ans = integrate(function, variable)
+
+        return output_func(ans)
 
 
 
 
 def limit_calculator(function: str, variable : str, sign: str, approach: str) -> str:
-    
-    variable = Symbol(variable)
+ 
     function = parse_func(function)
-    
-    if sign == '+' or sign == '-':        
-        ans = str(sympify(limit(function, variable, approach, sign)).evalf())    
-    else:
-        ans = str(sympify(limit(function, variable, approach)).evalf())
-    if 'oo' in ans:
-        return ans
-    else:
-        return str(Float(ans).round(4)) if '.0000' not in str(Float(ans).round(4)) else str(Float(ans).round(4))[:str(Float(ans).round(4)).index('.')]
+
+    if function is False:
+        return "Check your function"
+    else:   
+        variable = Symbol(variable)
+        
+        if sign == '+' or sign == '-':        
+            ans = str(sympify(limit(function, variable, approach, sign)).evalf())    
+        else:
+            ans = str(sympify(limit(function, variable, approach)).evalf())
+        if 'oo' in ans:
+            return ans
+        else:
+            return str(Float(ans).round(4)) if '.0000' not in str(Float(ans).round(4)) else str(Float(ans).round(4))[:str(Float(ans).round(4)).index('.')]
        
 ########################################################################################################################
 
 def universal_integral(type: str, function: str, variable: str, initial_point: float, end_point: float):
     if type == "definite":
-        variable = Symbol(variable)
-        initial_point = float(initial_point)
-        end_point = float(end_point)
         function = parse_func(function)
-        a = lambdify(variable, integrate(sympify(function), variable)) 
-        return output_func("{:.5f}".format(a(end_point)-a(initial_point)))
+        if function is False:
+            return "Check your function"
+        else:    
+            variable = Symbol(variable)
+            initial_point = float(initial_point)
+            end_point = float(end_point)
+            a = lambdify(variable, integrate(sympify(function), variable)) 
+            return output_func("{:.4f}".format(a(end_point)-a(initial_point)))
     else:
-        variable = Symbol(variable)
         function = parse_func(function)
-        ans = integrate(function, variable)
-        return output_func(ans)
-
-#########################################################################################################################
+        if function is False:
+            return "Check your function"
+        else: 
+            variable = Symbol(variable)
+            ans = integrate(function, variable)
+            return output_func(ans)

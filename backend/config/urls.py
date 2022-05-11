@@ -140,7 +140,7 @@ argument_5 =  number of intervals
 OUTPUT: "4.25000"
 
 ---------------------------------------------------------------------------------------------------------
-                                               MIDPOINT METHOD calculator JSON test example
+                                                MIDPOINT METHOD calculator JSON test example
 
 
 INPUT:
@@ -284,6 +284,6 @@ OUTPUT: "True"
 
 
         """,
-        version="1.1.4"
+        version="1.1.5"
     ), name='openapi-schema'),
 ]
