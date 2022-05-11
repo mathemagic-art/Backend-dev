@@ -76,20 +76,19 @@ x = Symbol('x')
 def parse_func(function: str) -> str: 
     try:
         function = sympify(function.replace('e', 'E'), convert_xor=True)
+        return function
     except:
-        function = function.replace('\frac', '\\frac')
-        function = function.replace('\tan', '\\tan')
-        function = function.replace('\arcsin', '\\arcsin')
-        function = function.replace('\arccos', '\\arccos')
-        function = function.replace('\arctan', '\\arctan')
-        function = function.replace('\arccot', '\\arccot')
         try:
+            function = function.replace('\frac', '\\frac')
+            function = function.replace('\tan', '\\tan')
+            function = function.replace('\arcsin', '\\arcsin')
+            function = function.replace('\arccos', '\\arccos')
+            function = function.replace('\arctan', '\\arctan')
+            function = function.replace('\arccot', '\\arccot')
             function = latex2sympy(function)
         except:
-            return "False"
-
-    return function
-
+            return False
+        return function
 
 # def output_func2(function: str): ## consider the case when we are multiplying function with log [sin(x)*log(x)]/[log(3)] or [x**2*log(x)]/[sin(x)*log(2)]
 #     function = latex(sympify(function))
@@ -299,25 +298,25 @@ def parse_func(function: str) -> str:
 # print(compare('1/', '1.2'))
 
 def compare(user_input:str, answer:str):
-    
-    floatchecker = True 
-    try:
-        float(user_input)
-        float(answer)
-    except ValueError:
-        floatchecker = False
-    if floatchecker:
-        if abs(float(user_input) - float(answer)) <= 0.1: 
-            return "True"
-        else:
-            return "False"
+    if parse_func(user_input) is False:
+        return "Error! Invalid input!"
     else:
-        user_input = trigsimp(simplify(parse_func(user_input).expand()))
-        answer = trigsimp(simplify(parse_func(answer).expand()))
-        print(user_input, answer)
-        if answer == user_input:
-            return "True"
-        else: 
-            return "False"
-
-print(compare('}^{', 'qwe'))
+        floatchecker = True 
+        try:
+            float(user_input)
+            float(answer)
+        except ValueError:
+            floatchecker = False
+        if floatchecker:
+            if abs(float(user_input) - float(answer)) <= 0.1: 
+                return "True"
+            else:
+                return "False"
+        else:
+            user_input = trigsimp(simplify(parse_func(user_input).expand()))
+            answer = trigsimp(simplify(parse_func(answer).expand()))
+            print(user_input, answer)
+            if answer == user_input:
+                return "True"
+            else: 
+                return "False"
